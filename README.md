@@ -7,9 +7,8 @@ Our tech stack here consists of
 
 <ol>
   <li>Flutter</li>
-  <li>Figma</li>
-  <li></li>
   <li>Firebase</li>
+  <li>Figma</li>
 </ol>
 
 --------------------------------------------
