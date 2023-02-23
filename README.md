@@ -6,7 +6,10 @@ Group-based Project for Software Engineering Module SC2006.
 Our tech stack here consists of 
 
 <ol>
-  <li>Flutter</li>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>Javascript</li>
+  <li>ReactJS</li>
   <li>Firebase</li>
   <li>Figma</li>
 </ol>
