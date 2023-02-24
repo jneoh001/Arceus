@@ -1,1 +1,23 @@
-
+.recipe-card-container {
+  position: relative;
+  display: flex;
+  background-color: black;
+  color: white;
+  max-width: fit-content;
+  min-width: max-content;
+  align-items: center;
+  margin: 5rem;
+}
+.recipe-nutrients {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5rem;
+  max-width: 500px;
+  min-width: 500px;
+}
+.recipe-image {
+  height: 300px;
+  max-width: 500px;
+  min-width: 500px;
+}
