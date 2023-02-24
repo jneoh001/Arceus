@@ -1,0 +1,22 @@
+.history-container {
+  position: relative;
+  z-index: 1;
+  max-width: 70vw;
+  min-width: 800px;
+  text-align: center;
+  line-height: 2.5rem;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.table-head {
+  background-color: black;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.history-table {
+  margin: 0;
+  border-radius: 5px;
+}
