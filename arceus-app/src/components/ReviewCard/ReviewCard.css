@@ -1,0 +1,50 @@
+.review-container {
+  position: relative;
+  z-index: 1;
+  max-width: 35vw;
+  min-width: 500px;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.review-input {
+  margin: 1.5rem 0;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+}
+
+.rating > input {
+  display: none;
+}
+
+.rating > label {
+  position: relative;
+  width: 1em;
+  font-size: 30px;
+  font-weight: 300;
+  color: #ffd600;
+  cursor: pointer;
+}
+
+.rating > label::before {
+  content: "\2605";
+  position: absolute;
+  opacity: 0;
+}
+
+.rating > label:hover:before,
+.rating > label:hover ~ label:before {
+  opacity: 1 !important;
+}
+
+.rating > input:checked ~ label:before {
+  opacity: 1;
+}
+
+.rating:hover > input:checked ~ label:before {
+  opacity: 0.4;
+}
