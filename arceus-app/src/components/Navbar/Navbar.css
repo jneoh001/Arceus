@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
+
+.nav-container {
+  position: relative;
+  z-index: 99;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.2rem;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: black;
+  color: white;
+}
+.nav-a {
+  margin: 0 6rem;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-a:hover {
+  color: cornsilk;
+}
+.nav-close {
+  cursor: pointer;
+  visibility: hidden;
+}
+.nav-btn {
+  cursor: pointer;
+  border: none;
+  color: white;
+  visibility: hidden;
+  opacity: 0;
+}
+.faBar {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1110px) {
+  .nav-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  .nav-header nav {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    gap: 1.5rem;
+    transition: 1s;
+    transform: translateX(100vw);
+    overflow: hidden;
+  }
+  .nav-header .responsive_nav {
+    transform: none;
+  }
+  .nav-close {
+    visibility: visible;
+  }
+  .nav-a {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .faBar {
+    position: relative;
+    margin-right: 1rem;
+    visibility: visible;
+  }
+}

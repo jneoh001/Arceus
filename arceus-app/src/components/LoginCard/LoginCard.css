@@ -1,0 +1,28 @@
+.login-container {
+  position: relative;
+  z-index: 1;
+  max-width: 30vw;
+  min-width: 400px;
+  background-color: rgb(64, 61, 61);
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: white;
+}
+.login-2nd-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-input {
+  margin: 1rem 0;
+}
+
+.login-2nd-container a {
+  margin: 2rem 1rem;
+  color: white;
+}
+
+.login-2nd-container a:hover {
+  color: skyblue;
+}
