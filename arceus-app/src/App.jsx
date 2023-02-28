@@ -1,10 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 import HistoryCard from "./components/HistoryCard/HistoryCard";
 import LoginCard from "./components/LoginCard/LoginCard";
 import Navbar from "./components/Navbar/Navbar";
 import RecipeCard from "./components/RecipeCard/RecipeCard";
 import ReviewCard from "./components/ReviewCard/ReviewCard";
 import recipelist from "./components/RecipeCard/recipelist";
+import RecommendedRecipes from "./components/RecipeCard/RecommendedRecipes";
 
 function App() {
   return (
@@ -13,18 +15,9 @@ function App() {
       <LoginCard />
       <ReviewCard />
       <HistoryCard />
-      {recipelist.map((recipe) => {
-        return (
-          <RecipeCard
-            name={recipe.recipeName}
-            carbs={recipe.carbohydrates}
-            protein={recipe.protein}
-            fats={recipe.fats}
-            img={recipe.img}
-            rating={recipe.rating}
-          />
-        );
-      })}
+      {/* <RecommendedRecipes />
+      <RecommendedRecipes />
+      <RecommendedRecipes /> */}
     </div>
   );
 }

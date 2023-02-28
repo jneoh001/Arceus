@@ -3,12 +3,23 @@ import "./LoginCard.css";
 
 const LoginCard = () => {
   const submitHandler = (e) => {
-    const username = e.target[0].value;
-    const password = e.target[1].value;
+    const data = {
+      email: e.target[0].value,
+      password: e.target[1].value,
+    };
+
+    // console.log(email);
+    // console.log(password);
+
+    const formData = new FormData();
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+
     e.preventDefault();
   };
   return (
-    <div className="login-container">
+    <div className="login-container bg-gray-800">
       <Form onSubmit={submitHandler}>
         <Form.Group className="login-input" controlId="formBasicEmail">
           <Form.Control
@@ -23,9 +34,12 @@ const LoginCard = () => {
           <Form.Control size="lg" type="password" placeholder="Password" />
         </Form.Group>
         <div className="d-grid">
-          <Button size="lg" variant="dark" type="submit">
+          <button
+            type="submit"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
             Log In
-          </Button>
+          </button>
         </div>
       </Form>
       <div className="login-2nd-container">

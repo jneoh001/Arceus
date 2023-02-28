@@ -1,5 +1,6 @@
 const historylist = [
   {
+    key: "23/02/23",
     date: "23/02/23",
     carbGoal: 350,
     carbIntake: 240,
@@ -9,6 +10,7 @@ const historylist = [
     fatIntake: 28,
   },
   {
+    key: "25/02/23",
     date: "25/02/23",
     carbGoal: 350,
     carbIntake: 240,
@@ -18,6 +20,7 @@ const historylist = [
     fatIntake: 28,
   },
   {
+    key: "28/02/23",
     date: "28/02/23",
     carbGoal: 350,
     carbIntake: 240,
@@ -27,6 +30,7 @@ const historylist = [
     fatIntake: 28,
   },
   {
+    key: "24/02/23",
     date: "24/02/23",
     carbGoal: 350,
     carbIntake: 240,
@@ -36,6 +40,7 @@ const historylist = [
     fatIntake: 28,
   },
   {
+    key: "22/02/23",
     date: "22/02/23",
     carbGoal: 350,
     carbIntake: 240,
