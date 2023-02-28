@@ -11,11 +11,7 @@ import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 
 function App() {
   return (
-    <div className="container">
-      <div className="form-wrapper">
-        <EditProfile />
-      </div>
-    </div>
+    <RegistrationPage />
   );
 }
 
