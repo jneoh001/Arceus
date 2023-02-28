@@ -1,0 +1,22 @@
+.outline {
+  text-align: center;
+  color: #000;
+  background-color: #b6b8ba;
+  border: 1px solid #0d6efd;
+  border-radius: 4px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+  padding-left: 6px;
+  font-family: Lato, Arial;
+  font-size: 2.25rem;
+  font-weight: 400;
+  line-height: 24px;
+  display: flex;
+}
+
+.text {
+  margin-top: 4px;
+  margin-left: 3px;
+}
