@@ -6,9 +6,10 @@ const ReviewCard = () => {
     let rating = 0;
     for (let i = 0; i < 5; i++) {
       if (e.target[i].checked) {
-        rating = i + 1;
+        rating = 5 - i;
       }
     }
+    console.log(e.target[3].checked);
     const reviewTitle = e.target[5].value;
     const reviewComment = e.target[6].value;
     console.log("Rating:", rating);
@@ -19,9 +20,7 @@ const ReviewCard = () => {
 
   return (
     <div className="review-container">
-      <h2>
-        <b>Leave a review</b>
-      </h2>
+      <h2 className="font-bold text-4xl">Leave a review</h2>
 
       <Form onSubmit={submitHandler}>
         <div className="rating">
@@ -42,19 +41,23 @@ const ReviewCard = () => {
           size="lg"
           type="text"
           placeholder="Review Title"
+          required
         />
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Control
             as="textarea"
-            rows={5}
+            rows={8}
             placeholder="Leave a comments (optional)"
             className="review-input"
           />
         </Form.Group>
         <div className="d-grid">
-          <Button size="lg" variant="secondary" type="submit">
+          <button
+            type="submit"
+            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          >
             Submit
-          </Button>
+          </button>
         </div>
       </Form>
     </div>
