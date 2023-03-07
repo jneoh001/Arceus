@@ -1,6 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { Form, useField, Formik } from "formik";
+import axios from "axios";
 
 const MyNumberInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -91,18 +92,29 @@ const validationSchema = Yup.object({
 });
 
 const RegistrationPage = () => {
+  // TODO change the firebase endpoint
+  const firebaseEndpoint =
+    "https://react-288bc-default-rtdb.asia-southeast1.firebasedatabase.app/accounts.json";
+
+  const submitHandler = (e) => {
+    axios
+      .post(firebaseEndpoint, {
+        data: e,
+      })
+      .then((response) => {
+        console.log("New user registered successfully", e);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="flex flex-col justify-center items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
       <h1 className="font-bold text-3xl p-12">Registration Information</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
+        onSubmit={submitHandler}
       >
         <Form>
           <div className="">
