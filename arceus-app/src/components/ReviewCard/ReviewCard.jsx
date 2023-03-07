@@ -1,7 +1,12 @@
 import "./ReviewCard.css";
+import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 
 const ReviewCard = () => {
+  // TODO: change the fireBase endpoint
+  const firebaseEndpoint =
+    "https://react-288bc-default-rtdb.asia-southeast1.firebasedatabase.app/reviews.json";
+
   const submitHandler = (e) => {
     let rating = 0;
     for (let i = 0; i < 5; i++) {
@@ -9,12 +14,23 @@ const ReviewCard = () => {
         rating = 5 - i;
       }
     }
-    console.log(e.target[3].checked);
     const reviewTitle = e.target[5].value;
     const reviewComment = e.target[6].value;
-    console.log("Rating:", rating);
-    console.log("Review Title:", reviewTitle);
-    console.log("Review Comment:", reviewComment);
+
+    axios
+      .post(firebaseEndpoint, {
+        data: {
+          ratings: rating,
+          title: reviewTitle,
+          comment: reviewComment,
+        },
+      })
+      .then((response) => {
+        console.log("Successfully posted request", response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     e.preventDefault();
   };
 
