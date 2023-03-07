@@ -1,12 +1,9 @@
 import "./ReviewCard.css";
-import axios from "axios";
-import { Form, Button } from "react-bootstrap";
+import { ref, push, update, child } from "firebase/database";
+import { db } from "../../firebaseConfig";
+import { Form } from "react-bootstrap";
 
 const ReviewCard = () => {
-  // TODO: change the fireBase endpoint
-  const firebaseEndpoint =
-    "https://react-288bc-default-rtdb.asia-southeast1.firebasedatabase.app/reviews.json";
-
   const submitHandler = (e) => {
     let rating = 0;
     for (let i = 0; i < 5; i++) {
@@ -17,20 +14,17 @@ const ReviewCard = () => {
     const reviewTitle = e.target[5].value;
     const reviewComment = e.target[6].value;
 
-    axios
-      .post(firebaseEndpoint, {
-        data: {
-          ratings: rating,
-          title: reviewTitle,
-          comment: reviewComment,
-        },
-      })
-      .then((response) => {
-        console.log("Successfully posted request", response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    const newEntry = {
+      title: reviewTitle,
+      rating: rating,
+      comment: reviewComment,
+    };
+    const endpt = "reviews";
+    const newPostKey = push(child(ref(db), endpt)).key;
+
+    const updates = {};
+    updates["/" + endpt + "/" + newPostKey] = newEntry;
+    update(ref(db), updates);
     e.preventDefault();
   };
 
