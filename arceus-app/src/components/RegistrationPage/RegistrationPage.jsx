@@ -94,7 +94,7 @@ const validationSchema = Yup.object({
 const RegistrationPage = () => {
   // TODO change the firebase endpoint
   const firebaseEndpoint =
-    "https://react-288bc-default-rtdb.asia-southeast1.firebasedatabase.app/accounts.json";
+    "https://arceus-debed-default-rtdb.asia-southeast1.firebasedatabase.app/accounts.json";
 
   const submitHandler = (e) => {
     axios
