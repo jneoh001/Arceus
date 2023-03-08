@@ -5,22 +5,27 @@ import HistoryCard from "./components/HistoryCard/HistoryCard";
 import LoginCard from "./components/LoginCard/LoginCard";
 import Navbar from "./components/Navbar/Navbar";
 import RecipeCard from "./components/RecipeCard/RecipeCard";
-import ReviewCard from "./components/ReviewCard/ReviewCard";
-import recipelist from "./components/RecipeCard/recipelist";
+import LeaveReviewCard from "./components/Review/LeaveReviewCard";
 import RecommendedRecipes from "./components/RecipeCard/RecommendedRecipes";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
+import EditProfile from "./components/EditProfile/EditProfile";
+import MyProfile from "./components/MyProfile/MyProfile";
+import ReviewCard from "./components/Review/ReviewCard";
 
 function App() {
   return (
-    <div>
+    <div className="bg-amber-100">
       <Navbar />
       <LoginCard />
-      <ReviewCard />
       <HistoryCard />
       <RegistrationPage />
-      {/* <RecommendedRecipes />
+      <EditProfile />
+      <MyProfile />
+      <LeaveReviewCard id={716429} />
+      <ReviewCard id={716429} />
       <RecommendedRecipes />
-      <RecommendedRecipes /> */}
+      <RecommendedRecipes />
+      <RecommendedRecipes />
     </div>
   );
 }

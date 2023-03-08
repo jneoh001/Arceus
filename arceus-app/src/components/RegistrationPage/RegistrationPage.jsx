@@ -1,8 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { Form, useField, Formik } from "formik";
-import { db } from "../../firebaseConfig";
-import { update, push, ref, child } from "firebase/database";
+import { useAuth } from "../../store/auth-context";
 
 const MyNumberInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -93,13 +92,22 @@ const validationSchema = Yup.object({
 });
 
 const RegistrationPage = () => {
-  const submitHandler = (values) => {
-    const endpt = "users-account";
-    const newPostKey = push(child(ref(db), endpt)).key;
+  const { signup, emailInUse } = useAuth();
 
-    const updates = {};
-    updates["/" + endpt + "/" + newPostKey] = values;
-    update(ref(db), updates);
+  const submitHandler = (values) => {
+    const profile = {
+      email: values.email,
+      fname: values.firstName,
+      lname: values.lastName,
+      activityLevel: values.activityLevel,
+      weight: values.weight,
+      height: values.height,
+      carbGoal: values.carbohydrateGoal,
+      proteinGoal: values.proteinGoal,
+      fatGoal: values.fatGoal,
+      calorieGoal: values.calorieGoal,
+    };
+    signup(values.email, values.password, profile);
   };
   return (
     <div className="flex flex-col justify-center items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
@@ -119,6 +127,9 @@ const RegistrationPage = () => {
                 type="email"
                 placeholder="Email Address"
               />
+              {emailInUse && (
+                <p className="text-red-500">*Email is already in use</p>
+              )}
             </div>
             <div className="">
               <MyTextInput
