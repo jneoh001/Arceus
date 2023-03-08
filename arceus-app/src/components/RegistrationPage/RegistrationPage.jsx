@@ -1,7 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { Form, useField, Formik } from "formik";
-import axios from "axios";
+import { useAuth } from "../../store/auth-context";
 
 const MyNumberInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -92,21 +92,22 @@ const validationSchema = Yup.object({
 });
 
 const RegistrationPage = () => {
-  // TODO change the firebase endpoint
-  const firebaseEndpoint =
-    "https://arceus-debed-default-rtdb.asia-southeast1.firebasedatabase.app/accounts.json";
+  const { signup, emailInUse } = useAuth();
 
-  const submitHandler = (e) => {
-    axios
-      .post(firebaseEndpoint, {
-        data: e,
-      })
-      .then((response) => {
-        console.log("New user registered successfully", e);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const submitHandler = (values) => {
+    const profile = {
+      email: values.email,
+      fname: values.firstName,
+      lname: values.lastName,
+      activityLevel: values.activityLevel,
+      weight: values.weight,
+      height: values.height,
+      carbGoal: values.carbohydrateGoal,
+      proteinGoal: values.proteinGoal,
+      fatGoal: values.fatGoal,
+      calorieGoal: values.calorieGoal,
+    };
+    signup(values.email, values.password, profile);
   };
   return (
     <div className="flex flex-col justify-center items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
@@ -126,6 +127,9 @@ const RegistrationPage = () => {
                 type="email"
                 placeholder="Email Address"
               />
+              {emailInUse && (
+                <p className="text-red-500">*Email is already in use</p>
+              )}
             </div>
             <div className="">
               <MyTextInput
@@ -230,9 +234,12 @@ const RegistrationPage = () => {
               />
             </div>
           </div>
-          <div className="my-4 py-2.5 cursor-pointer text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-md text-center">
-            <button type="submit">Register</button>
-          </div>
+          <button
+            className="my-4 py-2.5 cursor-pointer text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-md text-center w-full"
+            type="submit"
+          >
+            Register
+          </button>
         </Form>
       </Formik>
     </div>
