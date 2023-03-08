@@ -45,7 +45,7 @@ const RecommendedRecipes = () => {
       fats={recipeData.fats}
       calories={recipeData.calories}
       img={recipeData.img}
-      rating={4}
+      rating={5}
     />
   );
 };

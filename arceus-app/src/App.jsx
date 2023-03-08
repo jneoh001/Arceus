@@ -11,11 +11,13 @@ import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import EditProfile from "./components/EditProfile/EditProfile";
 import MyProfile from "./components/MyProfile/MyProfile";
 import ReviewCard from "./components/Review/ReviewCard";
+import Tracker from "./components/Tracker/Tracker";
 
 function App() {
   return (
     <div className="bg-amber-100">
       <Navbar />
+      <Tracker />
       <LoginCard />
       <HistoryCard />
       <RegistrationPage />
