@@ -1,9 +1,9 @@
-import "./ReviewCard.css";
+import "./LeaveReviewCard.css";
 import { ref, push, update, child } from "firebase/database";
 import { db } from "../../firebaseConfig";
 import { Form } from "react-bootstrap";
 
-const ReviewCard = () => {
+const LeaveReviewCard = (props) => {
   const submitHandler = (e) => {
     let rating = 0;
     for (let i = 0; i < 5; i++) {
@@ -23,13 +23,13 @@ const ReviewCard = () => {
     const newPostKey = push(child(ref(db), endpt)).key;
 
     const updates = {};
-    updates["/" + endpt + "/" + newPostKey] = newEntry;
+    updates["/" + endpt + "/" + props.id + "/" + newPostKey] = newEntry;
     update(ref(db), updates);
     e.preventDefault();
   };
 
   return (
-    <div className="review-container">
+    <div className="review-container bg-white border border-black">
       <h2 className="font-bold text-4xl">Leave a review</h2>
 
       <Form onSubmit={submitHandler}>
@@ -74,4 +74,4 @@ const ReviewCard = () => {
   );
 };
 
-export default ReviewCard;
+export default LeaveReviewCard;

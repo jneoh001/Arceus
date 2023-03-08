@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { auth } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
+import { update, ref } from "firebase/database";
 import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -10,6 +11,7 @@ const AuthContext = React.createContext({
   isLoggedIn: false,
   wrongPassword: false,
   userNotFound: false,
+  emailInUse: false,
   currentUser: {},
 });
 
@@ -21,17 +23,26 @@ export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [wrongPassword, setWrongPassword] = useState(false);
   const [userNotFound, setUserNotFound] = useState(false);
+  const [emailInUse, setEmailInUse] = useState(false);
   const [currentUser, setCurrentUser] = useState();
 
-  const signup = (email, password) => {
+  const signup = (email, password, profile) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log("Signed Up successfully!", user);
+        setEmailInUse(false);
         setIsLoggedIn(true);
+        const endpt = "users-profile";
+        const updates = {};
+        updates["/" + endpt + "/" + user.uid] = profile;
+        update(ref(db), updates);
       })
       .catch((error) => {
         console.log(error.code);
+        if (error.code == "auth/email-already-in-use") {
+          setEmailInUse(true);
+        }
       });
   };
 
@@ -95,6 +106,7 @@ export const AuthContextProvider = (props) => {
         isLoggedIn: isLoggedIn,
         wrongPassword: wrongPassword,
         userNotFound: userNotFound,
+        emailInUse: emailInUse,
         signup: signup,
         login: login,
         logout: logout,

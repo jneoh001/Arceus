@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 
 const HistoryCard = () => {
   return (
-    <div className="history-container">
+    <div className="history-container bg-white">
       {" "}
       <Table className="history-table" striped>
         <thead className="table-head">
