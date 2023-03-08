@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { Form, useField, Formik } from "formik";
 import { db } from "../../firebaseConfig";
 import { update, push, ref, child } from "firebase/database";
+import { useAuth } from "../../store/auth-context";
 
 const MyNumberInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -93,13 +94,20 @@ const validationSchema = Yup.object({
 });
 
 const RegistrationPage = () => {
+  const { signup } = useAuth();
+
   const submitHandler = (values) => {
+    signup(values.email, values.password);
+
     const endpt = "users-account";
     const newPostKey = push(child(ref(db), endpt)).key;
-
+    let data = { ...values };
+    delete data.password;
     const updates = {};
-    updates["/" + endpt + "/" + newPostKey] = values;
+    updates["/" + endpt + "/" + newPostKey] = data;
     update(ref(db), updates);
+
+    values.preventDefault();
   };
   return (
     <div className="flex flex-col justify-center items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
