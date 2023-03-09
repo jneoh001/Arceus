@@ -1,4 +1,4 @@
-import { getDatabase, ref, child, get } from "firebase/database";
+import { ref, child, get } from "firebase/database";
 import { useEffect, useState } from "react";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
@@ -18,7 +18,7 @@ const MyProfile = () => {
   const dbRef = ref(db);
   useEffect(() => {
     if (currentUser) {
-      get(child(dbRef, "users-profile/" + currentUser.uid))
+      get(child(dbRef, "users-profile/" + currentUser.uid + "/details"))
         .then((snapshot) => {
           if (snapshot.exists()) {
             setProfile(snapshot.val());

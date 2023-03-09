@@ -35,7 +35,7 @@ export const AuthContextProvider = (props) => {
         setIsLoggedIn(true);
         const endpt = "users-profile";
         const updates = {};
-        updates["/" + endpt + "/" + user.uid] = profile;
+        updates["/" + endpt + "/" + user.uid + "/details"] = profile;
         update(ref(db), updates);
       })
       .catch((error) => {
