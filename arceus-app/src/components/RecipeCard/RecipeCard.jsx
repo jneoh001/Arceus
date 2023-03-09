@@ -1,8 +1,11 @@
+import FavouriteButton from "./FavouriteButton";
+
 const RecipeCard = (props) => {
   const result = [];
   for (let i = 0; i < props.rating; i++) {
     result.push(<span>⭐</span>);
   }
+
   return (
     <a
       href="#"
@@ -32,7 +35,8 @@ const RecipeCard = (props) => {
         <p className="mb-2 text-lg font-normal text-gray-700 dark:text-gray-400">
           Calories: {props.calories}g
         </p>
-      </div>
+      </div>{" "}
+      <FavouriteButton id={props.id} />
     </a>
   );
 };
