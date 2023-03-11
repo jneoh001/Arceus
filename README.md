@@ -3,7 +3,7 @@
 <p align="center">
 
 
-<img src="/arceus-app/src/assets/arceus.gif" width="700" height="500"/>
+<img src="/arceus-app/src/assets/arceus.gif" width="100%" height="500"/>
 </p>
 
 
