@@ -1,6 +1,10 @@
 import "./HistoryCard.css";
 import historylist from "./historylist";
 import Table from "react-bootstrap/Table";
+import { useState, useEffect } from "react";
+import { useAuth } from "../../store/auth-context";
+import { db } from "../../firebaseConfig";
+import { get, child, ref } from "firebase/database";
 
 const HistoryCard = () => {
   return (
@@ -16,6 +20,8 @@ const HistoryCard = () => {
             <th>Protein Intake</th>
             <th>Fat Goal</th>
             <th>Fat Intake</th>
+            <th>Calories Goal</th>
+            <th>Calories Intake</th>
           </tr>
         </thead>
         <tbody>
