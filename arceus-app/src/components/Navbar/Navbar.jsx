@@ -17,7 +17,13 @@ const Navbar = () => {
   return (
     <div className="nav-container">
       <header className="nav-header">
-        <h3 onClick={ctx.onLogin}>Arceus</h3>
+        <h3
+          onClick={() => {
+            console.log(ctx.currentUser.uid);
+          }}
+        >
+          Arceus
+        </h3>
         <nav ref={navRef} className="responsive_nav">
           <a className="nav-a" onClick={showNavbar} href="#home">
             HOME
