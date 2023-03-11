@@ -10,6 +10,7 @@ import EditProfile from "./components/EditProfile/EditProfile";
 import MyProfile from "./components/MyProfile/MyProfile";
 import ReviewCard from "./components/Review/ReviewCard";
 import Tracker from "./components/Tracker/Tracker";
+import ViewReview from "./components/ViewReview/ViewReview";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <MyProfile />
       <LeaveReviewCard id={716429} />
       <ReviewCard id={716429} />
+      <ViewReview />
       {/* <RecommendedRecipes />
       <RecommendedRecipes />
       <RecommendedRecipes /> */}
