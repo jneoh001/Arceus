@@ -19,6 +19,8 @@
 
 <br />
 
+<div align="center">
+
 | Category       | Description |
 |----------------|-------------|
 | Documentation  | Use Case Diagrams, Use Case Descriptions, UI/UX, Data Dictionary, System Architecture Diagram, <br/> Activity Diagram, Sequence Diagrams, White Box and Black Box Testing |
@@ -26,17 +28,25 @@
 | Others | Source Control , Teamwork , Design |
 
 
+</div>
+
 ## <div align="center"> *Contributors (Alphabetical)* :star::family: </div>
 
 <br />
 
-<p >
- <p  >@indicium15 JADHAV CHAITANYA DHANANJAY   </p>
- <p >@jneoh001 JAVIER NEOH HONG RUI  </p> 
- <p >@ KENNETH GOH JING WEI </p> 
- <p >@shaowei0925 LAU SHAO WEI  </p> 
- <p >@leedz31 LEE DING ZHENG  </p> 
-</p>
+<div align="center">
+
+ <a href="https://github.com/indicium15">JADHAV CHAITANYA DHANANJAY @indicium15 </a>
+ 
+ <a href="https://github.com/jneoh001"> JAVIER NEOH HONG RUI @jneoh001  </a>
+ 
+ <a href=""> KENNETH GOH JING WEI </a>
+ 
+ <a href="https://github.com/shaowei0925"> LAU SHAO WEI @shaowei0925 </a>
+ 
+ <a href="https://github.com/leedz31"> LEE DING ZHENG  @leedz31</a> 
+ 
+</div>
 
 
 ## <div align ="center">*Tech Stack* :computer: </div>
