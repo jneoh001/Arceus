@@ -31,12 +31,12 @@ const Navbar = () => {
           <a className="nav-a" onClick={showNavbar} href="#search">
             SEARCH
           </a>
-          {!ctx.isLoggedIn && (
+          {!ctx.currentUser == null && (
             <a className="nav-a" onClick={showNavbar} href="#login">
               LOG IN
             </a>
           )}
-          {ctx.isLoggedIn && (
+          {ctx.currentUser && (
             <a className="nav-a" onClick={showNavbar} href="#login">
               MY PROFILE
             </a>
