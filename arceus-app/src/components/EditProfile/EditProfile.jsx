@@ -34,51 +34,12 @@ const EditProfile = () => {
     calorieGoal: 0,
   });
 
-  const [history, setHistory] = useState({
-    date: "",
-    carbGoal: 0,
-    proteinGoal: 0,
-    fatGoal: 0,
-    calorieGoal: 0,
-    carbIntake: 0,
-    proteinIntake: 0,
-    fatIntake: 0,
-    calorieIntake: 0,
-  });
-
-  const getDate = () => {
-    let today = new Date();
-    let year = today.getFullYear().toString().slice(-2);
-    let month = (today.getMonth() + 1).toString().padStart(2, "0");
-    let day = today.getDate().toString().padStart(2, "0");
-    let formattedDateID = `${day}-${month}-${year}`;
-    let formattedDateDisplay = `${day}/${month}/${year}`;
-    return [formattedDateID, formattedDateDisplay];
-  };
-
   useEffect(() => {
-    const [todayID, todayDisplay] = getDate();
-
     if (currentUser) {
       get(child(ref(db), "users-profile/" + currentUser.uid + "/details"))
         .then((snapshot) => {
           if (snapshot.exists()) {
             setProfile(snapshot.val());
-          }
-        })
-        .catch((error) => {
-          console.log(error.code);
-        });
-
-      get(
-        child(
-          ref(db),
-          "users-profile/" + currentUser.uid + "/history/" + todayID
-        )
-      )
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            setHistory(snapshot.val());
           }
         })
         .catch((error) => {
@@ -92,18 +53,6 @@ const EditProfile = () => {
       const updates = {};
       updates["/users-profile/" + currentUser.uid + "/details"] = profile;
       update(ref(db), updates);
-
-      const [todayID, todayDisplay] = getDate();
-      const updates2 = {};
-      updates2["/users-profile/" + currentUser.uid + "/history/" + todayID] = {
-        ...history,
-        date: todayDisplay,
-        carbGoal: profile.carbGoal,
-        proteinGoal: profile.proteinGoal,
-        fatGoal: profile.fatGoal,
-        calorieGoal: profile.calorieGoal,
-      };
-      update(ref(db), updates2);
     }
   }, [profile]);
 
