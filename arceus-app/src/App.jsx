@@ -9,7 +9,9 @@ import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import EditProfile from "./components/EditProfile/EditProfile";
 import MyProfile from "./components/MyProfile/MyProfile";
 import Tracker from "./components/Tracker/Tracker";
-import ViewReview from "./components/Review/ViewReview";
+import RecipeCard from "./components/RecipeCard/RecipeCard";
+import LandingPage from "./components/LandingPage/Landingpage";
+
 function App() {
   return (
     <div className="bg-amber-100">
@@ -21,10 +23,9 @@ function App() {
       <EditProfile />
       <MyProfile />
       <LeaveReviewCard id={716429} />
-      <ViewReview id={716429} />
-      {/* <RecommendedRecipes />
-      <RecommendedRecipes />
-      <RecommendedRecipes /> */}
+      <ReviewCard id={716429} />
+      <RecipeCard/>
+      <LandingPage/>
     </div>
   );
 }
