@@ -28,14 +28,7 @@ const ViewReview = (props) => {
     <div className="main-layout">
       <div className="reviews-heading">
         <h1>Reviews</h1>
-        <span>{reviewsData.length} reviews</span>
-        <div className="review">
-          <i className="fas fa-star"></i>
-          <i className="fas fa-star"></i>
-          <i className="fas fa-star"></i>
-          <i className="fas fa-star"></i>
-          <i className="far fa-star"></i>
-        </div>
+        <span className="mt-4">{reviewsData.length} reviews</span>
       </div>
       <div className="review-box-container">
         {reviewsData.map((review, index) => {
