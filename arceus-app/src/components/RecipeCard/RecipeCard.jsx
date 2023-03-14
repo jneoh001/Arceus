@@ -9,10 +9,10 @@ const RecipeCard = (props) => {
   return (
     <a
       href="#"
-      className="flex flex-col items-center bg-gray border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+      className="flex flex-col w-full items-center bg-gray border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
     >
       <img
-        className="object-cover w-full rounded-t-lg h-auto md:h-auto md:w-1/2 md:rounded-none md:rounded-l-lg"
+        className="object-cover w-full rounded-t-lg h-auto md:w-1/2 md:rounded-none md:rounded-l-lg"
         src={props.img}
         alt=""
       />
@@ -36,7 +36,7 @@ const RecipeCard = (props) => {
           Calories: {props.calories}g
         </p>
       </div>{" "}
-      <FavouriteButton id={props.id} />
+      {/* <FavouriteButton id={props.id} /> */}
     </a>
   );
 };

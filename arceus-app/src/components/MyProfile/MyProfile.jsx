@@ -1,4 +1,4 @@
-import { ref, child, get } from "firebase/database";
+import { ref, child, get, onValue } from "firebase/database";
 import { useEffect, useState } from "react";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
@@ -22,7 +22,7 @@ const MyProfile = () => {
         .then((snapshot) => {
           if (snapshot.exists()) {
             setProfile(snapshot.val());
-            console.log(snapshot.val());
+            // console.log(snapshot.val());
           } else {
             console.log("No data available");
           }
@@ -30,6 +30,13 @@ const MyProfile = () => {
         .catch((error) => {
           console.error(error);
         });
+
+      onValue(
+        child(ref(db), "users-profile/" + currentUser.uid + "/details"),
+        (snapshot) => {
+          setProfile(snapshot.val());
+        }
+      );
     }
   }, [currentUser]);
 
