@@ -11,21 +11,23 @@ import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import EditProfile from "./components/EditProfile/EditProfile";
 import MyProfile from "./components/MyProfile/MyProfile";
 import ReviewCard from "./components/Review/ReviewCard";
+import RecipePage from "./components/RecipePage/RecipePage";
 
 function App() {
   return (
     <div className="bg-amber-100">
-      <Navbar />
+      {/* <Navbar />
       <LoginCard />
       <HistoryCard />
       <RegistrationPage />
       <EditProfile />
-      <MyProfile />
+      <MyProfile /> */}
       <LeaveReviewCard id={716429} />
-      <ReviewCard id={716429} />
+      {/* <ReviewCard id={716429} />
       <RecommendedRecipes />
-      <RecommendedRecipes />
-      <RecommendedRecipes />
+      <RecommendedRecipes /> 
+      <RecommendedRecipes />   */}
+      <RecipePage /> 
     </div>
   );
 }
