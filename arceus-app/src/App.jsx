@@ -9,8 +9,8 @@ import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import EditProfile from "./components/EditProfile/EditProfile";
 import MyProfile from "./components/MyProfile/MyProfile";
 import Tracker from "./components/Tracker/Tracker";
-import RecipeCard from "./components/RecipeCard/RecipeCard";
-import LandingPage from "./components/LandingPage/Landingpage";
+import ViewReview from "./components/Review/ViewReview";
+import RecipeByID from "./components/RecipeCard/RecipeByID";
 
 function App() {
   return (
@@ -23,9 +23,12 @@ function App() {
       <EditProfile />
       <MyProfile />
       <LeaveReviewCard id={716429} />
-      <ReviewCard id={716429} />
-      <RecipeCard/>
-      <LandingPage/>
+      <ViewReview id={716429} />
+      <RecipeByID id={716429} />
+
+      {/* <RecommendedRecipes />
+      <RecommendedRecipes />
+      <RecommendedRecipes /> */}
     </div>
   );
 }
