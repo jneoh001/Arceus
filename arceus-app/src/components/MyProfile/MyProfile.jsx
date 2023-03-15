@@ -14,7 +14,7 @@ const MyProfile = () => {
     calorieGoal: 0,
   });
 
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
   const dbRef = ref(db);
   useEffect(() => {
     if (currentUser) {
@@ -72,9 +72,18 @@ const MyProfile = () => {
           Protein Goal: <span>{profile.proteinGoal} g</span>
         </p>
       </div>
-      <button className="mt-12 block w-1/3 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
-        Edit Profile
-      </button>
+      <div className="flex justify-between w-2/3">
+        <button className="mt-12 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+          Edit Profile
+        </button>{" "}
+        <button
+          onClick={logout}
+          type="submit"
+          className="mt-12 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };
