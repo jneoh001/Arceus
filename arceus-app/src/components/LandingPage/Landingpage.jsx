@@ -10,16 +10,16 @@ const LandingPage = () => {
       <Navbar />
       <h1 className="landingpageheader">Recommended Recipes</h1>
       <div className="recipecards">
-        {/* <RecipeCard />
         <RecipeCard />
         <RecipeCard />
         <RecipeCard />
-        <RecipeCard /> */}
+        <RecipeCard />
+        <RecipeCard />
+        {/* <RecommendedRecipes />
         <RecommendedRecipes />
         <RecommendedRecipes />
         <RecommendedRecipes />
-        <RecommendedRecipes />
-        <RecommendedRecipes />
+        <RecommendedRecipes /> */}
       </div>
     </div>
   );
