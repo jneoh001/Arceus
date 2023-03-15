@@ -1,28 +1,19 @@
-import axios from "axios";
 import RecipeCard from "./RecipeCard";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-const RecommendedRecipes = () => {
-  const [id, setID] = useState();
-  const [recipeData, setRecipeData] = useState({});
+const RecipeByID = (props) => {
   const apiKey = "d397c8afbfd343cbae5ab63b787f199a";
-
+  const [recipeData, setRecipeData] = useState({});
 
   useEffect(() => {
     axios
       .get(
-        "https://api.spoonacular.com/recipes/random?number=1&apiKey=" + apiKey
+        "https://api.spoonacular.com/recipes/" +
+          props.id +
+          "/information?includeNutrition=true&apiKey=" +
+          apiKey
       )
-      .then((response) => {
-        const id = response.data.recipes[0].id;
-        setID(id);
-        return axios.get(
-          "https://api.spoonacular.com/recipes/" +
-            id +
-            "/information?includeNutrition=true&apiKey=" +
-            apiKey
-        );
-      })
       .then((info) => {
         setRecipeData({
           title: info.data.title,
@@ -33,13 +24,13 @@ const RecommendedRecipes = () => {
           protein: info.data.nutrition.nutrients[9].amount,
         });
       })
-
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error.code);
+      });
   }, []);
-
   return (
     <RecipeCard
-      id={id}
+      id={props.id}
       name={recipeData.title}
       carbs={recipeData.carbs}
       protein={recipeData.protein}
@@ -51,4 +42,4 @@ const RecommendedRecipes = () => {
   );
 };
 
-export default RecommendedRecipes;
+export default RecipeByID;
