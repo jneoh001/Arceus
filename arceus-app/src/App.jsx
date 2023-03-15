@@ -14,10 +14,11 @@ import RecipeByID from "./components/RecipeCard/RecipeByID";
 import LandingPage from "./pages/LandingPage/Landingpage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import GoalPage from "./pages/GoalPage/GoalPage";
+import HistoryPage from "./pages/HistoryPage/HistoryPage";
 
 function App() {
   return (
-    <div className="bg-amber-100">
+    <div className="bg-[#FFFBEB]">
       {/* <Navbar />
       <Tracker />
       <LoginCard />
@@ -30,10 +31,11 @@ function App() {
       <RecipeByID id={716429} />
       <RecommendedRecipes />
       <RecommendedRecipes />
-      <RecommendedRecipes />
-      <LandingPage /> */}
+      <RecommendedRecipes /> */}
+      {/* <LandingPage /> */}
       {/* <LoginPage /> */}
-      <GoalPage />
+      {/* <GoalPage /> */}
+      <HistoryPage />
     </div>
   );
 }
