@@ -31,7 +31,7 @@ const Navbar = () => {
           <a className="nav-a" onClick={showNavbar} href="#search">
             SEARCH
           </a>
-          {!ctx.currentUser == null && (
+          {!ctx.currentUser && (
             <a className="nav-a" onClick={showNavbar} href="#login">
               LOG IN
             </a>

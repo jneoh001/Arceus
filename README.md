@@ -40,7 +40,7 @@
  
  <a href="https://github.com/jneoh001"> JAVIER NEOH HONG RUI @jneoh001  </a>
  
- <a href=""> KENNETH GOH JING WEI </a>
+ <a href="https://github.com/kennethgjw"> KENNETH GOH JING WEI </a>
  
  <a href="https://github.com/shaowei0925"> LAU SHAO WEI @shaowei0925 </a>
  
