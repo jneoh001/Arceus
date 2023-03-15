@@ -11,6 +11,7 @@ import MyProfile from "./components/MyProfile/MyProfile";
 import Tracker from "./components/Tracker/Tracker";
 import ViewReview from "./components/Review/ViewReview";
 import RecipeByID from "./components/RecipeCard/RecipeByID";
+
 function App() {
   return (
     <div className="bg-amber-100">
@@ -24,6 +25,7 @@ function App() {
       <LeaveReviewCard id={716429} />
       <ViewReview id={716429} />
       <RecipeByID id={716429} />
+
       {/* <RecommendedRecipes />
       <RecommendedRecipes />
       <RecommendedRecipes /> */}

@@ -7,6 +7,7 @@ const RecommendedRecipes = () => {
   const [recipeData, setRecipeData] = useState({});
   const apiKey = "d397c8afbfd343cbae5ab63b787f199a";
 
+
   useEffect(() => {
     axios
       .get(
