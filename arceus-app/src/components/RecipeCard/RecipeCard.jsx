@@ -9,7 +9,7 @@ const RecipeCard = (props) => {
   return (
     <a
       href="#"
-      className="hover:animate-bounce  flex flex-col w-full max-h-60 items-center bg-gray border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+      className="flex flex-col w-full max-h-60 items-center bg-gray border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
     >
       <img
         className="object-cover max-h-60 max-w-sm rounded-t-lg h-auto md:h-auto md:w-1/2 md:rounded-none md:rounded-l-lg"

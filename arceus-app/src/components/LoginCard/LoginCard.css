@@ -1,10 +1,11 @@
 .login-container {
   position: relative;
   z-index: 1;
-  max-width: 30vw;
-  min-width: 400px;
-  padding: 3rem;
-  border-radius: 5px;
+  max-width: 40vw;
+  min-width: 40vw;
+  min-height: 50vh;
+  padding: 3rem 5rem;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: white;
 }

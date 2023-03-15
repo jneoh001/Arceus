@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../Navbar/Navbar";
-import RecipeCard from "../RecipeCard/RecipeCard";
-import RecommendedRecipes from "../RecipeCard/RecommendedRecipes";
+import Navbar from "../../components/Navbar/Navbar";
+import RecipeCard from "../../components/RecipeCard/RecipeCard";
+import RecommendedRecipes from "../../components/RecipeCard/RecommendedRecipes";
 import "./LandingPage.css";
 
 const LandingPage = () => {
