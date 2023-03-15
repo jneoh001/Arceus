@@ -14,7 +14,7 @@ const RecipeCard = (props) => {
       <img
         className="object-cover max-h-60 max-w-sm rounded-t-lg h-auto md:h-auto md:w-1/2 md:rounded-none md:rounded-l-lg"
         src={props.img}
-        alt=""
+        alt={props.name}
       />
       <div className="flex flex-col justify-around py-5 px-5 leading-normal ">
         <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
