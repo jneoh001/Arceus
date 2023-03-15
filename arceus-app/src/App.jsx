@@ -34,8 +34,8 @@ function App() {
       <RecommendedRecipes /> */}
       {/* <LandingPage /> */}
       {/* <LoginPage /> */}
-      {/* <GoalPage /> */}
-      <HistoryPage />
+      <GoalPage />
+      {/* <HistoryPage /> */}
     </div>
   );
 }

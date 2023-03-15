@@ -130,8 +130,8 @@ const Tracker = () => {
   };
 
   return (
-    <div className="py-8 px-16 w-2/5 border-r-2 border-black">
-      <h1 className="font-bold text-5xl mb-16 mt-4">Daily Goal</h1>
+    <div className="py-8 px-16 w-2/5 border-r-2 border-black ">
+      <h1 className="font-bold text-4xl mb-8">Daily Goal</h1>
       <Progress
         title="Carbohydrates"
         percentage={
