@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Progress from "./Progress";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
-import { ref, child, get, update } from "firebase/database";
+import { ref, child, get, update, onValue } from "firebase/database";
 const Tracker = () => {
   const [profile, setProfile] = useState({
     email: "",
@@ -53,7 +53,7 @@ const Tracker = () => {
       };
       update(ref(db), updates);
     }
-  }, [intake]);
+  }, [intake, profile]);
 
   // Get the user's details when the user first log in
   useEffect(() => {
@@ -69,6 +69,7 @@ const Tracker = () => {
         .catch((error) => {
           console.error(error);
         });
+
       const [todayID, todayDisplay] = getDate();
       get(
         child(dbRef, "users-profile/" + currentUser.uid + "/history/" + todayID)
@@ -81,13 +82,28 @@ const Tracker = () => {
               fat: snapshot.val().fatIntake,
               calorie: snapshot.val().calorieIntake,
             });
-            console.log(snapshot.val());
-            console.log("History retrieved!");
+            // console.log(snapshot.val());
+            // console.log("History retrieved!");
           }
         })
         .catch((error) => {
           console.log(error.code);
         });
+
+      onValue(
+        child(ref(db), "users-profile/" + currentUser.uid + "/details"),
+        (snapshot) => {
+          setProfile((pre) => {
+            return {
+              ...profile,
+              carbGoal: snapshot.val().carbGoal,
+              proteinGoal: snapshot.val().proteinGoal,
+              fatGoal: snapshot.val().fatGoal,
+              calorieGoal: snapshot.val().calorieGoal,
+            };
+          });
+        }
+      );
     }
   }, [currentUser]);
 
