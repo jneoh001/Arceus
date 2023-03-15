@@ -130,7 +130,7 @@ const Tracker = () => {
   };
 
   return (
-    <div className="p-4 w-1/2 border-2 border-black bg-white">
+    <div className="py-8 px-16 w-2/5 border-r-2 border-black">
       <h1 className="font-bold text-5xl mb-16 mt-4">Daily Goal</h1>
       <Progress
         title="Carbohydrates"
@@ -168,18 +168,26 @@ const Tracker = () => {
         }
         className="bg-red-600 dark:bg-red-500"
       />
-      <button
-        onClick={addHandler}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      >
-        +
-      </button>{" "}
-      <button
-        onClick={subtractHandler}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      >
-        -
-      </button>
+      <div className="flex flex-col justify-center items-center">
+        <button
+          onClick={addHandler}
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          +
+        </button>{" "}
+        <button
+          onClick={subtractHandler}
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          -
+        </button>
+        <button
+          onClick={subtractHandler}
+          className="text-center text-white bg-[#24292F] hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center   mr-2 mb-2"
+        >
+          View History
+        </button>
+      </div>
     </div>
   );
 };

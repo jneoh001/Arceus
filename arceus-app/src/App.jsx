@@ -11,7 +11,9 @@ import MyProfile from "./components/MyProfile/MyProfile";
 import Tracker from "./components/Tracker/Tracker";
 import ViewReview from "./components/Review/ViewReview";
 import RecipeByID from "./components/RecipeCard/RecipeByID";
-import LandingPage from "./components/LandingPage/Landingpage";
+import LandingPage from "./pages/LandingPage/Landingpage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import GoalPage from "./pages/GoalPage/GoalPage";
 
 function App() {
   return (
@@ -25,11 +27,13 @@ function App() {
       <MyProfile />
       <LeaveReviewCard id={716429} />
       <ViewReview id={716429} />
-      <RecipeByID id={716429} /> */}
-      <LandingPage />
-      {/* <RecommendedRecipes />
+      <RecipeByID id={716429} />
       <RecommendedRecipes />
-      <RecommendedRecipes /> */}
+      <RecommendedRecipes />
+      <RecommendedRecipes />
+      <LandingPage /> */}
+      {/* <LoginPage /> */}
+      <GoalPage />
     </div>
   );
 }
