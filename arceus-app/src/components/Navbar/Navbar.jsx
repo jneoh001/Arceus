@@ -41,7 +41,15 @@ const Navbar = () => {
               MY PROFILE
             </a>
           )}
+          <a
+            className="lg:absolute lg:right-12 text-2xl"
+            onClick={showNavbar}
+            href="#search"
+          >
+            ⚙️
+          </a>
         </nav>
+
         {navIsClicked && <FaBars onClick={showNavbar} className="faBar" />}
         {!navIsClicked && <FaTimes onClick={showNavbar} className="faBar" />}
       </header>

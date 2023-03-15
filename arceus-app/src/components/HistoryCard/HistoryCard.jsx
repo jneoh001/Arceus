@@ -13,7 +13,7 @@ const HistoryCard = () => {
       get(child(ref(db), "users-profile/" + currentUser.uid + "/history"))
         .then((snapshot) => {
           if (snapshot.exists()) {
-            setHistoryList(Object.values(snapshot.val()));
+            setHistoryList(Object.values(snapshot.val()).reverse());
             // console.log(snapshot.val());
           }
         })
@@ -24,7 +24,7 @@ const HistoryCard = () => {
       onValue(
         child(ref(db), "users-profile/" + currentUser.uid + "/history"),
         (snapshot) => {
-          setHistoryList(Object.values(snapshot.val()));
+          setHistoryList(Object.values(snapshot.val()).reverse());
         }
       );
     }
