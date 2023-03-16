@@ -16,18 +16,18 @@ import RecipePage from "./components/RecipePage/RecipePage";
 function App() {
   return (
     <div className="bg-amber-100">
-      {/* <Navbar />
+      <Navbar />
       <LoginCard />
       <HistoryCard />
       <RegistrationPage />
       <EditProfile />
-      <MyProfile /> */}
+      <MyProfile />
       <LeaveReviewCard id={716429} />
-      {/* <ReviewCard id={716429} />
+      <ReviewCard id={716429} />
       <RecommendedRecipes />
       <RecommendedRecipes /> 
-      <RecommendedRecipes />   */}
-      <RecipePage /> 
+      <RecommendedRecipes />  
+      {/* <RecipePage />  */}
     </div>
   );
 }
