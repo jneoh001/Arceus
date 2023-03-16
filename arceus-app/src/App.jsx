@@ -8,19 +8,11 @@ import RecommendedRecipes from "./components/RecipeCard/RecommendedRecipes";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import EditProfile from "./components/EditProfile/EditProfile";
 import MyProfile from "./components/MyProfile/MyProfile";
-import Tracker from "./components/Tracker/Tracker";
-import ViewReview from "./components/Review/ViewReview";
-import RecipeByID from "./components/RecipeCard/RecipeByID";
-import LandingPage from "./pages/LandingPage/Landingpage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import GoalPage from "./pages/GoalPage/GoalPage";
-import HistoryPage from "./pages/HistoryPage/HistoryPage";
 
 function App() {
   return (
     <div className="bg-[#FFFBEB]">
-      {/* <Navbar />
-      <Tracker />
+      <Navbar />
       <LoginCard />
       <HistoryCard />
       <RegistrationPage />
@@ -31,11 +23,11 @@ function App() {
       <RecipeByID id={716429} />
       <RecommendedRecipes />
       <RecommendedRecipes />
-      <RecommendedRecipes /> */}
+      <RecommendedRecipes /> */
       {/* <LandingPage /> */}
       {/* <LoginPage /> */}
-      <GoalPage />
-      {/* <HistoryPage /> */}
+      {/* <GoalPage /> */}
+      <HistoryPage />
     </div>
   );
 }
