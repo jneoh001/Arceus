@@ -8,19 +8,21 @@ import RecommendedRecipes from "./components/RecipeCard/RecommendedRecipes";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import EditProfile from "./components/EditProfile/EditProfile";
 import MyProfile from "./components/MyProfile/MyProfile";
+import RecipePage from "./components/RecipePage/RecipePage";
 
 
 function App() {
   return (
     <div className="bg-[#FFFBEB]">
-      {/* <Navbar />
-      <Tracker />
+      <Navbar />
       <LoginCard />
       <HistoryCard />
       <RegistrationPage />
       <EditProfile />
       <MyProfile />
-      <LeaveReviewCard id={716429} />
+      <LeaveReviewCard id={716429} /> 
+      <RecipePage />
+      {/* <Tracker />  */}
     </div>
   );
 }
