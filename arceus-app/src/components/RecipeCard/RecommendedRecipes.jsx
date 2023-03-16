@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const RecommendedRecipes = () => {
   const [id, setID] = useState();
   const [recipeData, setRecipeData] = useState({});
-  const apiKey = "7f8b79cf24094b52953b2d594e02f04e";
+  const apiKey = "d397c8afbfd343cbae5ab63b787f199a";
 
   useEffect(() => {
     axios
@@ -45,7 +45,7 @@ const RecommendedRecipes = () => {
       fats={recipeData.fats}
       calories={recipeData.calories}
       img={recipeData.img}
-      rating={4}
+      rating={5}
     />
   );
 };

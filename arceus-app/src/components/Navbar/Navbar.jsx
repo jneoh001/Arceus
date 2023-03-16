@@ -31,17 +31,25 @@ const Navbar = () => {
           <a className="nav-a" onClick={showNavbar} href="#search">
             SEARCH
           </a>
-          {!ctx.isLoggedIn && (
+          {!ctx.currentUser && (
             <a className="nav-a" onClick={showNavbar} href="#login">
               LOG IN
             </a>
           )}
-          {ctx.isLoggedIn && (
+          {ctx.currentUser && (
             <a className="nav-a" onClick={showNavbar} href="#login">
               MY PROFILE
             </a>
           )}
+          <a
+            className="lg:absolute lg:right-12 text-2xl"
+            onClick={showNavbar}
+            href="#search"
+          >
+            ⚙️
+          </a>
         </nav>
+
         {navIsClicked && <FaBars onClick={showNavbar} className="faBar" />}
         {!navIsClicked && <FaTimes onClick={showNavbar} className="faBar" />}
       </header>

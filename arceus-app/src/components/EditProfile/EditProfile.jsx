@@ -1,7 +1,10 @@
 import React from "react";
-import { useFormik, useField, Form, Formik } from "formik";
-import styled from "styled-components";
+import { useField, Form, Formik } from "formik";
 import * as Yup from "yup";
+import { useAuth } from "../../store/auth-context";
+import { useState, useEffect } from "react";
+import { get, child, ref, update } from "firebase/database";
+import { db } from "../../firebaseConfig";
 
 const MyNumberInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -16,7 +19,57 @@ const MyNumberInput = ({ label, ...props }) => {
   );
 };
 
-const EditProfile = ({ styles }) => {
+const EditProfile = () => {
+  const { currentUser } = useAuth();
+  const [profile, setProfile] = useState({
+    email: "",
+    fname: "",
+    lname: "",
+    activityLevel: "",
+    weight: 0,
+    height: 0,
+    carbGoal: 0,
+    proteinGoal: 0,
+    fatGoal: 0,
+    calorieGoal: 0,
+  });
+
+  useEffect(() => {
+    if (currentUser) {
+      get(child(ref(db), "users-profile/" + currentUser.uid + "/details"))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setProfile(snapshot.val());
+          }
+        })
+        .catch((error) => {
+          console.log(error.code);
+        });
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (currentUser) {
+      const updates = {};
+      updates["/users-profile/" + currentUser.uid + "/details"] = profile;
+      update(ref(db), updates);
+    }
+  }, [profile]);
+
+  const submitHandler = (e) => {
+    setProfile((pre) => {
+      return {
+        ...pre,
+        height: e.height,
+        weight: e.weight,
+        carbGoal: e.carbohydrateGoal,
+        proteinGoal: e.proteinGoal,
+        fatGoal: e.fatGoal,
+        calorieGoal: e.calorieGoal,
+      };
+    });
+  };
+
   return (
     <div className="flex flex-col justify-center items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
       <h1 className="font-bold text-3xl p-12">Edit Profile</h1>
@@ -42,12 +95,7 @@ const EditProfile = ({ styles }) => {
             "Protein Goal must be greater than 0g"
           ),
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
+        onSubmit={submitHandler}
       >
         <Form className="">
           <div className="grid grid-cols-2">
