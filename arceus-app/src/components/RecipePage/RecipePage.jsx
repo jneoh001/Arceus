@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './RecipePage.css';
+import FavouriteButton from '../RecipeCard/FavouriteButton';
 
+const result = [];
+  for (let i = 0; i < 5; i++) {
+    result.push(<span>⭐</span>);
+  }
 
 export default function RecipePage() {
 
@@ -11,7 +16,7 @@ export default function RecipePage() {
 
     useEffect( ()=> {
         axios
-            .get("https://api.spoonacular.com/recipes/2/information?apiKey=" + apiKey)
+            .get("https://api.spoonacular.com/recipes/6/information?apiKey=" + apiKey)
             // .then(response => {
             //     //console.log(response)
             //     setRecipeData({img: response.data.img})
@@ -22,6 +27,7 @@ export default function RecipePage() {
                 setRecipeData({
                     img: response.data.image,
                     instructions: response.data.instructions,
+                    // title: response.data.title,
                 }
                 )
             })
@@ -49,6 +55,9 @@ export default function RecipePage() {
             
             {/*Picture 1st Item */}
             <div className="ml-20 mt-16">
+                {/* <h2 class=" text-3xl"
+                    id = "recipePageHeader"
+                    > {recipeData.title}</h2> */}
                 <img
                 class="rounded-lg"
                 src={recipeData.img}
@@ -65,13 +74,21 @@ export default function RecipePage() {
                 <p className="text-center mt-2 text-2xl"
                     dangerouslySetInnerHTML={{__html: recipeData.instructions}}></p>
             </div>
+            
+            
 
              {/*<div class="basis-1/2">
                 <h1>reviews, like, add review, add to tracker</h1>
             </div> */}
 
-            <div className="w-1/3">
+            <div className="w-1/3 ml-20">
 
+                for(let i = 0; i<5 ; i++){
+                    <span>⭐</span>
+                }
+
+
+                <FavouriteButton />
             </div>
             
 
@@ -88,10 +105,6 @@ export default function RecipePage() {
                 class = "m-auto" 
                 src={ingredientWidget} />
             </div>
-
-            
-                
-            
         
 
         </div>
