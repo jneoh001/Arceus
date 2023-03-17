@@ -15,12 +15,12 @@ function App() {
   return (
     <div className="bg-[#FFFBEB]">
       <Navbar />
-      <LoginCard />
+      {/* <LoginCard />
       <HistoryCard />
       <RegistrationPage />
       <EditProfile />
       <MyProfile />
-      <LeaveReviewCard id={716429} /> 
+      <LeaveReviewCard id={716429} />  */}
       <RecipePage />
       {/* <Tracker />  */}
     </div>

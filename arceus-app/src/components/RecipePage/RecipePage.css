@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap');
 
-
 .recipe-page-container
 {
     background-color: white;
@@ -16,17 +15,31 @@
     position: relative;
 }
 
+.buttonsContainer{
+    width: 556px;
+}
 
 #recipePageHeader{
     font-family: Lato;
     font-weight: bold;
 }
 
-.button{
-    padding: 1rem 2rem;
-    color: #313131;
-    background: white;
-    border: 2px solid black;
-    margin-right: 2rem;
-    font-weight: 600;
+.iconsdiv{
+    width: 556px;
+}
+
+.recipeInstructions{
+    height: 370px;
+}
+
+.AddReviewButton{
+    height: 50px;
+    margin-top: 4rem;
+    margin-left: 1rem;
+}
+
+.AddTrackerButton{
+    height: 50px;
+    margin-left: 2rem;
+    margin-right: 1rem;
 }
