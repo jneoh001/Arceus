@@ -24,16 +24,16 @@ const RecipeCard = (props) => {
           {result}
         </p>
         <p className="mb-2 text-base font-normal text-gray-700 dark:text-gray-400">
-          Carbohydrates: {props.carbs}
+          Carbohydrates: {props.carbs}g
         </p>
         <p className="mb-2 text-base font-normal text-gray-700 dark:text-gray-400">
-          Protein: {props.protein}
+          Protein: {props.protein}g
         </p>
         <p className="mb-2 text-base font-normal text-gray-700 dark:text-gray-400">
-          Fats: {props.fats}
+          Fats: {props.fats}g
         </p>
         <p className="mb-2 text-base font-normal text-gray-700 dark:text-gray-400">
-          Calories: {props.calories}
+          Calories: {props.calories}g
         </p>
       </div>{" "}
       {/* <FavouriteButton id={props.id} /> */}

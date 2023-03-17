@@ -1,0 +1,22 @@
+.LandingPage {
+  background-color: rgb(255, 251, 235);
+}
+.recipecards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  row-gap: 3rem;
+}
+.landingpageheader {
+  width: 60%;
+  margin: 0px auto 0.3%;
+  padding-top: 3%;
+  font-size: 1.8em;
+  font-weight: bold;
+  background-color: rgb(255, 251, 235);
+  line-height: 4rem;
+  border-bottom: 1px rgb(0, 0, 0) solid;
+}
