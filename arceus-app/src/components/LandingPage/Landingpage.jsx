@@ -3,8 +3,6 @@ import Navbar from '../Navbar/Navbar';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import RecommendedRecipes from '../RecipeCard/RecommendedRecipes';
 import './LandingPage.css';
-import '../Navbar/Navbar.css';
-import '../RecipeCard/RecipeCard.css';
 
 const LandingPage = () =>{
     return (
@@ -21,7 +19,7 @@ const LandingPage = () =>{
                 <RecommendedRecipes/>
                 <RecommendedRecipes/>
                 <RecommendedRecipes/>
-    <RecommendedRecipes/>*/}
+                <RecommendedRecipes/>*/}
             </div>
         </div>
     );

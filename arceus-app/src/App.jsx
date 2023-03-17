@@ -23,7 +23,7 @@ function App() {
       <EditProfile />
       <MyProfile />
       <LeaveReviewCard id={716429} />
-      <ReviewCard id={716429} />
+      {/*<ReviewCard id={716429} />*/}
       <RecipeCard/>
       <LandingPage/>
     </div>
