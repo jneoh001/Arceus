@@ -10,8 +10,7 @@ import { getStorage } from "firebase/storage";
 const firebaseConfig = {
   apiKey: "AIzaSyDZcYpaXkWN0OIlKpsIyWlRPSTXtOxU9dY",
   authDomain: "sc2006-arceus-f7ba8.firebaseapp.com",
-  databaseURL:
-    "https://sc2006-arceus-f7ba8-default-rtdb.asia-southeast1.firebasedatabase.app",
+  databaseURL: "https://sc2006-arceus-f7ba8-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "sc2006-arceus-f7ba8",
   storageBucket: "sc2006-arceus-f7ba8.appspot.com",
   messagingSenderId: "53558932997",
