@@ -29,8 +29,6 @@ function App() {
       <ViewReview id={716429} />
       <LeaveReviewCard id={716429} />
       <RecipeByID id={716429} />
-
-      {/* <RecommendedRecipes />
       <RecommendedRecipes />
       <RecommendedRecipes />
       <RecommendedRecipes /> 
