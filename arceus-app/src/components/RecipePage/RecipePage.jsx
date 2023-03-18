@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './RecipePage.css';
@@ -274,8 +275,10 @@ export default function RecipePage() {
             </div>
         
 
+          <img class="m-auto" src={ingredientWidget} />
         </div>
+      </div>
 
     </div>
-  )
+  );
 }

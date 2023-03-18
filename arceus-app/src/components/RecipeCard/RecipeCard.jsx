@@ -1,10 +1,43 @@
 import FavouriteButton from "./FavouriteButton";
+import { db } from "../../firebaseConfig";
+import { get, child, ref } from "firebase/database";
+import { useState, useEffect } from "react";
 
 const RecipeCard = (props) => {
-  const result = [];
-  for (let i = 0; i < props.rating; i++) {
-    result.push(<span>⭐</span>);
-  }
+  const [rating, setRating] = useState(0);
+  const [ratingDisplay, setRatingDisplay] = useState([]);
+
+  useEffect(() => {
+    get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setRating(Math.round(snapshot.val().total / snapshot.val().number));
+        }
+      })
+      .catch((error) => {
+        console.log(error.code);
+      });
+  }, []);
+
+  useEffect(() => {
+    const result = [];
+    if (rating === 0) {
+      for (let i = 0; i < 5; i++) {
+        result.push(
+          <span key={i} className="text-3xl">
+            &#10032;
+          </span>
+        );
+      }
+      result.push(<span key={5}> (No Ratings)</span>);
+    } else {
+      for (let i = 0; i < rating; i++) {
+        result.push(<span key={i}>&#11088;</span>);
+      }
+    }
+
+    setRatingDisplay(result);
+  }, [rating]);
 
   return (
     <a
@@ -21,19 +54,19 @@ const RecipeCard = (props) => {
           {props.name}
         </h5>
         <p className="mb-3 text-xl font-normal text-gray-700 dark:text-gray-400">
-          {result}
+          {ratingDisplay}
         </p>
         <p className="mb-2 text-base font-normal text-gray-700 dark:text-gray-400">
-          Carbohydrates: {props.carbs}
+          Carbohydrates: {props.carbs}g
         </p>
         <p className="mb-2 text-base font-normal text-gray-700 dark:text-gray-400">
-          Protein: {props.protein}
+          Protein: {props.protein}g
         </p>
         <p className="mb-2 text-base font-normal text-gray-700 dark:text-gray-400">
-          Fats: {props.fats}
+          Fats: {props.fats}g
         </p>
         <p className="mb-2 text-base font-normal text-gray-700 dark:text-gray-400">
-          Calories: {props.calories}
+          Calories: {props.calories}g
         </p>
       </div>{" "}
       {/* <FavouriteButton id={props.id} /> */}
