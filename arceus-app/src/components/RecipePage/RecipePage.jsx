@@ -197,7 +197,6 @@ export default function RecipePage() {
 
 
   return (
-    
     <div className="recipe-page-container">    
         <div className="recipe-page-container-grid w-5/6 grid gap-0 grid-cols-2 ml-16">
             
@@ -277,8 +276,6 @@ export default function RecipePage() {
 
           <img class="m-auto" src={ingredientWidget} />
         </div>
-      </div>
-
     </div>
-  );
+    );
 }
