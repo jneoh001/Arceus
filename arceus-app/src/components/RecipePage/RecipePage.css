@@ -16,7 +16,7 @@
 }
 
 .buttonsContainer{
-    width: 556px;
+    width: 35vw;
 }
 
 #recipePageHeader{
@@ -24,8 +24,12 @@
     font-weight: bold;
 }
 
+.recipeImage{
+    width: 35vw;
+}
+
 .iconsdiv{
-    width: 556px;
+    width: 35vw;
 }
 
 .recipeInstructions{
