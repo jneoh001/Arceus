@@ -21,6 +21,7 @@ function App() {
       <HistoryCard />
       <RegistrationPage />
       <EditProfile />
+      
       <MyProfile /> */}
       <ViewReview id={716429} />
       <LeaveReviewCard id={716429} />
@@ -34,6 +35,7 @@ function App() {
       {/* <GoalPage /> */}
       {/* <HistoryPage /> */}
       {/* <RecipePage /> */}
+      
     </div>
   );
 }
