@@ -1,6 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { Form, useField, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/auth-context";
 
 const MyNumberInput = ({ label, ...props }) => {
@@ -93,7 +94,7 @@ const validationSchema = Yup.object({
 
 const RegistrationCard = () => {
   const { signup, emailInUse } = useAuth();
-
+  const navigate = useNavigate();
   const submitHandler = (values) => {
     const profile = {
       email: values.email,
@@ -108,6 +109,12 @@ const RegistrationCard = () => {
       calorieGoal: values.calorieGoal,
     };
     signup(values.email, values.password, profile);
+    
+    navigate("/login",{
+      state:{
+        message: "Registration Succesful! Please Login."
+      }
+    })
   };
   return (
     <div className="flex flex-col justify-center items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
@@ -234,11 +241,11 @@ const RegistrationCard = () => {
               />
             </div>
           </div>
-          <button
-            className="my-4 py-2.5 cursor-pointer text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-md text-center w-full"
-            type="submit"
-          >
-            Register
+            <button
+              className="my-4 py-2.5 cursor-pointer text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-md text-center w-full"
+              type="submit"
+            >
+              Register
           </button>
         </Form>
       </Formik>

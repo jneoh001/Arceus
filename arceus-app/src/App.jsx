@@ -18,25 +18,24 @@ import GoalPage from "./pages/GoalPage/GoalPage";
 function App() {
   return (
     <div className="bg-[#FFFBEB]">
-      {/* 
-      Legacy Code
-      <Navbar />
+      {/* <Navbar />
       <LoginCard />
       <HistoryCard />
       <RegistrationPage />
       <EditProfile />
-      <MyProfile /> */}
+      <MyProfile />
       <ViewReview id={716429} />
       <LeaveReviewCard id={716429} />
       <RecipeByID id={716429} />
       <RecommendedRecipes />
       <RecommendedRecipes />
+      <RecommendedRecipes />
       <RecommendedRecipes /> 
-      <LandingPage />
       <LoginPage />
       <GoalPage /> 
-      <HistoryPage /> 
-      */}
+      <LandingPage />
+      <HistoryPage />  */}
+     
       {/* New Code with Routing */}
       <BrowserRouter>
         <Pages/>
