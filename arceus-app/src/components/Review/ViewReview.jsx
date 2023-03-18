@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 const ViewReview = (props) => {
   const [reviewsData, setReviewsData] = useState([]);
   useEffect(() => {
-    get(child(ref(db), "reviews/" + props.id))
+    get(child(ref(db), "reviews/" + props.id + "/data"))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setReviewsData(Object.values(snapshot.val()));
@@ -34,12 +34,12 @@ const ViewReview = (props) => {
         {reviewsData.map((review, index) => {
           let result = [];
           for (let i = 0; i < review.rating; i++) {
-            result.push(<span>⭐</span>);
+            result.push(<span key={i}>⭐</span>);
           }
           return (
             <div className="review-box" key={index}>
               <div className="box-top">
-                <div className="" profile>
+                <div className="" profile="true">
                   <div className="profile-img">
                     <img src="c-1.jpg" alt="" />
                   </div>
