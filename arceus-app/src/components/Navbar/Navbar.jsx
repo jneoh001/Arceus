@@ -2,12 +2,11 @@ import "./Navbar.css";
 import { useRef, useContext, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import AuthContext from "../../store/auth-context";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const ctx = useContext(AuthContext);
-
   const [navIsClicked, setNavIsClicked] = useState(false);
-
   const navRef = useRef();
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
@@ -25,31 +24,28 @@ const Navbar = () => {
           Arceus
         </h3>
         <nav ref={navRef} className="responsive_nav">
-          <a className="nav-a" onClick={showNavbar} href="#home">
+          <NavLink to={"/"} className="nav-a" onClick={showNavbar}>
             HOME
-          </a>
-          <a className="nav-a" onClick={showNavbar} href="#search">
+          </NavLink>
+          <NavLink to={"/search"} className="nav-a" onClick={showNavbar}>
             SEARCH
-          </a>
+          </NavLink>
           {!ctx.currentUser && (
-            <a className="nav-a" onClick={showNavbar} href="#login">
+            <NavLink to={"/login"} className="nav-a" onClick={showNavbar}>
               LOG IN
-            </a>
+            </NavLink>
           )}
           {ctx.currentUser && (
-            <a className="nav-a" onClick={showNavbar} href="#login">
+            <NavLink to={"/profile"} className="nav-a" onClick={showNavbar}>
               MY PROFILE
-            </a>
+            </NavLink>
           )}
-          <a
+          <NavLink
+            to={"/search"}
             className="lg:absolute lg:right-12 text-2xl"
             onClick={showNavbar}
-            href="#search"
-          >
-            ⚙️
-          </a>
+          ></NavLink>
         </nav>
-
         {navIsClicked && <FaBars onClick={showNavbar} className="faBar" />}
         {!navIsClicked && <FaTimes onClick={showNavbar} className="faBar" />}
       </header>
