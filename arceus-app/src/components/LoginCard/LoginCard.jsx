@@ -2,6 +2,7 @@ import { Form, Button } from "react-bootstrap";
 import "./LoginCard.css";
 import { useAuth } from "../../store/auth-context";
 import { useRef } from "react";
+import { NavLink } from "react-router-dom";
 
 const LoginCard = () => {
   const emailRef = useRef();
@@ -53,12 +54,12 @@ const LoginCard = () => {
         </div>
       </Form>
       <div className="login-2nd-container">
-        <a href="#register">
+        <NavLink to={"/register"}>
           <button>Don't have an account?</button>
-        </a>
-        <a href="#passwordReset">
+        </NavLink>
+        <NavLink to={"/"}>
           <button onClick={passwordResetHandler}>Forget Password?</button>
-        </a>
+        </NavLink>
       </div>
     </div>
   );
