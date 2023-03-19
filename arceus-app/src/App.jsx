@@ -11,6 +11,8 @@ import MyProfile from "./components/MyProfile/MyProfile";
 import Tracker from "./components/Tracker/Tracker";
 import ViewReview from "./components/Review/ViewReview";
 import RecipeByID from "./components/RecipeCard/RecipeByID";
+import SearchPageByID from "./components/Search/SearchPageByID";
+
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
       <LeaveReviewCard id={716429} />
       <ViewReview id={716429} />
       <RecipeByID id={716429} />
-
+      <SearchPageByID id={716429} />
       {/* <RecommendedRecipes />
       <RecommendedRecipes />
       <RecommendedRecipes /> */}
