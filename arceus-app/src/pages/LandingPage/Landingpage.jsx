@@ -15,11 +15,11 @@ const LandingPage = () => {
         <RecipeCard />
         <RecipeCard />
         <RecipeCard />
-        {/* <RecommendedRecipes />
-        <RecommendedRecipes />
-        <RecommendedRecipes />
-        <RecommendedRecipes />
-        <RecommendedRecipes /> */}
+        {/*<RecommendedRecipes/>
+        <RecommendedRecipes/>
+        <RecommendedRecipes/>
+        <RecommendedRecipes/>
+        <RecommendedRecipes/>*/}
       </div>
     </div>
   );

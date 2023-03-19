@@ -33,7 +33,7 @@ const RecipeCard = (props) => {
           Fats: {props.fats}g
         </p>
         <p className="mb-2 text-base font-normal text-gray-700 dark:text-gray-400">
-          Calories: {props.calories}g
+          Calories: {props.calories}kcal
         </p>
       </div>{" "}
       {/* <FavouriteButton id={props.id} /> */}
