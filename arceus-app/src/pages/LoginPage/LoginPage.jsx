@@ -1,7 +1,6 @@
 import LoginCard from "../../components/LoginCard/LoginCard";
 import Navbar from "../../components/Navbar/Navbar";
 import { useLocation } from "react-router-dom";
-import { Message } from "semantic-ui-react";
 
 function RerouteHandler(){
   const location = useLocation();

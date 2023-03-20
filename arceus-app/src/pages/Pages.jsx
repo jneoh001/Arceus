@@ -10,6 +10,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import IndividualReviewPage from "./IndividualReviewPage/IndividualReviewPage";
 import IndividualRecipePage from "./IndividualRecipePage/IndividualRecipePage";
 import RecipeSearchPage from "./RecipeSearchPage/RecipeSearchPage";
+import Searched from "./RecipeSearchPage/Searched";
 
 function Pages(){
     return(
@@ -21,6 +22,7 @@ function Pages(){
             <Route path="/goals" element={<ProtectedRoute><GoalPage/></ProtectedRoute>}/>
             <Route path="/profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
             <Route path="/search" element={<RecipeSearchPage/>}/>
+            <Route path="/searched/:search" element={<Searched />}/>
             <Route path="/recipe/:id" element={<IndividualRecipePage/>}/>
             <Route path="/reviews/:recipe" element={<IndividualReviewPage/>}/>
         </Routes>

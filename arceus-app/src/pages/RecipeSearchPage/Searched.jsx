@@ -6,7 +6,7 @@ import Search from '../../components/Search2/Search';
 import {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import './Searched.css';
+
 
 
 function Searched() {
@@ -16,7 +16,7 @@ function Searched() {
 
     const getSearched = async (name) => {
         const data = await fetch(
-        'https://api.spoonacular.com/recipes/complexSearch?apiKey=7f8b79cf24094b52953b2d594e02f04e&query=${name}'
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=7f8b79cf24094b52953b2d594e02f04e&query=${name}`
         );
         const recipes = await data.json();
         setSearchedRecipes(recipes.results);
@@ -31,20 +31,17 @@ function Searched() {
         <div>
             <Navbar />
             <div className="recipecards">
-                <div className="recipeGrid">
                 <Grid>
                     {SearchedRecipes.map((item) => {
                         return (
-                            <div class="recipeCard">
                             <Card key={item.id}>
                                 <img src={item.image} alt="" />
                                 <h4>{item.title}</h4>
+                                <h4>{item.protein}</h4>
                             </Card>
-                            </div>
                         );
                     })}
                 </Grid>
-                </div>
             </div>
         </div>
     );

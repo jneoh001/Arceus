@@ -1,9 +1,10 @@
 import RecipeCard from "../RecipeCard/RecipeCard";
+import SearchPage from "./SearchPage";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
 const SearchPageByID = (props) => {
-  const apiKey = "d397c8afbfd343cbae5ab63b787f199a";
+  const apiKey = "7f8b79cf24094b52953b2d594e02f04e";
   const [recipeData, setRecipeData] = useState({});
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const SearchPageByID = (props) => {
       });
   }, []);
   return (
-    <RecipeCard
+    <SearchPage
       id={props.id}
       name={recipeData.title}
       carbs={recipeData.carbs}
