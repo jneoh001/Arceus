@@ -1,4 +1,4 @@
-import NavBar from  "../.../components/Navbar/Navbar";
+import NavBar from  "../../components/Navbar/Navbar";
 import RecipePage from "../../components/RecipePage/RecipePage";
 
 const IndividualRecipePage = () => {
