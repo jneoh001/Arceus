@@ -9,10 +9,17 @@ const LandingPage = () => {
       <Navbar />
       <h1 className="landingpageheader">Top Rated</h1>
       <div className="recipecards">
-        <RecipeByID id={716429} />
-        <RecipeByID id={642605} />
-        <RecipeByID id={716356} />
-        <RecipeByID id={641904} />
+        <RecipeCard />
+        <RecipeCard />
+        <RecipeCard />
+        <RecipeCard />
+        <RecipeCard />
+        {/*<RecommendedRecipes/>
+        <RecommendedRecipes/>
+        <RecommendedRecipes/>
+        <RecommendedRecipes/>
+        <RecommendedRecipes/>*/}
+
       </div>
     </div>
   );

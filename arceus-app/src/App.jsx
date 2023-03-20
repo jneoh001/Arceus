@@ -11,6 +11,8 @@ import RecommendedRecipes from "./components/RecipeCard/RecommendedRecipes";
 import RegistrationPage from "./components/RegistrationCard/RegistrationCard";
 import EditProfile from "./components/EditProfile/EditProfile";
 import MyProfile from "./components/MyProfile/MyProfile";
+import LandingPage from "./pages/LandingPage/Landingpage";
+import HomePage from "./pages/HomePage/Homepage";
 import RecipePage from "./components/RecipePage/RecipePage";
 import ViewReview from "./components/Review/ViewReview";
 import SearchPageByID from "./components/Search/SearchPageByID";
@@ -25,6 +27,18 @@ function App() {
       <RegistrationPage />
       <EditProfile />
       <MyProfile />
+      <LeaveReviewCard id={716429} />
+      <HomePage/>
+      {/*<ViewReview id={716429} />*/}
+      {/*<RecipeByID id={716429} />
+      <RecommendedRecipes />
+      <RecommendedRecipes />
+      <RecommendedRecipes />
+      <LandingPage /> 
+      <LoginPage /> 
+      <GoalPage />
+  <HistoryPage />*/}
+
       <ViewReview id={716429} />
       <LeaveReviewCard id={716429} />
       <RecipeByID id={716429} />

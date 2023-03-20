@@ -85,6 +85,7 @@ const RecipeCard = (props) => {
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {props.name}
         </h5>
+
         <p className=" flex mb-3 text-xl text-gray-700 dark:text-gray-400">
           {ratingDisplay}
         </p>
