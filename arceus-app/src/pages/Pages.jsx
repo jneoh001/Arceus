@@ -10,6 +10,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import IndividualReviewPage from "./IndividualReviewPage/IndividualReviewPage";
 import IndividualRecipePage from "./IndividualRecipePage/IndividualRecipePage";
 import RecipeSearchPage from "./RecipeSearchPage/RecipeSearchPage";
+import RecommendedRecipePage from "./RecommendedRecipePage/RecommendedRecipePage";
 import EditProfilePage from "./EditProfilePage/EditProfilePage";
 
 function Pages(){
@@ -21,6 +22,7 @@ function Pages(){
             <Route path="/history" element={<ProtectedRoute><HistoryPage/></ProtectedRoute>} />
             <Route path="/goals" element={<ProtectedRoute><GoalPage/></ProtectedRoute>}/>
             <Route path="/profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
+            <Route path="/recommended" element={<RecommendedRecipePage/>}/>
             <Route path="/editprofile" element={<ProtectedRoute><EditProfilePage/></ProtectedRoute>}/>
             <Route path="/search" element={<RecipeSearchPage/>}/>
             <Route path="/recipe/:id" element={<IndividualRecipePage/>}/>

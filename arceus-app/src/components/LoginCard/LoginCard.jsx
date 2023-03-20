@@ -2,16 +2,17 @@ import { Form, Button } from "react-bootstrap";
 import "./LoginCard.css";
 import { useAuth } from "../../store/auth-context";
 import { useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const LoginCard = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-
+  const navigate = useNavigate();
   const { login, resetPassword, wrongPassword, userNotFound } = useAuth();
   const submitHandler = (e) => {
     login(emailRef.current.value, passwordRef.current.value);
     e.preventDefault();
+    navigate("/recommended");
   };
 
   const passwordResetHandler = (e) => {
