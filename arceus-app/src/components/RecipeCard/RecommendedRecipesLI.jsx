@@ -1,53 +1,57 @@
 import axios from "axios";
 import RecipeCard from "./RecipeCard";
 import { useEffect, useState } from "react";
-
 /*database imports*/
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
 import { ref, child, get, onValue } from "firebase/database";
 
-
-const RecommendedRecipesLI = () =>{
-  {/*the goals have been divided by 3 for each meal of the day*/}
-  const dummyData = {
-    calorieGoal : 750,
-    proteinGoal: 40,
-    carbGoal: 88,
-    fatGoal: 60
-  }
-  const apiKey = '2e141398c9fe42e29876fda0a0c27218';
+const RecommendedRecipesLI = () => {
+  const { userDetails } = useAuth();
+  console.log(userDetails);
+  const apiKey = "0a76b05501d343a3865103c54309f7dd";
 
   const [id, setID] = useState();
   const [recipeData, setRecipeData] = useState({});
 
-  useEffect(()=>{
-    axios
-      .get(`https://api.spoonacular.com/recipes/findByNutrients?apiKey=${apiKey}&minCarbs=${dummyData.carbGoal}
-      &minCalories=${dummyData.calorieGoal}&minProtein=${dummyData.proteinGoal}&maxFat=${dummyData.fatGoal}&number=1&random=true`)
-      .then((res)=>{
-        const curID = res.data[0].id;
-        console.log(curID);
-        setID(curID);
-        return axios.get(
-          "https://api.spoonacular.com/recipes/"+curID+"/information?includeNutrition=true&apiKey="+apiKey
-        );
-      })
-      .then((info)=>{
-        setRecipeData({
-          title: info.data.title,
-          img: info.data.image,
-          calories: info.data.nutrition.nutrients[0].amount,
-          fats: info.data.nutrition.nutrients[1].amount,
-          carbs: info.data.nutrition.nutrients[3].amount,
-          protein: info.data.nutrition.nutrients[9].amount
+  useEffect(() => {
+    if (userDetails) {
+      axios
+        .get(
+          `https://api.spoonacular.com/recipes/findByNutrients?apiKey=${apiKey}&minCarbs=${
+            userDetails.carbGoal / 3
+          }
+      &minCalories=${userDetails.calorieGoal / 3}&minProtein=${
+            userDetails.proteinGoal / 3
+          }&maxFat=${userDetails.fatGoal / 3}&number=1&random=true`
+        )
+        .then((res) => {
+          const curID = res.data[0].id;
+          console.log(curID);
+          setID(curID);
+          return axios.get(
+            "https://api.spoonacular.com/recipes/" +
+              curID +
+              "/information?includeNutrition=true&apiKey=" +
+              apiKey
+          );
         })
-      })
-      .catch((error=>console.log(error)));
-    },[]);
+        .then((info) => {
+          setRecipeData({
+            title: info.data.title,
+            img: info.data.image,
+            calories: info.data.nutrition.nutrients[0].amount,
+            fats: info.data.nutrition.nutrients[1].amount,
+            carbs: info.data.nutrition.nutrients[3].amount,
+            protein: info.data.nutrition.nutrients[9].amount,
+          });
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [userDetails]);
 
-  return(      
-    <RecipeCard 
+  return (
+    <RecipeCard
       id={id}
       name={recipeData.title}
       carbs={recipeData.carbs}
@@ -55,9 +59,8 @@ const RecommendedRecipesLI = () =>{
       fats={recipeData.fats}
       calories={recipeData.calories}
       img={recipeData.img}
-      rating={5}
-      />
-  )
-}
+    />
+  );
+};
 
 export default RecommendedRecipesLI;

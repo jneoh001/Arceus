@@ -47,30 +47,30 @@ const MyProfile = () => {
       <hr className="w-full h-1 mt-4 bg-black rounded" />
       <p className="w-9/12 mt-12">
         {" "}
-        Email: <span>{profile.email}</span>
+        Email: <span>{userDetails.email}</span>
       </p>
       <div className="grid grid-cols-2 w-9/12 mt-8">
         <p>
-          Height: <span>{profile.height} cm</span>
+          Height: <span>{userDetails.height} cm</span>
         </p>
         <p>
-          Weight: <span>{profile.weight} kg</span>
-        </p>
-      </div>{" "}
-      <div className="grid grid-cols-2 w-9/12 mt-8">
-        <p>
-          Carbohydrate Goal: <span>{profile.carbGoal} g</span>
-        </p>
-        <p>
-          Calorie Goal: <span>{profile.calorieGoal} g</span>
+          Weight: <span>{userDetails.weight} kg</span>
         </p>
       </div>{" "}
       <div className="grid grid-cols-2 w-9/12 mt-8">
         <p>
-          Fat Goal: <span>{profile.fatGoal} g</span>
+          Carbohydrate Goal: <span>{userDetails.carbGoal} g</span>
         </p>
         <p>
-          Protein Goal: <span>{profile.proteinGoal} g</span>
+          Calorie Goal: <span>{userDetails.calorieGoal} g</span>
+        </p>
+      </div>{" "}
+      <div className="grid grid-cols-2 w-9/12 mt-8">
+        <p>
+          Fat Goal: <span>{userDetails.fatGoal} g</span>
+        </p>
+        <p>
+          Protein Goal: <span>{userDetails.proteinGoal} g</span>
         </p>
       </div>
       <div className="flex justify-between w-2/3">

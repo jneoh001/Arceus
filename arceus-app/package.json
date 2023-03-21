@@ -18,6 +18,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.8.1",
+    "semantic-ui-css": "^2.5.0",
+    "styled-components": "^5.3.9",
     "yup": "^1.0.2"
   },
   "devDependencies": {
