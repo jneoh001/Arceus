@@ -44,7 +44,7 @@ const RecommendedRecipesList = () => {
       protein={recipe.protein}
       fats={recipe.fats}
       calories={recipe.calories}
-      img={recipe.img}
+      img={recipe.image}
     />
     )))
   );
