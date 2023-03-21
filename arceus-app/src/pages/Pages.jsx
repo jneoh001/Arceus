@@ -28,6 +28,7 @@ function Pages(){
             <Route path="/recommended" element={<RecommendedRecipePage/>}/>
             <Route path="/editprofile" element={<EditProfilePage/>}/>
             <Route path="/search" element={<RecipeSearchPage/>}/>
+            <Route path="/searched/:search" element={<Searched/>}/>
             <Route path="/recipe/:id" element={<IndividualRecipePage/>}/>
             <Route path="/reviews/:recipe" element={<IndividualReviewPage/>}/>
         </Routes>

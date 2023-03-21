@@ -49,7 +49,9 @@ function Searched() {
         } else if (sortBy === 'calories') {
             return recipes.sort((a, b) => a.calories - b.calories);
         } else if (sortBy === 'alpha') {
-            return recipes.sort((a, b) => a.title.localCompare(b.title));
+            return recipes.sort((a, b) => a.title.localeCompare(b.title));
+        } else if (sortBy === 'zulu') {
+            return recipes.sort((a, b) => b.title.localeCompare(a.title));
         } else {
             return recipes;
         }
@@ -87,6 +89,7 @@ function Searched() {
                         <option value='rating'>Rating</option>
                         <option value='calories'>Calories</option>
                         <option value='alpha'>A-Z</option>
+                        <option value='zulu'>Z-A</option>
                     </select>
                 </div>
             </div>
