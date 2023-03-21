@@ -6,4 +6,4 @@ function RecipeSearchPage() {
   )
 }
 
-export default RecipeSearchPage
+export default RecipeSearchPage;
