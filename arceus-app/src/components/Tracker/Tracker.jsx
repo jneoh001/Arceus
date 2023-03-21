@@ -3,64 +3,63 @@ import Progress from "./Progress";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
 import { ref, child, get, update } from "firebase/database";
+import getDate from "../../helpers/getDate";
 
 const Tracker = () => {
-  const { currentUser, userDetails, getDate } = useAuth();
-
-  const [intake, setIntake] = useState();
+  const { userIntake, userDetails } = useAuth();
 
   //Update database once the intake changes
-  useEffect(() => {
-    const [todayID, todayDisplay] = getDate();
-    if (userDetails && intake) {
-      const updates = {};
-      updates["/users-profile/" + currentUser.uid + "/history/" + todayID] = {
-        date: todayDisplay,
-        carbGoal: userDetails.carbGoal,
-        proteinGoal: userDetails.proteinGoal,
-        fatGoal: userDetails.fatGoal,
-        calorieGoal: userDetails.calorieGoal,
-        carbIntake: intake.carb,
-        proteinIntake: intake.protein,
-        fatIntake: intake.fat,
-        calorieIntake: intake.calorie,
-      };
-      update(ref(db), updates);
-    }
-  }, [intake, userDetails]);
+  // useEffect(() => {
+  //   const [todayID, todayDisplay] = getDate();
+  //   if (userDetails && intake) {
+  //     const updates = {};
+  //     updates["/users-profile/" + currentUser.uid + "/history/" + todayID] = {
+  //       date: todayDisplay,
+  //       carbGoal: userDetails.carbGoal,
+  //       proteinGoal: userDetails.proteinGoal,
+  //       fatGoal: userDetails.fatGoal,
+  //       calorieGoal: userDetails.calorieGoal,
+  //       carbIntake: intake.carb,
+  //       proteinIntake: intake.protein,
+  //       fatIntake: intake.fat,
+  //       calorieIntake: intake.calorie,
+  //     };
+  //     update(ref(db), updates);
+  //   }
+  // }, [intake, userDetails]);
 
   // Get the user's details when the user first log in
-  useEffect(() => {
-    if (currentUser) {
-      const [todayID, todayDisplay] = getDate();
-      get(
-        child(
-          ref(db),
-          "users-profile/" + currentUser.uid + "/history/" + todayID
-        )
-      )
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            setIntake({
-              carb: snapshot.val().carbIntake,
-              protein: snapshot.val().proteinIntake,
-              fat: snapshot.val().fatIntake,
-              calorie: snapshot.val().calorieIntake,
-            });
-          } else {
-            setIntake({
-              carb: 0,
-              protein: 0,
-              fat: 0,
-              calorie: 0,
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error.code);
-        });
-    }
-  }, [currentUser]);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     const [todayID, todayDisplay] = getDate();
+  //     get(
+  //       child(
+  //         ref(db),
+  //         "users-profile/" + currentUser.uid + "/history/" + todayID
+  //       )
+  //     )
+  //       .then((snapshot) => {
+  //         if (snapshot.exists()) {
+  //           setIntake({
+  //             carb: snapshot.val().carbIntake,
+  //             protein: snapshot.val().proteinIntake,
+  //             fat: snapshot.val().fatIntake,
+  //             calorie: snapshot.val().calorieIntake,
+  //           });
+  //         } else {
+  //           setIntake({
+  //             carb: 0,
+  //             protein: 0,
+  //             fat: 0,
+  //             calorie: 0,
+  //           });
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error.code);
+  //       });
+  //   }
+  // }, [currentUser]);
 
   // const addHandler = () => {
   //   setIntake((pre) => {
@@ -90,10 +89,10 @@ const Tracker = () => {
       <Progress
         title="Carbohydrates"
         percentage={
-          userDetails && intake
-            ? (intake.carb / userDetails.carbGoal) * 100 >= 100
+          userIntake
+            ? (userIntake.carb / userDetails.carbGoal) * 100 >= 100
               ? "100%"
-              : (intake.carb / userDetails.carbGoal) * 100 + "%"
+              : (userIntake.carb / userDetails.carbGoal) * 100 + "%"
             : "0%"
         }
         className="bg-green-600 dark:bg-green-500"
@@ -101,10 +100,10 @@ const Tracker = () => {
       <Progress
         title="Protein"
         percentage={
-          userDetails && intake
-            ? (intake.protein / userDetails.proteinGoal) * 100 >= 100
+          userIntake
+            ? (userIntake.protein / userDetails.proteinGoal) * 100 >= 100
               ? "100%"
-              : (intake.protein / userDetails.proteinGoal) * 100 + "%"
+              : (userIntake.protein / userDetails.proteinGoal) * 100 + "%"
             : "0%"
         }
         className="dark:bg-indigo-500 bg-indigo-600"
@@ -112,10 +111,10 @@ const Tracker = () => {
       <Progress
         title="Fats"
         percentage={
-          userDetails && intake
-            ? (intake.fat / userDetails.fatGoal) * 100 >= 100
+          userIntake
+            ? (userIntake.fat / userDetails.fatGoal) * 100 >= 100
               ? "100%"
-              : (intake.fat / userDetails.fatGoal) * 100 + "%"
+              : (userIntake.fat / userDetails.fatGoal) * 100 + "%"
             : "0%"
         }
         className="bg-yellow-400 dark:bg-yellow-500"
@@ -123,10 +122,10 @@ const Tracker = () => {
       <Progress
         title="Calories"
         percentage={
-          userDetails && intake
-            ? (intake.calorie / userDetails.calorieGoal) * 100 >= 100
+          userIntake
+            ? (userIntake.calorie / userDetails.calorieGoal) * 100 >= 100
               ? "100%"
-              : (intake.calorie / userDetails.calorieGoal) * 100 + "%"
+              : (userIntake.calorie / userDetails.calorieGoal) * 100 + "%"
             : "0%"
         }
         className="bg-red-600 dark:bg-red-500"

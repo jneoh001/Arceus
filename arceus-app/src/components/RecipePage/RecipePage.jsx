@@ -5,6 +5,7 @@ import RecipeFavourite from "./RecipeFavourite";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
 import { ref, child, get, update } from "firebase/database";
+import getDate from "../../helpers/getDate";
 
 export default function RecipePage() {
   const { currentUser, userDetails } = useAuth();
@@ -18,17 +19,6 @@ export default function RecipePage() {
     fat: 0,
     calorie: 0,
   });
-
-  // Get today's date in the format of DD/MM/YYYY
-  const getDate = () => {
-    let today = new Date();
-    let year = today.getFullYear().toString().slice(-2);
-    let month = (today.getMonth() + 1).toString().padStart(2, "0");
-    let day = today.getDate().toString().padStart(2, "0");
-    let formattedDateID = `${day}-${month}-${year}`;
-    let formattedDateDisplay = `${day}/${month}/${year}`;
-    return [formattedDateID, formattedDateDisplay];
-  };
 
   //Update database once the intake changes
   useEffect(() => {

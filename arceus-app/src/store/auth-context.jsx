@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import getDate from "../helpers/getDate";
 import { auth, db } from "../firebaseConfig";
 import { update, ref, get, child, onValue } from "firebase/database";
 import {
@@ -16,6 +17,7 @@ const AuthContext = React.createContext({
   currentUser: {},
   userDetails: {},
   userHistory: [],
+  userIntake: {},
 });
 
 export const useAuth = () => {
@@ -30,6 +32,7 @@ export const AuthContextProvider = (props) => {
   const [currentUser, setCurrentUser] = useState();
   const [userDetails, setUserDetails] = useState();
   const [userHistory, setUserHistory] = useState();
+  const [userIntake, setUserIntake] = useState();
 
   const signup = (email, password, profile) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -97,23 +100,20 @@ export const AuthContextProvider = (props) => {
       });
   };
 
+  const editUserProfile = (profile) => {
+    console.log(profile);
+    const updates = {};
+    updates["/users-profile/" + currentUser.uid + "/details"] = profile;
+    update(ref(db), updates);
+    console.log("db updated");
+  };
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
     });
     return unsubscribe;
   }, []);
-
-  // Get today's date in the format of DD/MM/YYYY
-  const getDate = () => {
-    let today = new Date();
-    let year = today.getFullYear().toString().slice(-2);
-    let month = (today.getMonth() + 1).toString().padStart(2, "0");
-    let day = today.getDate().toString().padStart(2, "0");
-    let formattedDateID = `${day}-${month}-${year}`;
-    let formattedDateDisplay = `${day}/${month}/${year}`;
-    return [formattedDateID, formattedDateDisplay];
-  };
 
   // Get user's profile details
   useEffect(() => {
@@ -160,6 +160,40 @@ export const AuthContextProvider = (props) => {
     }
   }, [currentUser]);
 
+  // Get user's today's intake
+  useEffect(() => {
+    if (currentUser) {
+      const [todayID, todayDisplay] = getDate();
+      get(
+        child(
+          ref(db),
+          "users-profile/" + currentUser.uid + "/history/" + todayID
+        )
+      )
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            setUserIntake({
+              carb: snapshot.val().carbIntake,
+              protein: snapshot.val().proteinIntake,
+              fat: snapshot.val().fatIntake,
+              calorie: snapshot.val().calorieIntake,
+            });
+          } else {
+            setUserIntake({
+              carb: 0,
+              protein: 0,
+              fat: 0,
+              calorie: 0,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error.code);
+        });
+    }
+  }, [currentUser]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -170,11 +204,12 @@ export const AuthContextProvider = (props) => {
         emailInUse: emailInUse,
         userDetails: userDetails,
         userHistory: userHistory,
+        userIntake: userIntake,
         signup: signup,
         login: login,
         logout: logout,
         resetPassword: resetPassword,
-        getDate: getDate,
+        editUserProfile: editUserProfile,
       }}
     >
       {props.children}
