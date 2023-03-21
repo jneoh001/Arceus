@@ -1,22 +1,30 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar';
-import RecipePage from '../../components/RecipePage/RecipePage'
-import SearchPageByID from '../../components/Search/SearchPageByID'
-import Search from '../../components/Search2/Search';
-import {useEffect, useState} from 'react';
+import Search from '../../components/Search/Search';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
+import { FaSearch } from 'react-icons/fa'
 
 
 
 function Searched() {
+
+    const [input, setInput] = useState("");
+    const navigate = useNavigate();
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        navigate('/searched/' + input)
+    };
 
     const [SearchedRecipes, setSearchedRecipes] = useState([]);
     let params = useParams();
 
     const getSearched = async (name) => {
         const data = await fetch(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=7f8b79cf24094b52953b2d594e02f04e&query=${name}`
+            `https://api.spoonacular.com/recipes/complexSearch?apiKey=7f8b79cf24094b52953b2d594e02f04e&query=${name}`
         );
         const recipes = await data.json();
         setSearchedRecipes(recipes.results);
@@ -24,12 +32,22 @@ function Searched() {
 
     useEffect(() => {
         getSearched(params.search);
-    },[params.search])
+    }, [params.search])
 
     return (
 
         <div>
             <Navbar />
+            <form className="searchForm" onSubmit={submitHandler}>
+                <div className="searchInput">
+                    <FaSearch></FaSearch>
+                    <input
+                        onChange={(e) => setInput(e.target.value)}
+                        type="text"
+                        value={input}
+                    />
+                </div>
+            </form>
             <div className="recipecards">
                 <Grid>
                     {SearchedRecipes.map((item) => {
