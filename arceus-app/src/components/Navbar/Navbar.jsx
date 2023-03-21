@@ -41,10 +41,12 @@ const Navbar = () => {
             </NavLink>
           )}
           <NavLink
-            to={"/search"}
+            to={"/history"}
             className="lg:absolute lg:right-12 text-2xl"
             onClick={showNavbar}
-          ></NavLink>
+          >
+            ⚙️
+          </NavLink>
         </nav>
         {navIsClicked && <FaBars onClick={showNavbar} className="faBar" />}
         {!navIsClicked && <FaTimes onClick={showNavbar} className="faBar" />}
