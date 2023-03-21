@@ -1,5 +1,6 @@
 import React from "react";
 import RecommendedRecipesLI from "../../components/RecipeCard/RecommendedRecipesLI";
+import RecommendedRecipesList from "../../components/RecipeCard/RecommendedRecipeslist";
 import Navbar from "../../components/Navbar/Navbar";
 import "./HomePage.css";
 
