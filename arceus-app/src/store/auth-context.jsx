@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth, db } from "../firebaseConfig";
-import { update, ref } from "firebase/database";
+import { update, ref, get, child, onValue } from "firebase/database";
 import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -14,6 +14,7 @@ const AuthContext = React.createContext({
   userNotFound: false,
   emailInUse: false,
   currentUser: {},
+  userDetails: {},
 });
 
 export const useAuth = () => {
@@ -26,6 +27,7 @@ export const AuthContextProvider = (props) => {
   const [userNotFound, setUserNotFound] = useState(false);
   const [emailInUse, setEmailInUse] = useState(false);
   const [currentUser, setCurrentUser] = useState();
+  const [userDetails, setUserDetails] = useState();
 
   const signup = (email, password, profile) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -100,6 +102,29 @@ export const AuthContextProvider = (props) => {
     return unsubscribe;
   }, []);
 
+  useEffect(() => {
+    if (currentUser) {
+      get(child(ref(db), "users-profile/" + currentUser.uid + "/details"))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setUserDetails(snapshot.val());
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      onValue(
+        child(ref(db), "users-profile/" + currentUser.uid + "/details"),
+        (snapshot) => {
+          setUserDetails(snapshot.val());
+        }
+      );
+    }
+  }, [currentUser]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -108,6 +133,7 @@ export const AuthContextProvider = (props) => {
         wrongPassword: wrongPassword,
         userNotFound: userNotFound,
         emailInUse: emailInUse,
+        userDetails: userDetails,
         signup: signup,
         login: login,
         logout: logout,

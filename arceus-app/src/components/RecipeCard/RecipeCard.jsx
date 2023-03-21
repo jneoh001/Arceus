@@ -1,9 +1,7 @@
-import FavouriteButton from "./FavouriteButton";
 import { db } from "../../firebaseConfig";
 import { get, child, ref } from "firebase/database";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { Nav } from "react-bootstrap";
 
 const RecipeCard = (props) => {
   const [rating, setRating] = useState(0);
@@ -109,7 +107,6 @@ const RecipeCard = (props) => {
           </p>
         </div>
       </div>{" "}
-      {/* <FavouriteButton id={props.id} /> */}
     </NavLink>
   );
 };

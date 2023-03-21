@@ -1,44 +1,7 @@
-import { ref, child, get, onValue } from "firebase/database";
-import { useEffect, useState } from "react";
-import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
 
 const MyProfile = () => {
-  const [profile, setProfile] = useState({
-    email: "",
-    height: 0,
-    weight: 0,
-    carbGoal: 0,
-    proteinGoal: 0,
-    fatGoal: 0,
-    calorieGoal: 0,
-  });
-
-  const { currentUser, logout } = useAuth();
-  const dbRef = ref(db);
-  useEffect(() => {
-    if (currentUser) {
-      get(child(dbRef, "users-profile/" + currentUser.uid + "/details"))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            setProfile(snapshot.val());
-            // console.log(snapshot.val());
-          } else {
-            console.log("No data available");
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-
-      onValue(
-        child(ref(db), "users-profile/" + currentUser.uid + "/details"),
-        (snapshot) => {
-          setProfile(snapshot.val());
-        }
-      );
-    }
-  }, [currentUser]);
+  const { logout, userDetails } = useAuth();
 
   return (
     <div className="bg-white flex flex-col w-7/12 justify-center items-center text-lg font-medium border-2 border-black rounded p-4">
@@ -46,30 +9,30 @@ const MyProfile = () => {
       <hr className="w-full h-1 mt-4 bg-black rounded" />
       <p className="w-9/12 mt-12">
         {" "}
-        Email: <span>{profile.email}</span>
+        Email: <span>{userDetails.email}</span>
       </p>
       <div className="grid grid-cols-2 w-9/12 mt-8">
         <p>
-          Height: <span>{profile.height} cm</span>
+          Height: <span>{userDetails.height} cm</span>
         </p>
         <p>
-          Weight: <span>{profile.weight} kg</span>
-        </p>
-      </div>{" "}
-      <div className="grid grid-cols-2 w-9/12 mt-8">
-        <p>
-          Carbohydrate Goal: <span>{profile.carbGoal} g</span>
-        </p>
-        <p>
-          Calorie Goal: <span>{profile.calorieGoal} g</span>
+          Weight: <span>{userDetails.weight} kg</span>
         </p>
       </div>{" "}
       <div className="grid grid-cols-2 w-9/12 mt-8">
         <p>
-          Fat Goal: <span>{profile.fatGoal} g</span>
+          Carbohydrate Goal: <span>{userDetails.carbGoal} g</span>
         </p>
         <p>
-          Protein Goal: <span>{profile.proteinGoal} g</span>
+          Calorie Goal: <span>{userDetails.calorieGoal} g</span>
+        </p>
+      </div>{" "}
+      <div className="grid grid-cols-2 w-9/12 mt-8">
+        <p>
+          Fat Goal: <span>{userDetails.fatGoal} g</span>
+        </p>
+        <p>
+          Protein Goal: <span>{userDetails.proteinGoal} g</span>
         </p>
       </div>
       <div className="flex justify-between w-2/3">

@@ -15,7 +15,8 @@ import LandingPage from "./pages/LandingPage/Landingpage";
 import HomePage from "./pages/HomePage/Homepage";
 import RecipePage from "./components/RecipePage/RecipePage";
 import ViewReview from "./components/Review/ViewReview";
-
+import Tracker from "./components/Tracker/Tracker";
+import RecommendedRecipesLI from "./components/RecipeCard/RecommendedRecipesLI";
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
       <LoginPage /> 
       <GoalPage />
   <HistoryPage />*/}
-  {/*
+      {/*
       <ViewReview id={716429} />
       <HistoryPage />*/}
       {/* <ViewReview id={716429} />
@@ -54,11 +55,13 @@ function App() {
       <GoalPage /> 
       <LandingPage />
       <HistoryPage />  */}
-     
+
+      {/* <MyProfile /> */}
       {/* New Code with Routing */}
       <BrowserRouter>
-        <Pages/>
+        <Pages />
       </BrowserRouter>
+      {/* <RecommendedRecipesLI /> */}
     </div>
   );
 }
