@@ -15,6 +15,7 @@ const AuthContext = React.createContext({
   emailInUse: false,
   currentUser: {},
   userDetails: {},
+  userHistory: [],
 });
 
 export const useAuth = () => {
@@ -28,6 +29,7 @@ export const AuthContextProvider = (props) => {
   const [emailInUse, setEmailInUse] = useState(false);
   const [currentUser, setCurrentUser] = useState();
   const [userDetails, setUserDetails] = useState();
+  const [userHistory, setUserHistory] = useState();
 
   const signup = (email, password, profile) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -102,6 +104,18 @@ export const AuthContextProvider = (props) => {
     return unsubscribe;
   }, []);
 
+  // Get today's date in the format of DD/MM/YYYY
+  const getDate = () => {
+    let today = new Date();
+    let year = today.getFullYear().toString().slice(-2);
+    let month = (today.getMonth() + 1).toString().padStart(2, "0");
+    let day = today.getDate().toString().padStart(2, "0");
+    let formattedDateID = `${day}-${month}-${year}`;
+    let formattedDateDisplay = `${day}/${month}/${year}`;
+    return [formattedDateID, formattedDateDisplay];
+  };
+
+  // Get user's profile details
   useEffect(() => {
     if (currentUser) {
       get(child(ref(db), "users-profile/" + currentUser.uid + "/details"))
@@ -125,6 +139,27 @@ export const AuthContextProvider = (props) => {
     }
   }, [currentUser]);
 
+  // Get user's history
+  useEffect(() => {
+    if (currentUser) {
+      get(child(ref(db), "users-profile/" + currentUser.uid + "/history"))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setUserHistory(Object.values(snapshot.val()).reverse());
+          }
+        })
+        .catch((error) => {
+          console.log(error.code);
+        });
+      onValue(
+        child(ref(db), "users-profile/" + currentUser.uid + "/history"),
+        (snapshot) => {
+          setUserHistory(Object.values(snapshot.val()).reverse());
+        }
+      );
+    }
+  }, [currentUser]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -134,10 +169,12 @@ export const AuthContextProvider = (props) => {
         userNotFound: userNotFound,
         emailInUse: emailInUse,
         userDetails: userDetails,
+        userHistory: userHistory,
         signup: signup,
         login: login,
         logout: logout,
         resetPassword: resetPassword,
+        getDate: getDate,
       }}
     >
       {props.children}

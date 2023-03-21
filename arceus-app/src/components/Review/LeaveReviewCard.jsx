@@ -15,7 +15,6 @@ const LeaveReviewCard = (props) => {
     get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          // console.log(snapshot.val());
           setRatingDetails(snapshot.val());
         }
       })

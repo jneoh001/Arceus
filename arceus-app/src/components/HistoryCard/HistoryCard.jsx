@@ -1,34 +1,9 @@
 import "./HistoryCard.css";
 import Table from "react-bootstrap/Table";
-import { useState, useEffect } from "react";
 import { useAuth } from "../../store/auth-context";
-import { db } from "../../firebaseConfig";
-import { get, child, ref, onValue } from "firebase/database";
 
 const HistoryCard = () => {
-  const { currentUser } = useAuth();
-  const [historylist, setHistoryList] = useState([]);
-  useEffect(() => {
-    if (currentUser) {
-      get(child(ref(db), "users-profile/" + currentUser.uid + "/history"))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            setHistoryList(Object.values(snapshot.val()).reverse());
-            // console.log(snapshot.val());
-          }
-        })
-        .catch((error) => {
-          console.log(error.code);
-        });
-
-      onValue(
-        child(ref(db), "users-profile/" + currentUser.uid + "/history"),
-        (snapshot) => {
-          setHistoryList(Object.values(snapshot.val()).reverse());
-        }
-      );
-    }
-  }, [currentUser]);
+  const { userHistory } = useAuth();
 
   return (
     <div className="history-container bg-white">
@@ -48,7 +23,7 @@ const HistoryCard = () => {
           </tr>
         </thead>
         <tbody>
-          {historylist.map((history) => {
+          {userHistory.map((history) => {
             return (
               <tr key={history.date}>
                 <td>{history.date}</td>

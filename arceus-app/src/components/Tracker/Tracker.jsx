@@ -5,30 +5,14 @@ import { useAuth } from "../../store/auth-context";
 import { ref, child, get, update } from "firebase/database";
 
 const Tracker = () => {
-  const { currentUser, userDetails } = useAuth();
+  const { currentUser, userDetails, getDate } = useAuth();
 
-  const [intake, setIntake] = useState({
-    carb: 0,
-    protein: 0,
-    fat: 0,
-    calorie: 0,
-  });
-
-  // Get today's date in the format of DD/MM/YYYY
-  const getDate = () => {
-    let today = new Date();
-    let year = today.getFullYear().toString().slice(-2);
-    let month = (today.getMonth() + 1).toString().padStart(2, "0");
-    let day = today.getDate().toString().padStart(2, "0");
-    let formattedDateID = `${day}-${month}-${year}`;
-    let formattedDateDisplay = `${day}/${month}/${year}`;
-    return [formattedDateID, formattedDateDisplay];
-  };
+  const [intake, setIntake] = useState();
 
   //Update database once the intake changes
   useEffect(() => {
     const [todayID, todayDisplay] = getDate();
-    if (userDetails) {
+    if (userDetails && intake) {
       const updates = {};
       updates["/users-profile/" + currentUser.uid + "/history/" + todayID] = {
         date: todayDisplay,
@@ -63,8 +47,13 @@ const Tracker = () => {
               fat: snapshot.val().fatIntake,
               calorie: snapshot.val().calorieIntake,
             });
-            // console.log(snapshot.val());
-            // console.log("History retrieved!");
+          } else {
+            setIntake({
+              carb: 0,
+              protein: 0,
+              fat: 0,
+              calorie: 0,
+            });
           }
         })
         .catch((error) => {
@@ -73,27 +62,27 @@ const Tracker = () => {
     }
   }, [currentUser]);
 
-  const addHandler = () => {
-    setIntake((pre) => {
-      return {
-        carb: pre.carb + 10,
-        protein: pre.protein + 10,
-        fat: pre.fat + 10,
-        calorie: pre.calorie + 10,
-      };
-    });
-  };
+  // const addHandler = () => {
+  //   setIntake((pre) => {
+  //     return {
+  //       carb: pre.carb + 10,
+  //       protein: pre.protein + 10,
+  //       fat: pre.fat + 10,
+  //       calorie: pre.calorie + 10,
+  //     };
+  //   });
+  // };
 
-  const subtractHandler = () => {
-    setIntake((pre) => {
-      return {
-        carb: pre.carb - 10,
-        protein: pre.protein - 10,
-        fat: pre.fat - 10,
-        calorie: pre.calorie - 10,
-      };
-    });
-  };
+  // const subtractHandler = () => {
+  //   setIntake((pre) => {
+  //     return {
+  //       carb: pre.carb - 10,
+  //       protein: pre.protein - 10,
+  //       fat: pre.fat - 10,
+  //       calorie: pre.calorie - 10,
+  //     };
+  //   });
+  // };
 
   return (
     <div className="py-8 px-16 w-2/5 border-r-2 border-black ">
@@ -101,7 +90,7 @@ const Tracker = () => {
       <Progress
         title="Carbohydrates"
         percentage={
-          userDetails
+          userDetails && intake
             ? (intake.carb / userDetails.carbGoal) * 100 >= 100
               ? "100%"
               : (intake.carb / userDetails.carbGoal) * 100 + "%"
@@ -112,7 +101,7 @@ const Tracker = () => {
       <Progress
         title="Protein"
         percentage={
-          userDetails
+          userDetails && intake
             ? (intake.protein / userDetails.proteinGoal) * 100 >= 100
               ? "100%"
               : (intake.protein / userDetails.proteinGoal) * 100 + "%"
@@ -123,7 +112,7 @@ const Tracker = () => {
       <Progress
         title="Fats"
         percentage={
-          userDetails
+          userDetails && intake
             ? (intake.fat / userDetails.fatGoal) * 100 >= 100
               ? "100%"
               : (intake.fat / userDetails.fatGoal) * 100 + "%"
@@ -134,7 +123,7 @@ const Tracker = () => {
       <Progress
         title="Calories"
         percentage={
-          userDetails
+          userDetails && intake
             ? (intake.calorie / userDetails.calorieGoal) * 100 >= 100
               ? "100%"
               : (intake.calorie / userDetails.calorieGoal) * 100 + "%"
@@ -143,7 +132,7 @@ const Tracker = () => {
         className="bg-red-600 dark:bg-red-500"
       />
       <div className="flex flex-col justify-center items-center">
-        <button
+        {/* <button
           onClick={addHandler}
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
         >
@@ -154,9 +143,11 @@ const Tracker = () => {
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
         >
           -
-        </button>
+        </button> */}
         <button
-          onClick={subtractHandler}
+          onClick={() => {
+            console.log("Hello");
+          }}
           className="text-center text-white bg-[#24292F] hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center   mr-2 mb-2"
         >
           View History
