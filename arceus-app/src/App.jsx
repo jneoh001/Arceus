@@ -15,7 +15,6 @@ import LandingPage from "./pages/LandingPage/Landingpage";
 import HomePage from "./pages/HomePage/Homepage";
 import RecipePage from "./components/RecipePage/RecipePage";
 import ViewReview from "./components/Review/ViewReview";
-import SearchPageByID from "./components/Search/SearchPageByID";
 
 
 function App() {
@@ -38,11 +37,12 @@ function App() {
       <LoginPage /> 
       <GoalPage />
   <HistoryPage />*/}
-
+  {/*
       <ViewReview id={716429} />
       <LeaveReviewCard id={716429} />
       <RecipeByID id={716429} />
       <SearchPageByID id={716429} />
+*/}
       {/* <RecommendedRecipes />
       <RecommendedRecipes />
       <RecommendedRecipes />

@@ -1,9 +1,7 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar';
 import RecipePage from '../../components/RecipePage/RecipePage'
-import SearchPageByID from '../../components/Search/SearchPageByID'
-import Search from '../../components/Search2/Search';
-import Searched from './Searched';
+import Search from '../../components/Search/Search';
 
 function RecipeSearchPage() {
   return (
