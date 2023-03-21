@@ -39,6 +39,8 @@ function App() {
   <HistoryPage />*/}
   {/*
       <ViewReview id={716429} />
+      <HistoryPage />*/}
+      {/* <ViewReview id={716429} />
       <LeaveReviewCard id={716429} />
       <RecipeByID id={716429} />
       <SearchPageByID id={716429} />

@@ -2,10 +2,13 @@ import FavouriteButton from "./FavouriteButton";
 import { db } from "../../firebaseConfig";
 import { get, child, ref } from "firebase/database";
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 
 const RecipeCard = (props) => {
   const [rating, setRating] = useState(0);
   const [ratingDisplay, setRatingDisplay] = useState([]);
+  const rerouteString = "recipes/" + props.id;
 
   useEffect(() => {
     get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
@@ -72,9 +75,9 @@ const RecipeCard = (props) => {
   }, [rating]);
 
   return (
-    <a
-      href="#"
-      className="flex flex-row min-w-[900px]  max-w-[900px] items-center border rounded-lg shadow hover:bg-gray-100 border-gray-700 bg-gray-800 hover:bg-gray-700 mb-12"
+    <NavLink
+      to={rerouteString}
+      className="flex flex-row min-w-[800px]  max-w-[800px] items-center border rounded-lg shadow hover:bg-gray-100 border-gray-700 bg-gray-800 hover:bg-gray-700 mb-12"
     >
       <img
         className="object-cover max-h-60 max-w-sm rounded-t-lg h-auto w-1/2 md:rounded-none md:rounded-l-lg"
@@ -107,7 +110,7 @@ const RecipeCard = (props) => {
         </div>
       </div>{" "}
       {/* <FavouriteButton id={props.id} /> */}
-    </a>
+    </NavLink>
   );
 };
 

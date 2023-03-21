@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import RecipeByID from "../../components/RecipeCard/RecipeByID";
 import "./LandingPage.css";
 
