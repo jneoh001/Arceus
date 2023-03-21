@@ -3,7 +3,7 @@ import { useField, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../store/auth-context";
 import { useState, useEffect } from "react";
-import { get, child, ref, update } from "firebase/database";
+import { ref, update } from "firebase/database";
 import { db } from "../../firebaseConfig";
 
 const MyNumberInput = ({ label, ...props }) => {
@@ -20,33 +20,8 @@ const MyNumberInput = ({ label, ...props }) => {
 };
 
 const EditProfile = () => {
-  const { currentUser } = useAuth();
-  const [profile, setProfile] = useState({
-    email: "",
-    fname: "",
-    lname: "",
-    activityLevel: "",
-    weight: 0,
-    height: 0,
-    carbGoal: 0,
-    proteinGoal: 0,
-    fatGoal: 0,
-    calorieGoal: 0,
-  });
-
-  useEffect(() => {
-    if (currentUser) {
-      get(child(ref(db), "users-profile/" + currentUser.uid + "/details"))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            setProfile(snapshot.val());
-          }
-        })
-        .catch((error) => {
-          console.log(error.code);
-        });
-    }
-  }, [currentUser]);
+  const { currentUser, userDetails } = useAuth();
+  const [profile, setProfile] = useState(userDetails);
 
   useEffect(() => {
     if (currentUser) {

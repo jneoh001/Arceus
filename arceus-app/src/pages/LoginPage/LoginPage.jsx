@@ -1,16 +1,17 @@
 import LoginCard from "../../components/LoginCard/LoginCard";
 import Navbar from "../../components/Navbar/Navbar";
 import { useLocation } from "react-router-dom";
-import { Message } from "semantic-ui-react";
 
 function RerouteHandler(){
   const location = useLocation();
+  const error = location.state?.message;
+  console.log(error);
   return (
     <>
-      {location.state && location.state.message && <p>{location.state.message}</p>}
+      {error && <p>{error}</p>}
     </>
   );
-}
+};
 
 const LoginPage = () => {
   return (
