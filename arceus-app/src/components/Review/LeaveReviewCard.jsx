@@ -1,9 +1,37 @@
 import "./LeaveReviewCard.css";
-import { ref, push, update, child } from "firebase/database";
+import { ref, push, update, child, get, set } from "firebase/database";
 import { db } from "../../firebaseConfig";
 import { Form } from "react-bootstrap";
+import { useState, useEffect } from "react";
 
 const LeaveReviewCard = (props) => {
+  const [ratingDetails, setRatingDetails] = useState({
+    total: 0,
+    number: 0,
+  });
+  const [isRetrieved, setIsRetrieved] = useState(false);
+
+  useEffect(() => {
+    get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          // console.log(snapshot.val());
+          setRatingDetails(snapshot.val());
+        }
+      })
+      .catch((error) => {
+        console.log(error.code);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (isRetrieved) {
+      set(ref(db, "reviews/" + props.id + "/ratingDetails"), ratingDetails);
+    } else {
+      setIsRetrieved(true);
+    }
+  }, [ratingDetails]);
+
   const submitHandler = (e) => {
     let rating = 0;
     for (let i = 0; i < 5; i++) {
@@ -19,11 +47,17 @@ const LeaveReviewCard = (props) => {
       rating: rating,
       comment: reviewComment,
     };
-    const endpt = "reviews";
-    const newPostKey = push(child(ref(db), endpt)).key;
 
+    setRatingDetails((pre) => {
+      return {
+        total: pre.total + rating,
+        number: pre.number + 1,
+      };
+    });
+
+    const newPostKey = push(child(ref(db), "reviews")).key;
     const updates = {};
-    updates["/" + endpt + "/" + props.id + "/" + newPostKey] = newEntry;
+    updates["/reviews/" + props.id + "/data/" + newPostKey] = newEntry;
     update(ref(db), updates);
     e.preventDefault();
   };
