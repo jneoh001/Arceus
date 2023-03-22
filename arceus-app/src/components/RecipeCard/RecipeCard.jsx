@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 const RecipeCard = (props) => {
   const [rating, setRating] = useState(0);
   const [ratingDisplay, setRatingDisplay] = useState([]);
-  const rerouteString = "recipes/" + props.id;
+  const rerouteString = "/recipes/" + props.id;
 
   useEffect(() => {
     get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
@@ -74,7 +74,7 @@ const RecipeCard = (props) => {
 
   return (
     <NavLink
-      to={rerouteString}
+      exact to={rerouteString}
       className="flex flex-row min-w-[800px]  max-w-[800px] items-center border rounded-lg shadow hover:bg-gray-100 border-gray-700 bg-gray-800 hover:bg-gray-700 mb-12"
     >
       <img
