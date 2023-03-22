@@ -28,7 +28,9 @@ function Pages(){
             <Route path="/recommended" element={<ProtectedRoute><RecommendedRecipePage/></ProtectedRoute>}/>
             <Route path="/editprofile" element={<ProtectedRoute><EditProfilePage/></ProtectedRoute>}/>
             <Route path="/search" element={<ProtectedRoute><RecipeSearchPage/></ProtectedRoute>}/>
-            <Route path="/recipe/:id" element={<ProtectedRoute><IndividualRecipePage/></ProtectedRoute>}/>
+            <Route path="/searched/:query" element={<ProtectedRoute><Searched/></ProtectedRoute>}/>
+            {/* <Route path="/recipe/:id" element={<ProtectedRoute><IndividualRecipePage/></ProtectedRoute>}/> */}
+            <Route path="/recipe/:id" element={<IndividualRecipePage/>}/>
             <Route path="/reviews/:recipe" element={<ProtectedRoute><IndividualReviewPage/></ProtectedRoute>}/>
         </Routes>
     );

@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 const RecipeCard = (props) => {
   const [rating, setRating] = useState(0);
   const [ratingDisplay, setRatingDisplay] = useState([]);
-  const rerouteString = "/recipes/" + props.id;
+  const rerouteString = "/recipe/" + props.id;
 
   useEffect(() => {
     get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
