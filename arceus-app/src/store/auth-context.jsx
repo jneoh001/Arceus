@@ -172,7 +172,6 @@ export const AuthContextProvider = (props) => {
       )
         .then((snapshot) => {
           if (snapshot.exists()) {
-            console.log(snapshot.val());
             setUserIntake({
               carb: snapshot.val().carbIntake,
               protein: snapshot.val().proteinIntake,

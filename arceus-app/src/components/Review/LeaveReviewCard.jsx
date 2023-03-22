@@ -1,31 +1,92 @@
 import "./LeaveReviewCard.css";
-import { ref, push, update, child, get, set } from "firebase/database";
+import { ref, push, update, child, get, set, remove } from "firebase/database";
 import { db } from "../../firebaseConfig";
 import { Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
 const LeaveReviewCard = (props) => {
-  const [ratingDetails, setRatingDetails] = useState({
-    total: 0,
-    number: 0,
-  });
+  const [ratingDetails, setRatingDetails] = useState();
   const [isRetrieved, setIsRetrieved] = useState(false);
+  const [topRatedList, setTopRatedList] = useState();
 
+  // Check if the current recipe has reviews
+  // if true: retrieve data and store it to ratingDetails; else: set ratingDetails to initial value
   useEffect(() => {
     get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setRatingDetails(snapshot.val());
+        } else {
+          setRatingDetails({
+            total: 0,
+            number: 0,
+          });
+          console.log("No ratings found");
         }
       })
       .catch((error) => {
         console.log(error.code);
       });
+
+    // Get the list of current top rated recipes and store the data in topRatedList
+    get(child(ref(db), "top-rated")).then((snapshot) => {
+      if (snapshot.exists()) {
+        const list = Object.values(snapshot.val());
+        list.sort((a, b) => {
+          return a.rating - b.rating;
+        });
+        setTopRatedList(list);
+      }
+    });
   }, []);
 
+  // when ratingDetails is updated, update Database
   useEffect(() => {
     if (isRetrieved) {
       set(ref(db, "reviews/" + props.id + "/ratingDetails"), ratingDetails);
+
+      get(child(ref(db), "top-rated")).then((snapshot) => {
+        if (snapshot.exists()) {
+          if (
+            (Object.keys(snapshot.val()).length < 5 ||
+              Object.keys(snapshot.val()).includes(props.id.toString())) &&
+            ratingDetails.number !== 0
+          ) {
+            const updates = {};
+            updates["top-rated/" + props.id] = {
+              id: props.id,
+              rating: ratingDetails.total / ratingDetails.number,
+            };
+            update(ref(db), updates);
+            console.log("data added");
+          }
+
+          if (
+            ratingDetails.number !== 0 &&
+            ratingDetails.total / ratingDetails.number >
+              topRatedList[0].rating &&
+            !Object.keys(snapshot.val()).includes(props.id.toString()) &&
+            Object.keys(snapshot.val()).length >= 5
+          ) {
+            remove(child(ref(db), "top-rated/" + topRatedList[0].id));
+            const updates = {};
+            updates["top-rated/" + props.id] = {
+              id: props.id,
+              rating: ratingDetails.total / ratingDetails.number,
+            };
+            update(ref(db), updates);
+          }
+        } else {
+          if (ratingDetails.number !== 0) {
+            const updates = {};
+            updates["top-rated/" + props.id] = {
+              id: props.id,
+              rating: ratingDetails.total / ratingDetails.number,
+            };
+            update(ref(db), updates);
+          }
+        }
+      });
     } else {
       setIsRetrieved(true);
     }
