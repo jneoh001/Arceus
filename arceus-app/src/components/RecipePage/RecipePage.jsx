@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./RecipePage.css";
+// import "./RecipePage.css";
 import RecipeFavourite from "./RecipeFavourite";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
 import { ref, child, get, update } from "firebase/database";
 import getDate from "../../helpers/getDate";
+import "./RecipePage.css";
 
-export default function RecipePage({recipeid}) {
+export default function RecipePage({ recipeid }) {
   const { currentUser, userDetails } = useAuth();
-  const apiKey = "7f8b79cf24094b52953b2d594e02f04e ";
+  const apiKey = "";
   const [recipeData, setRecipeData] = useState({});
   const [ingredientWidget, setIngredientWidget] = useState();
-
-  const [intake, setIntake] = useState({
-    carb: 0,
-    protein: 0,
-    fat: 0,
-    calorie: 0,
-  });
+  const [intake, setIntake] = useState();
 
   //Update database once the intake changes
   useEffect(() => {
     const [todayID, todayDisplay] = getDate();
-    if (userDetails) {
-
+    if (userDetails && intake) {
       const updates = {};
       updates["/users-profile/" + currentUser.uid + "/history/" + todayID] = {
         date: todayDisplay,
@@ -38,7 +32,6 @@ export default function RecipePage({recipeid}) {
         calorieIntake: intake.calorie,
       };
       update(ref(db), updates);
-      console.log(userDetails);
     }
   }, [intake]);
 
@@ -60,8 +53,13 @@ export default function RecipePage({recipeid}) {
               fat: snapshot.val().fatIntake,
               calorie: snapshot.val().calorieIntake,
             });
-            // console.log(snapshot.val());
-            // console.log("History retrieved!");
+          } else {
+            setIntake({
+              carb: 0,
+              protein: 0,
+              fat: 0,
+              calorie: 0,
+            });
           }
         })
         .catch((error) => {
@@ -95,8 +93,10 @@ export default function RecipePage({recipeid}) {
   useEffect(() => {
     axios
       .get(
-        "https://api.spoonacular.com/recipes/" + recipeid + "/information?apiKey="
-         + apiKey
+        "https://api.spoonacular.com/recipes/" +
+          recipeid +
+          "/information?apiKey=" +
+          apiKey
       )
       // .then(response => {
       //     //console.log(response)
@@ -105,10 +105,11 @@ export default function RecipePage({recipeid}) {
 
       // })
       .then((response) => {
+        // console.log(response.data.instructions);
         setRecipeData({
           img: response.data.image,
           instructions: response.data.instructions,
-          // title: response.data.title,
+          title: response.data.title,
         });
       })
       .catch((error) => console.log(error));
@@ -117,8 +118,11 @@ export default function RecipePage({recipeid}) {
   useEffect(() => {
     axios
       .get(
-        "https://api.spoonacular.com/food/menuitems/" + recipeid + "?apiKey="
-         + apiKey)
+        "https://api.spoonacular.com/food/menuitems/" +
+          recipeid +
+          "?apiKey=" +
+          apiKey
+      )
       // .then(response => {
       //     //console.log(response)
       //     setRecipeData({img: response.data.img})
@@ -140,8 +144,9 @@ export default function RecipePage({recipeid}) {
   useEffect(() => {
     axios
       .get(
-        "https://api.spoonacular.com/recipes/" + recipeid + "/ingredientWidget.png?apiKey="
-        +
+        "https://api.spoonacular.com/recipes/" +
+          recipeid +
+          "/ingredientWidget.png?apiKey=" +
           apiKey
       )
       .then((response) => {
@@ -152,20 +157,18 @@ export default function RecipePage({recipeid}) {
   }, []);
 
   return (
-    <div className="recipe-page-container">
-      <div className="recipe-page-container-grid w-5/6 grid ml-16">
+    <div className="w-screen h-screen py-16 px-16 grid grid-cols-2 grid-rows-2">
+      {/*Picture 1st Item */}
+      <div className="flex flex-col justify-center items-center row-span-2">
+        <h2 className="text-3xl font-semibold" id="recipePageHeader">
+          {" "}
+          {recipeData.title}
+        </h2>
 
-        {/*Picture 1st Item */}
-        <div className="imagediv ml-20 mt-16">
+        <img className="mt-3 w-2/3 h-auto" src={recipeData.img} />
 
-          {/* <h2 class=" text-3xl"
-                    id = "recipePageHeader"
-                    > {recipeData.title}</h2> */}
-
-          <img className="recipeImage rounded-lg" src={recipeData.img} />
-
-
-          <div className="iconscontainer flex items-center">
+        <div className="flex mt-2 justify-between w-2/3">
+          <div className="flex ">
             <svg
               aria-hidden="true"
               className="w-10 h-10 text-yellow-400"
@@ -216,65 +219,49 @@ export default function RecipePage({recipeid}) {
               <title>Fifth star</title>
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
-          
-      
-          
-            <div className="recipeFavourite">
-              <RecipeFavourite />
-            </div>
-
           </div>
-
-       
-
-          {/*Add Review Button ( Routed to Reviews) & Add To Tracker */}
-          <div className="buttonsContainer ml-auto mr-auto">
-            <button
-              type="button"
-              onClick={addHandler}
-              className="AddReviewButton text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-            >
-              Add Review
-            </button>
-            <button
-              type="button"
-              className="AddTrackerButton text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-            >
-              Add To Tracker
-            </button>
-          </div>
+          <RecipeFavourite id={recipeid} />
         </div>
 
-        {/*Preparation Portion */}
-        <div className="preparationdiv">
-          <h2 className=" text-center text-3xl mb-2 mt-2" id="recipePageHeader">
-            Preparation
-          </h2>
-          <hr />
-
-          <p
-            className="recipeInstructions text-center mt-2 text-2xl"
-            dangerouslySetInnerHTML={{ __html: recipeData.instructions }}
-          ></p>
+        {/*Add Review Button ( Routed to Reviews) & Add To Tracker */}
+        <div className="flex mt-16 w-2/3 h-auto justify-around">
+          <button
+            type="button"
+            onClick={addHandler}
+            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-md px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          >
+            Add Review
+          </button>
+          <button
+            type="button"
+            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-md px-5 py-2.5  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          >
+            Add To Tracker
+          </button>
         </div>
+      </div>
 
-        <div className="fillerdiv">
+      {/*Preparation Portion */}
+      <div className="flex flex-col">
+        <h2 className="text-center text-3xl" id="recipePageHeader">
+          Preparation
+        </h2>
+        <hr />
 
+        <p className="text-center mt-3 px-8 text-lg overflow-y-auto">
+          {recipeData.instructions}
+        </p>
+      </div>
+
+      {/*Ingredients Portion */}
+      <div className="flex flex-col overflow-y-auto">
+        <h2 className="text-center text-3xl mb-2 mt-4" id="recipePageHeader">
+          Ingredients
+        </h2>
+        <hr />
+        <div className="mt-3 overflow-y-auto self-center">
+          <img src={ingredientWidget} />
         </div>
-
-        {/*Ingredients Portion */}
-        <div className="ingredientsdiv">
-          <h2 className="text-center text-3xl mb-2 mt-10" id="recipePageHeader">
-            Ingredients
-          </h2>
-          <hr className=" " />
-          <img className="m-auto" src={ingredientWidget} />
-        </div>
-
-        
-
-        
-
       </div>
     </div>
   );
