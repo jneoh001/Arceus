@@ -191,6 +191,20 @@ export const AuthContextProvider = (props) => {
         .catch((error) => {
           console.log(error.code);
         });
+      onValue(
+        child(
+          ref(db),
+          "users-profile/" + currentUser.uid + "/history/" + todayID
+        ),
+        (snapshot) => {
+          setUserIntake({
+            carb: snapshot.val().carbIntake,
+            protein: snapshot.val().proteinIntake,
+            fat: snapshot.val().fatIntake,
+            calorie: snapshot.val().calorieIntake,
+          });
+        }
+      );
     }
   }, [currentUser]);
 
