@@ -1,45 +1,8 @@
-import { ref, child, get, onValue } from "firebase/database";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
 
 const MyProfile = () => {
-  const [profile, setProfile] = useState({
-    email: "",
-    height: 0,
-    weight: 0,
-    carbGoal: 0,
-    proteinGoal: 0,
-    fatGoal: 0,
-    calorieGoal: 0,
-  });
-  
-  const { currentUser, logout } = useAuth();
-  const dbRef = ref(db);
-  useEffect(() => {
-    if (currentUser) {
-      get(child(dbRef, "users-profile/" + currentUser.uid + "/details"))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            setProfile(snapshot.val());
-            // console.log(snapshot.val());
-          } else {
-            console.log("No data available");
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-
-      onValue(
-        child(ref(db), "users-profile/" + currentUser.uid + "/details"),
-        (snapshot) => {
-          setProfile(snapshot.val());
-        }
-      );
-    }
-  }, [currentUser]);
+  const { logout, userDetails } = useAuth();
 
   return (
     <div className="bg-white flex flex-col w-7/12 justify-center items-center text-lg font-medium border-2 border-black rounded p-4">

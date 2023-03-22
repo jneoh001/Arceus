@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import getDate from "../helpers/getDate";
 import { auth, db } from "../firebaseConfig";
 import { update, ref, get, child, onValue } from "firebase/database";
 import {
@@ -15,6 +16,8 @@ const AuthContext = React.createContext({
   emailInUse: false,
   currentUser: {},
   userDetails: {},
+  userHistory: [],
+  userIntake: {},
 });
 
 export const useAuth = () => {
@@ -28,6 +31,8 @@ export const AuthContextProvider = (props) => {
   const [emailInUse, setEmailInUse] = useState(false);
   const [currentUser, setCurrentUser] = useState();
   const [userDetails, setUserDetails] = useState();
+  const [userHistory, setUserHistory] = useState();
+  const [userIntake, setUserIntake] = useState();
 
   const signup = (email, password, profile) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -95,6 +100,14 @@ export const AuthContextProvider = (props) => {
       });
   };
 
+  const editUserProfile = (profile) => {
+    console.log(profile);
+    const updates = {};
+    updates["/users-profile/" + currentUser.uid + "/details"] = profile;
+    update(ref(db), updates);
+    console.log("db updated");
+  };
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -102,6 +115,7 @@ export const AuthContextProvider = (props) => {
     return unsubscribe;
   }, []);
 
+  // Get user's profile details
   useEffect(() => {
     if (currentUser) {
       get(child(ref(db), "users-profile/" + currentUser.uid + "/details"))
@@ -125,6 +139,74 @@ export const AuthContextProvider = (props) => {
     }
   }, [currentUser]);
 
+  // Get user's history
+  useEffect(() => {
+    if (currentUser) {
+      get(child(ref(db), "users-profile/" + currentUser.uid + "/history"))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setUserHistory(Object.values(snapshot.val()).reverse());
+          }
+        })
+        .catch((error) => {
+          console.log(error.code);
+        });
+      onValue(
+        child(ref(db), "users-profile/" + currentUser.uid + "/history"),
+        (snapshot) => {
+          setUserHistory(Object.values(snapshot.val()).reverse());
+        }
+      );
+    }
+  }, [currentUser]);
+
+  // Get user's today's intake
+  useEffect(() => {
+    if (currentUser) {
+      const [todayID, todayDisplay] = getDate();
+      get(
+        child(
+          ref(db),
+          "users-profile/" + currentUser.uid + "/history/" + todayID
+        )
+      )
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setUserIntake({
+              carb: snapshot.val().carbIntake,
+              protein: snapshot.val().proteinIntake,
+              fat: snapshot.val().fatIntake,
+              calorie: snapshot.val().calorieIntake,
+            });
+          } else {
+            setUserIntake({
+              carb: 0,
+              protein: 0,
+              fat: 0,
+              calorie: 0,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error.code);
+        });
+      onValue(
+        child(
+          ref(db),
+          "users-profile/" + currentUser.uid + "/history/" + todayID
+        ),
+        (snapshot) => {
+          setUserIntake({
+            carb: snapshot.val().carbIntake,
+            protein: snapshot.val().proteinIntake,
+            fat: snapshot.val().fatIntake,
+            calorie: snapshot.val().calorieIntake,
+          });
+        }
+      );
+    }
+  }, [currentUser]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -134,10 +216,13 @@ export const AuthContextProvider = (props) => {
         userNotFound: userNotFound,
         emailInUse: emailInUse,
         userDetails: userDetails,
+        userHistory: userHistory,
+        userIntake: userIntake,
         signup: signup,
         login: login,
         logout: logout,
         resetPassword: resetPassword,
+        editUserProfile: editUserProfile,
       }}
     >
       {props.children}

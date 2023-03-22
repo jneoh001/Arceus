@@ -28,3 +28,24 @@
     transform: translate(100%, -50%);
     color: white;
 }
+
+.searchpageheader {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: 0px auto 0.3%;
+    padding-top: 3%;
+    font-size: 1.8em;
+    font-weight: bold;
+    background-color: rgb(255, 251, 235);
+    line-height: 4rem;
+    border-bottom: 1px rgb(0, 0, 0) solid;
+  }
+
+  .dropdown {
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }

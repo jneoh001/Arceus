@@ -20,29 +20,19 @@ const MyNumberInput = ({ label, ...props }) => {
 };
 
 const EditProfile = () => {
-  const { currentUser, userDetails } = useAuth();
-  const [profile, setProfile] = useState(userDetails);
-
-  useEffect(() => {
-    if (currentUser) {
-      const updates = {};
-      updates["/users-profile/" + currentUser.uid + "/details"] = profile;
-      update(ref(db), updates);
-    }
-  }, [profile]);
+  const { userDetails, editUserProfile } = useAuth();
 
   const submitHandler = (e) => {
-    setProfile((pre) => {
-      return {
-        ...pre,
-        height: e.height,
-        weight: e.weight,
-        carbGoal: e.carbohydrateGoal,
-        proteinGoal: e.proteinGoal,
-        fatGoal: e.fatGoal,
-        calorieGoal: e.calorieGoal,
-      };
-    });
+    const profile = {
+      ...userDetails,
+      height: e.height,
+      weight: e.weight,
+      carbGoal: e.carbohydrateGoal,
+      proteinGoal: e.proteinGoal,
+      fatGoal: e.fatGoal,
+      calorieGoal: e.calorieGoal,
+    };
+    editUserProfile(profile);
   };
 
   return (
