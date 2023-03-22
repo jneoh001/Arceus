@@ -24,12 +24,12 @@ function Pages(){
             <Route path="/register" element={<RegistrationPage/>} />
             <Route path="/history" element={<ProtectedRoute><HistoryPage/></ProtectedRoute>} />
             <Route path="/goals" element={<ProtectedRoute><GoalPage/></ProtectedRoute>}/>
-            <Route path="/profile" element={<ProfilePage/>}/>
-            <Route path="/recommended" element={<RecommendedRecipePage/>}/>
-            <Route path="/editprofile" element={<EditProfilePage/>}/>
-            <Route path="/search" element={<RecipeSearchPage/>}/>
-            <Route path="/recipe/:id" element={<IndividualRecipePage/>}/>
-            <Route path="/reviews/:recipe" element={<IndividualReviewPage/>}/>
+            <Route path="/profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
+            <Route path="/recommended" element={<ProtectedRoute><RecommendedRecipePage/></ProtectedRoute>}/>
+            <Route path="/editprofile" element={<ProtectedRoute><EditProfilePage/></ProtectedRoute>}/>
+            <Route path="/search" element={<ProtectedRoute><RecipeSearchPage/></ProtectedRoute>}/>
+            <Route path="/recipe/:id" element={<ProtectedRoute><IndividualRecipePage/></ProtectedRoute>}/>
+            <Route path="/reviews/:recipe" element={<ProtectedRoute><IndividualReviewPage/></ProtectedRoute>}/>
         </Routes>
     );
 };
