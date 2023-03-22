@@ -7,16 +7,50 @@
     max-width: 100vw;
     min-width: 100vw;
     min-height: 80vh;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1)
+    /* box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1) */
 }
 
-.preparation-container
+.imagediv{
+    grid-row: 1;
+    order: 1;
+    min-height: 200px;
+    min-width: 480px;
+}
+
+.recipeImage{
+    min-height: 315px;
+    min-width: 480px;
+    width: 35vw;
+}
+
+.preparationdiv
 {
-    position: relative;
+    grid-row: 1;
+    order: 2;
+    margin-left: 50px;
+    min-width: 500px;
+    min-height: 600px;
+}
+
+.iconscontainer{
+    height: 50px;
+    min-width: 480px;
+}
+
+.fillerdiv{
+    grid-row: 2;
+    order: 1;
+}
+
+.ingredientsdiv{
+    grid-row: 2;
+    order: 2;
+    margin-left: 50px;
 }
 
 .buttonsContainer{
     width: 35vw;
+    min-width: 480px;
 }
 
 #recipePageHeader{
@@ -24,26 +58,25 @@
     font-weight: bold;
 }
 
-.recipeImage{
-    width: 35vw;
-}
-
-.iconsdiv{
-    width: 35vw;
-}
 
 .recipeInstructions{
     height: 370px;
 }
 
+
 .AddReviewButton{
     height: 50px;
-    margin-top: 4rem;
-    margin-left: 1rem;
+    margin-top: 2rem;
+    margin-left: 3rem;
 }
 
 .AddTrackerButton{
     height: 50px;
-    margin-left: 2rem;
-    margin-right: 1rem;
+    margin-right: 2rem;
+    margin-left: 1rem;
+}
+
+.recipeFavourite{
+    position: relative;
+    margin-left: 26rem;
 }
