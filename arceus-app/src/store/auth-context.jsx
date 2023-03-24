@@ -78,6 +78,7 @@ export const AuthContextProvider = (props) => {
     signOut(auth)
       .then(() => {
         setIsLoggedIn(false);
+
         console.log("Sign-out successful.");
       })
       .catch((error) => {
