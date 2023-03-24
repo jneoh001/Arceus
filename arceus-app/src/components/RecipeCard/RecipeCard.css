@@ -1,0 +1,9 @@
+
+#recipeCardEffects{
+    transition: 1s;
+}
+
+#recipeCardEffects:hover{
+    transform: scale(1.12);
+    z-index: 2;
+}

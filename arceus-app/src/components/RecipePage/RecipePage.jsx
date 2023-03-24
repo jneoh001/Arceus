@@ -10,7 +10,7 @@ import "./RecipePage.css";
 
 export default function RecipePage({ recipeid }) {
   const { currentUser, userDetails } = useAuth();
-  const apiKey = "";
+  const apiKey = "7f8b79cf24094b52953b2d594e02f04e ";
   const [recipeData, setRecipeData] = useState({});
   const [ingredientWidget, setIngredientWidget] = useState();
   const [intake, setIntake] = useState();
