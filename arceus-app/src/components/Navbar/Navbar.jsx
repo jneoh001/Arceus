@@ -12,7 +12,7 @@ const Navbar = () => {
     navRef.current.classList.toggle("responsive_nav");
     setNavIsClicked((pre) => !pre);
   };
-  console.log(ctx.currentUser);
+  // console.log(ctx.currentUser);
 
   return (
     <div className="nav-container">
@@ -25,16 +25,9 @@ const Navbar = () => {
           Arceus
         </h3>
         <nav ref={navRef} className="responsive_nav">
-          {!ctx.currentUser && (
-            <NavLink to={"/"} className="nav-a" onClick={showNavbar}>
+          <NavLink to={"/"} className="nav-a" onClick={showNavbar}>
             HOME
           </NavLink>
-          )}
-          {ctx.currentUser && (
-            <NavLink to={"/recommended"} className="nav-a" onClick={showNavbar}>
-            HOME
-          </NavLink>
-          )}
           <NavLink to={"/search"} className="nav-a" onClick={showNavbar}>
             SEARCH
           </NavLink>
@@ -44,12 +37,12 @@ const Navbar = () => {
             </NavLink>
           )}
           {ctx.currentUser && (
-            <NavLink to={"/profile"} className="nav-a" onClick={showNavbar}>
+            <NavLink to={"/goals"} className="nav-a" onClick={showNavbar}>
               MY PROFILE
             </NavLink>
           )}
           <NavLink
-            to={"/history"}
+            to={"/profile"}
             className="lg:absolute lg:right-12 text-2xl"
             onClick={showNavbar}
           >

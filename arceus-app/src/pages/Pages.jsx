@@ -13,19 +13,19 @@ import RecipeSearchPage from "./RecipeSearchPage/RecipeSearchPage";
 import RecommendedRecipePage from "./RecommendedRecipePage/RecommendedRecipePage";
 import EditProfilePage from "./EditProfilePage/EditProfilePage";
 import Searched from "./RecipeSearchPage/Searched";
-import HomePage from "./HomePage/Homepage";
+import HomePage from "./HomePage/HomePage";
 import { useAuth } from "../store/auth-context";
 
 function Pages(){
+  const {currentUser} = useAuth();
     return(
         <Routes>
-            <Route path="/" element={<LandingPage/>} />
+            <Route path="/" element={currentUser?<ProtectedRoute><HomePage/></ProtectedRoute>:<LandingPage/>} />
             <Route path="/login" element={<LoginPage/>} />
             <Route path="/register" element={<RegistrationPage/>} />
             <Route path="/history" element={<ProtectedRoute><HistoryPage/></ProtectedRoute>} />
             <Route path="/goals" element={<ProtectedRoute><GoalPage/></ProtectedRoute>}/>
             <Route path="/profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
-            <Route path="/recommended" element={<ProtectedRoute><RecommendedRecipePage/></ProtectedRoute>}/>
             <Route path="/editprofile" element={<ProtectedRoute><EditProfilePage/></ProtectedRoute>}/>
             <Route path="/search" element={<ProtectedRoute><RecipeSearchPage/></ProtectedRoute>}/>
             <Route path="/recipe/:id" element={<ProtectedRoute><IndividualRecipePage/></ProtectedRoute>}/>

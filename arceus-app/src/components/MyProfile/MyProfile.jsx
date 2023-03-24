@@ -1,20 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/auth-context";
-import { useNavigate } from "react-router-dom";
-
 
 const MyProfile = () => {
   const { logout, userDetails } = useAuth();
   const navigate = useNavigate();
-  function logoutHandler(){
-    logout;
-    navigate("/login",{
-      replace: true, 
-      state:{
-        message: "You have Succesfully Logged Out."
-      }},
-    )
-  };
+  function logoutHandler() {
+    logout();
+    navigate("/login", {
+      replace: true,
+      state: {
+        message: "You have Succesfully Logged Out.",
+      },
+    });
+  }
   return (
     <div className="bg-white flex flex-col w-7/12 justify-center items-center text-lg font-medium border-2 border-black rounded p-4">
       <h1 className="font-bold text-3xl">My Profile</h1>
