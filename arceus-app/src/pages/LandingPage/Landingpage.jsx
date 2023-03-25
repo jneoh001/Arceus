@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import RecipeByID from "../../components/RecipeCard/RecipeByID";
 import "./LandingPage.css";
+import RecommendedRecipes from "../../components/RecipeCard/RecommendedRecipes";
 
 const LandingPage = () => {
   return (
@@ -10,17 +11,12 @@ const LandingPage = () => {
       <Navbar />
       <h1 className="landingpageheader">Top Rated</h1>
       <div className="recipecards">
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
+        <RecommendedRecipes />
         {/*<RecommendedRecipes/>
         <RecommendedRecipes/>
         <RecommendedRecipes/>
         <RecommendedRecipes/>
         <RecommendedRecipes/>*/}
-
       </div>
     </div>
   );

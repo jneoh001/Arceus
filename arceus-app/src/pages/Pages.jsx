@@ -7,8 +7,9 @@ import RegistrationPage from "./RegistrationPage/RegistrationPage";
 import { Route, Routes } from "react-router-dom";
 import ProfilePage from "./ProfilePage/ProfilePage";
 import ProtectedRoute from "./ProtectedRoute";
-import IndividualReviewPage from "./IndividualReviewPage/IndividualReviewPage";
 import IndividualRecipePage from "./IndividualRecipePage/IndividualRecipePage";
+import AddReviewPage from "./AddReviewPage/AddReviewPage";
+import ViewReviewPage from "./ViewReviewPage/ViewReviewPage";
 import RecipeSearchPage from "./RecipeSearchPage/RecipeSearchPage";
 import RecommendedRecipePage from "./RecommendedRecipePage/RecommendedRecipePage";
 import EditProfilePage from "./EditProfilePage/EditProfilePage";
@@ -29,8 +30,9 @@ function Pages(){
             <Route path="/editprofile" element={<ProtectedRoute><EditProfilePage/></ProtectedRoute>}/>
             <Route path="/search" element={<ProtectedRoute><RecipeSearchPage/></ProtectedRoute>}/>
             <Route path="/searched/:search" element={<ProtectedRoute><Searched/></ProtectedRoute>}/>
-            <Route path="/recipe/:id" element={<ProtectedRoute><IndividualRecipePage/></ProtectedRoute>}/>
-            <Route path="/reviews/:recipe" element={<ProtectedRoute><IndividualReviewPage/></ProtectedRoute>}/>
+            <Route path="/recipes/:id" element={<ProtectedRoute><IndividualRecipePage /></ProtectedRoute>}/>
+            <Route path="/add-reviews/:id" element={<ProtectedRoute><AddReviewPage/></ProtectedRoute>}/>
+            <Route path="/view-reviews/:id" element={<ProtectedRoute><ViewReviewPage/></ProtectedRoute>}/>
         </Routes>
     );
 };
