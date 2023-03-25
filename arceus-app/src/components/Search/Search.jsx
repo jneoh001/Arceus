@@ -8,19 +8,14 @@ import RecommendedRecipesLI from '../../components/RecipeCard/RecommendedRecipes
 
     
 function Search() {
-
     const [input, setInput] = useState("");
     const navigate = useNavigate();
-
     const submitHandler = (e) => {
         e.preventDefault();
         navigate('/searched/' + input)
     };
-
-
     return (
         <>
-        
         <form className="searchForm" onSubmit={submitHandler}>
             <div className="searchInput">
                 <FaSearch></FaSearch>
@@ -30,17 +25,14 @@ function Search() {
                     value={input} />
             </div>
         </form>
-        <RecommendedRecipesLI />
+        {/* <RecommendedRecipesLI /> */}
         {/*
         <RecommendedRecipesLI />
         <RecommendedRecipesLI />
         <RecommendedRecipesLI />
         <RecommendedRecipesLI />
     */}
-        
-        
         </>
-
     )
 }
 
