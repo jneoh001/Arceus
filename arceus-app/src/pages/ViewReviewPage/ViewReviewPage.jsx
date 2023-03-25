@@ -1,13 +1,17 @@
 import React from "react";
 import ViewReview from "../../components/Review/ViewReview";
 import { useParams } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 
-function IndividualReviewPage() {
+function ViewReviewPage() {
   let params = useParams();
-  console.log(params);
   return (
-    <ViewReview id={params.recipe}/>
+<div>
+  <Navbar />
+    <ViewReview id={params.id}/>
+</div>
+
   );
 }
 
-export default IndividualReviewPage;
+export default ViewReviewPage;

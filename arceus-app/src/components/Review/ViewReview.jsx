@@ -10,7 +10,6 @@ const ViewReview = (props) => {
       .then((snapshot) => {
         if (snapshot.exists()) {
           setReviewsData(Object.values(snapshot.val()));
-          console.log(reviewsData);
         } else {
           console.log("No reviews data");
         }
