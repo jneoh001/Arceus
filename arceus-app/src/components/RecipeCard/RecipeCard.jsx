@@ -2,6 +2,7 @@ import { db } from "../../firebaseConfig";
 import { get, child, ref } from "firebase/database";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import './RecipeCard.css'
 
 const RecipeCard = (props) => {
   const [rating, setRating] = useState(0);
@@ -74,8 +75,9 @@ const RecipeCard = (props) => {
 
   return (
     <NavLink
+      id = "recipeCardEffects"
       exact to={rerouteString}
-      className="flex flex-row min-w-[800px]  max-w-[800px] items-center border rounded-lg shadow hover:bg-gray-100 border-gray-700 bg-gray-800 hover:bg-gray-700 mb-12"
+      className="flex flex-row min-w-[800px]  max-w-[800px] items-center border rounded-lg shadow hover:bg-gray-100 hover:-translate-y-2 border-gray-700 bg-gray-800 hover:bg-gray-700 mb-12"
     >
       <img
         className="object-cover max-h-60 max-w-sm rounded-t-lg h-auto w-1/2 md:rounded-none md:rounded-l-lg"

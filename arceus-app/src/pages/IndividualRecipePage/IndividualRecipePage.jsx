@@ -1,16 +1,17 @@
 import { useParams } from "react-router-dom";
 import Navbar from  "../../components/Navbar/Navbar";
 import RecipePage from "../../components/RecipePage/RecipePage";
+import { useParams } from "react-router-dom";
 
 const IndividualRecipePage = () => {
-    let params = useParams();
-    console.log(params);
-    return (
-        <div>
-            <Navbar />
-            <RecipePage recipeid={params.id}/>
-        </div>
-    );
+  const params = useParams();
+  console.log(params.id);
+  return (
+    <div>
+      <Navbar />
+      <RecipePage id={params.id} />
+    </div>
+  );
 };
 
 export default IndividualRecipePage;

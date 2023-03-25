@@ -12,7 +12,7 @@ const LoginCard = () => {
   const submitHandler = (e) => {
     login(emailRef.current.value, passwordRef.current.value);
     e.preventDefault();
-    navigate("/recommended");
+    navigate("/");
   };
 
   const passwordResetHandler = (e) => {

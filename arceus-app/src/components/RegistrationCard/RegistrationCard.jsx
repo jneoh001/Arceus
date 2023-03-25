@@ -117,8 +117,8 @@ const RegistrationCard = () => {
     })
   };
   return (
-    <div className="flex flex-col justify-center items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
-      <h1 className="font-bold text-3xl p-12">Registration Information</h1>
+    <div className="flex flex-col justify-center items-center pl-20 pr-20 font-semibold bg-white text-lg text-black">
+      <h1 className="font-bold text-4xl p-12">Register an account</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

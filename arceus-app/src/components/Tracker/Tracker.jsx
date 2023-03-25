@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import Progress from "./Progress";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
@@ -7,6 +8,7 @@ import getDate from "../../helpers/getDate";
 
 const Tracker = () => {
   const { userIntake, userDetails, currentUser } = useAuth();
+  const navigate = useNavigate();
 
   //Update database once the intake changes
   useEffect(() => {
@@ -75,16 +77,16 @@ const Tracker = () => {
         }
         className="bg-red-600 dark:bg-red-500"
       />
-      <div className="flex flex-col justify-center items-center">
+      <Link to="/history" className="flex flex-col items-center">
         <button
           onClick={() => {
-            console.log("Hello");
+            navigate("/history");
           }}
-          className="text-center text-white bg-[#24292F] hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center   mr-2 mb-2"
+          className="text-center text-white bg-[#24292F] hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center absolute mt-8"
         >
           View History
         </button>
-      </div>
+      </Link>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const HomePage = () => {
       <Navbar />
       <h1 className="homepageheader">Recommended Recipes</h1>
       <div className="recipecards">
-        <RecommendedRecipesLI />
+        <RecommendedRecipes />
         {/* <RecommendedRecipesLI />
                 <RecommendedRecipesLI />
                 <RecommendedRecipesLI />
