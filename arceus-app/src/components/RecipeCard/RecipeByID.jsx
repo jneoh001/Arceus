@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const RecipeByID = (props) => {
-  const apiKey = "d397c8afbfd343cbae5ab63b787f199a";
+  const apiKey = "35ef18ee864f4118b9f1e2f9955ecbfe";
   const [recipeData, setRecipeData] = useState({});
 
   useEffect(() => {
