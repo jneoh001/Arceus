@@ -2,6 +2,7 @@ import React from "react";
 import RecommendedRecipesLI from "../../components/RecipeCard/RecommendedRecipesLI";
 import RecommendedRecipesList from "../../components/RecipeCard/RecommendedRecipeslist";
 import Navbar from "../../components/Navbar/Navbar";
+import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -10,11 +11,7 @@ const HomePage = () => {
       <Navbar />
       <h1 className="homepageheader">Recommended Recipes</h1>
       <div className="recipecards">
-        <RecommendedRecipes />
-        {/* <RecommendedRecipesLI />
-                <RecommendedRecipesLI />
-                <RecommendedRecipesLI />
-                <RecommendedRecipesLI /> */}
+                <RecommendedRecipesList />
       </div>
     </div>
   );
