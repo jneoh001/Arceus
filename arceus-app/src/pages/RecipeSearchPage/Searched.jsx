@@ -1,11 +1,10 @@
 import React from 'react';
-import Navbar from '../../components/Navbar/Navbar';
-import Search from '../../components/Search/Search';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { FaSearch } from 'react-icons/fa'
+import Navbar from '../../components/Navbar/Navbar';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import "./Searched.css";
 
@@ -26,7 +25,7 @@ function Searched() {
 
 
     let params = useParams();
-    const apiKey = '887452d55d564c2d89b9eba52e001c4c';
+    const apiKey = '7680a54dea464e5b90ddebf086a2b41d';
 
     const getSearched = async (name) => {
         const data = await fetch(
@@ -107,8 +106,8 @@ function Searched() {
 
 
     useEffect(() => {
-        getSearched(params.search);
-    }, [params.search])
+        getSearched(params.query);
+    }, [params.query])
 
     useEffect(() => {
         SearchedRecipes.forEach((item) => {
@@ -119,12 +118,9 @@ function Searched() {
     useEffect(() => {
         getFiltered(params.search, caloriesMin, caloriesMax)
     }, [params.search])
-
-
-
-    return (
+    return ( 
         <div>
-            <Navbar />
+            <Navbar/>
             <FormStyle onSubmit={submitHandler}>
                 <div>
                     <FaSearch></FaSearch>
@@ -182,7 +178,6 @@ function Searched() {
                 {sortedRecipes.map((item) => {
                     const nutrition = recipeNutrition[item.id];
                     return (
-
                         <RecipeCard
                             id={item.id}
                             name={item.title}
