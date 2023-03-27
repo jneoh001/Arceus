@@ -14,7 +14,7 @@ const MyProfile = () => {
     });
   }
   return (
-    <div className="bg-white flex flex-col w-7/12 justify-center items-center text-lg font-medium border-2 border-black rounded p-4">
+    <div className="bg-white flex flex-col mx-auto mt-4 w-7/12 justify-center items-center text-lg font-medium border-2 border-black rounded p-4">
       <h1 className="font-bold text-3xl">My Profile</h1>
       <hr className="w-full h-1 mt-4 bg-black rounded" />
       <p className="w-9/12 mt-12">

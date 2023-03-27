@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import './RecipeCard.css'
 
-const RecipeCard = (props) => {
+const RecipeCardHmepage = (props) => {
   const [rating, setRating] = useState(0);
   const [ratingDisplay, setRatingDisplay] = useState([]);
-  const rerouteString = "/recipe/" + props.id;
+  const rerouteString = "/recipes/" + props.id;
 
   useEffect(() => {
     get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
@@ -94,15 +94,15 @@ const RecipeCard = (props) => {
         </p>
         <div className="grid grid-cols-2">
           <p className="mb-2 text-lg text-gray-700 dark:text-gray-400">
-            Carbohydrates: {props.carbs}g
+            Carbohydrates: {props.carbs}
           </p>
           <p className="ml-4 mb-2 text-lg text-gray-700 dark:text-gray-400">
-            Protein: {props.protein}g
+            Protein: {props.protein}
           </p>
         </div>
         <div className="grid grid-cols-2">
           <p className="mb-2 text-lg text-gray-700 dark:text-gray-400">
-            Fats: {props.fats}g
+            Fats: {props.fats}
           </p>
           <p className="ml-4 mb-2 text-lg text-gray-700 dark:text-gray-400">
             Calories: {props.calories}kcal
@@ -113,4 +113,4 @@ const RecipeCard = (props) => {
   );
 };
 
-export default RecipeCard;
+export default RecipeCardHmepage;
