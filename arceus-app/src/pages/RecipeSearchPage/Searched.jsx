@@ -26,7 +26,7 @@ function Searched() {
 
 
     let params = useParams();
-    const apiKey = 'adee7ae6878248ddb9e66de6011b6264';
+    const apiKey = '887452d55d564c2d89b9eba52e001c4c';
 
     const getSearched = async (name) => {
         const data = await fetch(
@@ -46,18 +46,27 @@ function Searched() {
         });
     };
 
+    const getFiltered = async (name, minCalories, maxCalories) => {
+        const data = await fetch(
+          `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${name}&minCalories=${minCalories}&maxCalories=${maxCalories}`
+        );
+        const recipes = await data.json();
+        setSearchedRecipes(recipes.results);
+      };
+      
+
     const [showForm, setShowForm] = useState(false);
 
     const handleFilterClick = () => {
         setShowForm((prevShowForm) => !prevShowForm);
     };
 
-    const handleFilterSubmit = () => {
+    const handleFilterSubmit = (e) => {
         e.preventDefault();
-        const filteredRecipes = filterRecipes(SearchedRecipes, caloriesMin, caloriesMax);
-        setSearchedRecipes(filteredRecipes);
+        getFiltered(params.search, caloriesMin, caloriesMax);
         setShowForm(false);
-    };
+      };
+      
 
     const sortRecipes = (recipes, sortBy) => {
         if (!sortBy) {
@@ -65,7 +74,11 @@ function Searched() {
         } else if (sortBy === 'rating') {
             return recipes.sort((a, b) => b.rating - a.rating);
         } else if (sortBy === 'calories') {
-            return recipes.sort((a, b) => a.calories - b.calories);
+            return recipes.sort((a, b) => {
+                const aCalories = a.nutrition ? a.nutrition.calories : 0;
+                const bCalories = b.nutrition ? b.nutrition.calories : 0;
+                return aCalories - bCalories;
+            });
         } else if (sortBy === 'alpha') {
             return recipes.sort((a, b) => a.title.localeCompare(b.title));
         } else if (sortBy === 'zulu') {
@@ -77,18 +90,20 @@ function Searched() {
 
     const filterRecipes = (recipes, caloriesMin, caloriesMax) => {
         return recipes.filter((recipe) => {
-            if (caloriesMin && recipe.nutrition?.calories < caloriesMin) {
-                return false;
-            }
-            if (caloriesMax && recipe.nutrition?.calories > caloriesMax) {
-                return false;
-            }
-            return true;
+          const nutrition = recipeNutrition[recipe.id];
+          if (caloriesMin && nutrition?.calories < caloriesMin) {
+            return false;
+          }
+          if (caloriesMax && nutrition?.calories > caloriesMax) {
+            return false;
+          }
+          return true;
         });
-    };
+      };
+      
 
     const filteredRecipes = filterRecipes(SearchedRecipes, caloriesMin, caloriesMax);
-    const sortedRecipes = sortRecipes(filteredRecipes, sortBy);
+    const sortedRecipes = sortRecipes(SearchedRecipes, sortBy);
 
 
     useEffect(() => {
@@ -100,6 +115,10 @@ function Searched() {
             getRecipeNutrition(item.id);
         });
     }, [SearchedRecipes]);
+
+    useEffect(() => {
+        getFiltered(params.search, caloriesMin, caloriesMax)
+    }, [params.search])
 
 
 
@@ -233,3 +252,4 @@ const FormStyle = styled.form`
 
 
 export default Searched;
+
