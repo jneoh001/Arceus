@@ -12,14 +12,14 @@ const HistoryCard = () => {
         <thead className="table-head">
           <tr>
             <th>Date</th>
-            <th>Carbs Goal</th>
-            <th>Carbs Intake</th>
-            <th>Protein Goal</th>
-            <th>Protein Intake</th>
-            <th>Fat Goal</th>
-            <th>Fat Intake</th>
-            <th>Calories Goal</th>
-            <th>Calories Intake</th>
+            <th>Carbs Goal / g</th>
+            <th>Carbs Intake / g</th>
+            <th>Protein Goal / g</th>
+            <th>Protein Intake / g</th>
+            <th>Fat Goal / g</th>
+            <th>Fat Intake / g</th>
+            <th>Calories Goal / kcal</th>
+            <th>Calories Intake / kcal</th>
           </tr>
         </thead>
         <tbody>
@@ -27,14 +27,14 @@ const HistoryCard = () => {
             return (
               <tr key={history.date}>
                 <td>{history.date}</td>
-                <td>{history.carbGoal}g</td>
-                <td>{history.carbIntake}g</td>
+                <td>{history.carbGoal}</td>
+                <td>{history.carbIntake.toFixed(2)}</td>
                 <td>{history.proteinGoal}g</td>
-                <td>{history.proteinIntake}g</td>
-                <td>{history.fatGoal}g</td>
-                <td>{history.fatIntake}g</td>
-                <td>{history.calorieGoal}g</td>
-                <td>{history.calorieIntake}g</td>
+                <td>{history.proteinIntake.toFixed(2)}</td>
+                <td>{history.fatGoal} g</td>
+                <td>{history.fatIntake.toFixed(2)}</td>
+                <td>{history.calorieGoal}</td>
+                <td>{history.calorieIntake.toFixed(2)}</td>
               </tr>
             );
           })}

@@ -9,14 +9,15 @@ import getDate from "../../helpers/getDate";
 import "./RecipePage.css";
 import { Link, NavLink } from "react-router-dom";
 
-export default function RecipePage( props) {
+export default function RecipePage(props) {
   const { currentUser, userDetails } = useAuth();
-  const apiKey = "7f8b79cf24094b52953b2d594e02f04e";
+  const apiKey = "1bf290a35f8c49c8a844be86f6575f28";
   const [recipeData, setRecipeData] = useState({});
   const [ingredientWidget, setIngredientWidget] = useState();
   const [intake, setIntake] = useState();
-  const [rating, setRating] = useState({total:0, number:0});
+  const [rating, setRating] = useState({ total: 0, number: 0 });
   const [ratingDisplay, setRatingDisplay] = useState([]);
+  const [isAdded, setIsAdded] = useState(false);
 
   //Update database once the intake changes
   useEffect(() => {
@@ -80,17 +81,10 @@ export default function RecipePage( props) {
         calorie: pre.calorie + recipeData.recipeCalorie,
       };
     });
-  };
-
-  const subtractHandler = () => {
-    setIntake((pre) => {
-      return {
-        carb: pre.carb - 10,
-        protein: pre.protein - 10,
-        fat: pre.fat - 10,
-        calorie: pre.calorie - 10,
-      };
-    });
+    setIsAdded(true);
+    setTimeout(() => {
+      setIsAdded(false);
+    }, 2000);
   };
 
   useEffect(() => {
@@ -98,7 +92,7 @@ export default function RecipePage( props) {
       .get(
         "https://api.spoonacular.com/recipes/" +
           props.id +
-          "/information?apiKey=" +
+          "/information?includeNutrition=true&apiKey=" +
           apiKey
       )
       // .then(response => {
@@ -109,38 +103,19 @@ export default function RecipePage( props) {
       // })
       .then((response) => {
         // console.log(response.data.instructions);
-        setRecipeData({
-          img: response.data.image,
-          instructions: response.data.instructions,
-          title: response.data.title,
+        setRecipeData((pre) => {
+          return {
+            ...pre,
+            img: response.data.image,
+            instructions: response.data.instructions,
+            title: response.data.title,
+            recipeCarbs: response.data.nutrition.nutrients[3].amount,
+            recipeProtein: response.data.nutrition.nutrients[9].amount,
+            recipeFat: response.data.nutrition.nutrients[1].amount,
+            recipeCalorie: response.data.nutrition.nutrients[0].amount,
+          };
         });
       })
-      .catch((error) => console.log(error));
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(
-        "https://api.spoonacular.com/food/menuitems/" +
-          props.id +
-          "?apiKey=" +
-          apiKey
-      )
-      // .then(response => {
-      //     //console.log(response)
-      //     setRecipeData({img: response.data.img})
-      //     console.log(recipeData)
-
-      // })
-      .then((response) => {
-        setRecipeData({
-          recipeCarbs: response.nutrition.nutrients[1].amount,
-          recipeProtein: response.nutrition.nutrients[7].amount,
-          recipeFat: response.nutrition.nutrients[3].amount,
-          recipeCalorie: response.nutrition.nutrients[2].amount,
-        });
-      })
-
       .catch((error) => console.log(error));
   }, []);
 
@@ -218,7 +193,7 @@ export default function RecipePage( props) {
           </svg>
         );
       }
-      result.push(<span key={6}> ( {rating.number} )</span>)
+      result.push(<span key={6}> ( {rating.number} )</span>);
     }
 
     setRatingDisplay(result);
@@ -235,28 +210,57 @@ export default function RecipePage( props) {
         <img className="mt-3 w-2/3 h-auto" src={recipeData.img} />
 
         <div className="flex mt-2 justify-between w-2/3">
-          <Link to={"/view-reviews/" + props.id} className="flex justify-center items-center">
+          <Link
+            to={"/view-reviews/" + props.id}
+            className="flex justify-center items-center"
+          >
             {ratingDisplay}
           </Link>
           <RecipeFavourite id={props.id} />
         </div>
 
         {/*Add Review Button ( Routed to Reviews) & Add To Tracker */}
-        <Link to={"/add-reviews/"+props.id} className="flex mt-16 w-2/3 h-auto justify-around">
+        <div className="flex mt-16 w-2/3 h-auto justify-around">
+          <Link to={"/add-reviews/" + props.id}>
+            <button
+              type="button"
+              className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-md px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            >
+              Add Review
+            </button>{" "}
+          </Link>
           <button
-            type="button"
             onClick={addHandler}
-            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-md px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-          >
-            Add Review
-          </button>
-          <button
             type="button"
             className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-md px-5 py-2.5  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
           >
             Add To Tracker
           </button>
-        </Link>
+        </div>
+        {isAdded && (
+          <div
+            class="w-2/3 mt-2 flex p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+            role="alert"
+          >
+            <svg
+              aria-hidden="true"
+              class="flex-shrink-0 inline w-5 h-5 mr-3"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium"></span> Added to Tracker!
+            </div>
+          </div>
+        )}
       </div>
 
       {/*Preparation Portion */}
