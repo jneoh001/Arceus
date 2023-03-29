@@ -9,7 +9,7 @@ import { ref, child, get, onValue } from "firebase/database";
 const RecommendedRecipesLI = () => {
   const { userDetails } = useAuth();
   console.log(userDetails);
-  const apiKey = "0a76b05501d343a3865103c54309f7dd";
+  const apiKey = "887452d55d564c2d89b9eba52e001c4c";
 
   const [id, setID] = useState();
   const [recipeData, setRecipeData] = useState({});
