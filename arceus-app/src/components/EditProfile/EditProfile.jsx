@@ -36,7 +36,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
+    <div className="flex flex-col justify-center mx-auto mt-4 mb-4 items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
       <h1 className="font-bold text-3xl p-12">Edit Profile</h1>
       <Formik
         initialValues={{
