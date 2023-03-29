@@ -4,7 +4,9 @@ const ProfilePage = () => {
   return (
     <div>
       <Navbar />
-      <MyProfile />
+      <div className="p-16">
+        <MyProfile />
+      </div>
     </div>
   );
 };

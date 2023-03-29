@@ -8,9 +8,11 @@ function AddReviewPage() {
   console.log(params);
   return (
     <div>
-      <Navbar /><LeaveReviewCard id={params.id}/>
+      <Navbar />
+      <div className="p-16">
+        <LeaveReviewCard id={params.id} />
+      </div>
     </div>
-    
   );
 }
 
