@@ -39,10 +39,10 @@ const Tracker = () => {
           userIntake
             ? (userIntake.carb / userDetails.carbGoal) * 100 >= 100
               ? "100%"
-              : (userIntake.carb / userDetails.carbGoal) * 100 + "%"
+              : Math.round((userIntake.carb / userDetails.carbGoal) * 100) + "%"
             : "0%"
         }
-        className="bg-green-600 dark:bg-green-500"
+        className="from-emerald-500 to-lime-600"
       />
       <Progress
         title="Protein"
@@ -50,10 +50,12 @@ const Tracker = () => {
           userIntake
             ? (userIntake.protein / userDetails.proteinGoal) * 100 >= 100
               ? "100%"
-              : (userIntake.protein / userDetails.proteinGoal) * 100 + "%"
+              : Math.round(
+                  (userIntake.protein / userDetails.proteinGoal) * 100
+                ) + "%"
             : "0%"
         }
-        className="dark:bg-indigo-500 bg-indigo-600"
+        className="from-sky-400 to-blue-500"
       />{" "}
       <Progress
         title="Fats"
@@ -61,10 +63,10 @@ const Tracker = () => {
           userIntake
             ? (userIntake.fat / userDetails.fatGoal) * 100 >= 100
               ? "100%"
-              : (userIntake.fat / userDetails.fatGoal) * 100 + "%"
+              : Math.round((userIntake.fat / userDetails.fatGoal) * 100) + "%"
             : "0%"
         }
-        className="bg-yellow-400 dark:bg-yellow-500"
+        className="from-yellow-200 via-yellow-300 to-yellow-400"
       />
       <Progress
         title="Calories"
@@ -72,10 +74,12 @@ const Tracker = () => {
           userIntake
             ? (userIntake.calorie / userDetails.calorieGoal) * 100 >= 100
               ? "100%"
-              : (userIntake.calorie / userDetails.calorieGoal) * 100 + "%"
+              : Math.round(
+                  (userIntake.calorie / userDetails.calorieGoal) * 100
+                ) + "%"
             : "0%"
         }
-        className="bg-red-600 dark:bg-red-500"
+        className="from-rose-500 via-red-400 to-red-500"
       />
       <Link to="/history" className="flex flex-col items-center">
         <button
