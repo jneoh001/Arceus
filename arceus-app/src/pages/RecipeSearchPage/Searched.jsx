@@ -7,15 +7,21 @@ import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { FaSearch } from 'react-icons/fa'
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
+import { useLocation } from 'react-router-dom';
 import "./Searched.css";
+import RecipeCardHmepage from '../../components/RecipeCard/RecipeCardHmepage';
 
 function Searched() {
-    const [input, setInput] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
+    const searchTerm = location.state?.searchTerm || '';
+    const [input, setInput] = useState(searchTerm);
+
+
 
     const submitHandler = (e) => {
         e.preventDefault();
-        navigate('/searched/' + input)
+        navigate('/searched/' + input);
     };
 
     const [SearchedRecipes, setSearchedRecipes] = useState([]);
@@ -26,7 +32,7 @@ function Searched() {
 
 
     let params = useParams();
-    const apiKey = '887452d55d564c2d89b9eba52e001c4c';
+    const apiKey = '4cf4419d29214ccd8eeac75198bf0065';
 
     const getSearched = async (name) => {
         const data = await fetch(
@@ -128,7 +134,11 @@ function Searched() {
             <FormStyle onSubmit={submitHandler}>
                 <div>
                     <FaSearch></FaSearch>
-                    <input onChange={(e) => setInput(e.target.value)} type="text" value={input} />
+                    <input onChange={(e) => setInput(e.target.value)} 
+                    type="text" 
+                    value={input}
+                    placeholder={searchTerm}
+                    />
                 </div>
             </FormStyle>
             <div className="searchpageheader">
@@ -183,7 +193,7 @@ function Searched() {
                     const nutrition = recipeNutrition[item.id];
                     return (
 
-                        <RecipeCard
+                        <RecipeCardHmepage
                             id={item.id}
                             name={item.title}
                             carbs={nutrition?.carbs}
