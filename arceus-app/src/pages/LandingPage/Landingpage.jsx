@@ -7,8 +7,19 @@ import RecommendedRecipes from "../../components/RecipeCard/RecommendedRecipes";
 
 const LandingPage = () => {
   return (
+  <div className="grid grid-rows-2 grid-cols-1 ">
+    <Navbar />
+
+    {/* <div className="LandingPageTop">
+       <div className="static-txt">One Stop</div>
+       <ul className="dynamic-txts">
+        <li><span>Recipes</span></li> 
+        <li><span>Tracker</span></li> 
+        <li><span>Solution</span></li> 
+       </ul>
+    </div> */}
+
     <div className="LandingPage h-full">
-      <Navbar />
       <h1 className="landingpageheader">Top Rated</h1>
       <div className="recipecards">
         <RecommendedRecipes />
@@ -19,6 +30,7 @@ const LandingPage = () => {
         <RecommendedRecipes/>*/}
       </div>
     </div>
+  </div>
   );
 };
 
