@@ -1,13 +1,15 @@
 import "./LeaveReviewCard.css";
 import { ref, push, update, child, get, set, remove } from "firebase/database";
 import { db } from "../../firebaseConfig";
-import { Form } from "react-bootstrap";
+import { Form, Alert } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
 const LeaveReviewCard = (props) => {
   const [ratingDetails, setRatingDetails] = useState();
   const [isRetrieved, setIsRetrieved] = useState(false);
   const [topRatedList, setTopRatedList] = useState();
+  const [selectedRating, setSelectedRating] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
 
   // Check if the current recipe has reviews
   // if true: retrieve data and store it to ratingDetails; else: set ratingDetails to initial value
@@ -93,51 +95,63 @@ const LeaveReviewCard = (props) => {
   }, [ratingDetails]);
 
   const submitHandler = (e) => {
-    let rating = 0;
-    for (let i = 0; i < 5; i++) {
-      if (e.target[i].checked) {
-        rating = 5 - i;
-      }
-    }
-    const reviewTitle = e.target[5].value;
-    const reviewComment = e.target[6].value;
-
-    const newEntry = {
-      title: reviewTitle,
-      rating: rating,
-      comment: reviewComment,
-    };
-
-    setRatingDetails((pre) => {
-      return {
-        total: pre.total + rating,
-        number: pre.number + 1,
-      };
-    });
-
-    const newPostKey = push(child(ref(db), "reviews")).key;
-    const updates = {};
-    updates["/reviews/" + props.id + "/data/" + newPostKey] = newEntry;
-    update(ref(db), updates);
     e.preventDefault();
+    if(selectedRating === null){
+      setShowAlert(true);
+    }
+    else{
+      setShowAlert(false);
+      let rating = 0;
+      for (let i = 0; i < 5; i++) {
+        if (e.target[i].checked) {
+          rating = 5 - i;
+        }
+      }
+      const reviewTitle = e.target[5].value;
+      const reviewComment = e.target[6].value;
+  
+      const newEntry = {
+        title: reviewTitle,
+        rating: rating,
+        comment: reviewComment,
+      };
+  
+      setRatingDetails((pre) => {
+        return {
+          total: pre.total + rating,
+          number: pre.number + 1,
+        };
+      });
+  
+      const newPostKey = push(child(ref(db), "reviews")).key;
+      const updates = {};
+      updates["/reviews/" + props.id + "/data/" + newPostKey] = newEntry;
+      update(ref(db), updates);
+      e.preventDefault();
+    }
+  };
+  
+  const ratingChangeHandler = (e) => {
+    setSelectedRating(e.target.value);
   };
 
   return (
     <div className="review-container bg-white border border-black">
+      {showAlert && <Alert variant = "danger">Please select a rating</Alert>}
       <h2 className="font-bold text-4xl">Leave a review</h2>
 
       <Form onSubmit={submitHandler}>
         <div className="rating">
           {" "}
-          <input type="radio" name="rating" value="5" id="5" />
+          <input type="radio" name="rating" value="5" id="5" onChange={ratingChangeHandler}/>
           <label htmlFor="5">☆</label>{" "}
-          <input type="radio" name="rating" value="4" id="4" />
+          <input type="radio" name="rating" value="4" id="4" onChange={ratingChangeHandler}/>
           <label htmlFor="4">☆</label>{" "}
-          <input type="radio" name="rating" value="3" id="3" />
+          <input type="radio" name="rating" value="3" id="3" onChange={ratingChangeHandler}/>
           <label htmlFor="3">☆</label>{" "}
-          <input type="radio" name="rating" value="2" id="2" />
+          <input type="radio" name="rating" value="2" id="2" onChange={ratingChangeHandler}/>
           <label htmlFor="2">☆</label>{" "}
-          <input type="radio" name="rating" value="1" id="1" />
+          <input type="radio" name="rating" value="1" id="1" onChange={ratingChangeHandler}/>
           <label htmlFor="1">☆</label>
         </div>
         <Form.Control
@@ -159,11 +173,13 @@ const LeaveReviewCard = (props) => {
           <button
             type="submit"
             className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+
           >
             Submit
           </button>
         </div>
       </Form>
+      
     </div>
   );
 };
