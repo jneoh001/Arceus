@@ -21,6 +21,7 @@ const MyNumberInput = ({ label, ...props }) => {
 
 const EditProfile = () => {
   const { userDetails, editUserProfile } = useAuth();
+  
 
   const submitHandler = (e) => {
     const profile = {

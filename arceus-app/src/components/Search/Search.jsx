@@ -5,6 +5,7 @@ import { FaSearch } from 'react-icons/fa'
 import { set } from "firebase/database";
 import { useLocation, useNavigate } from "react-router-dom";
 import RecommendedRecipes from "../../components/RecipeCard/RecommendedRecipes";
+import RecommendedRecipesList from "../RecipeCard/RecommendedRecipesList";
 
 
 function Search() {
@@ -43,7 +44,7 @@ function Search() {
                     {error && <p className="error">{error}</p>}
                 </div>
             </form>
-            <RecommendedRecipes />
+            <RecommendedRecipesList />
             {/*
         <RecommendedRecipesLI />
         <RecommendedRecipesLI />
