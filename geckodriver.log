@@ -178,3 +178,4 @@ Read port: 52107
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/k4/w9dbm1s13dl19lv4d6wt6lqc0000gn/T/rust_mozprofilexGrrmU/search.json.mozlz4", (void 0)))
 JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
 JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680168731405	Marionette	INFO	Stopped listening on port 52107
