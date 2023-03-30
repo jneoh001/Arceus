@@ -100,6 +100,7 @@ const LeaveReviewCard = (props) => {
       setShowAlert(true);
     }
     else{
+      setShowAlert(false);
       let rating = 0;
       for (let i = 0; i < 5; i++) {
         if (e.target[i].checked) {
