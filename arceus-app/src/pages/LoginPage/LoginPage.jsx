@@ -1,3 +1,4 @@
+import "./LoginPage.css";
 import LoginCard from "../../components/LoginCard/LoginCard";
 import Navbar from "../../components/Navbar/Navbar";
 import { useLocation } from "react-router-dom";
@@ -35,7 +36,10 @@ function RerouteHandler(){
     <div>
       <CSSTransition
         in={isShowing}
-        timeout={500}
+        timeout={{
+          enter:300,
+          exit:300,
+        }}
         classNames="fade"
         unmountOnExit
       >

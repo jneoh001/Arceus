@@ -8,7 +8,6 @@ import RecommendedRecipes from "../../components/RecipeCard/RecommendedRecipes";
 
 
 function Search() {
-
     const [input, setInput] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -19,7 +18,6 @@ function Search() {
     useEffect(() => {
         setSearchTerm(location.state?.searchTerm || "");
     }, [location.state]);
-
     const submitHandler = (e) => {
         e.preventDefault();
         if (input.trim() !== "") {
@@ -28,11 +26,8 @@ function Search() {
             setError("Please enter a search term");
         }
     };
-
-
     return (
         <>
-
             <form className="searchForm" onSubmit={submitHandler}>
                 <div className="searchInput">
                     <FaSearch></FaSearch>
@@ -55,11 +50,8 @@ function Search() {
         <RecommendedRecipesLI />
         <RecommendedRecipesLI />
     */}
-
-
         </>
-
     )
 }
 
-export default Search
+export default Search;
