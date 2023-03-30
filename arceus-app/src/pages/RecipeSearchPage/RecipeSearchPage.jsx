@@ -1,6 +1,8 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar';
+import RecommendedRecipesLI from '../../components/RecipeCard/RecommendedRecipesLI';
 import RecipePage from '../../components/RecipePage/RecipePage'
+import RecommendedRecipes from "../../components/RecipeCard/RecommendedRecipes";
 import Search from '../../components/Search/Search';
 import Searched from './Searched';
 
@@ -11,6 +13,12 @@ function RecipeSearchPage() {
       <div className="recipecards">
         {/* <Searched/> */}
         <Search/>
+        <RecommendedRecipes />
+        <RecommendedRecipes />
+        <RecommendedRecipes />
+        <RecommendedRecipes />
+
+        
         {/*}
         <SearchPageByID id={716420} />
         <SearchPageByID id={642605} />
