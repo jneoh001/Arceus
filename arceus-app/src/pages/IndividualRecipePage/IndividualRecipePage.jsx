@@ -1,6 +1,6 @@
-import Navbar from "../../components/Navbar/Navbar";
-import RecipePage from "../../components/RecipePage/RecipePage";
 import { useParams } from "react-router-dom";
+import Navbar from  "../../components/Navbar/Navbar";
+import RecipePage from "../../components/RecipePage/RecipePage";
 
 const IndividualRecipePage = () => {
   const params = useParams();

@@ -5,10 +5,10 @@ import { FaSearch } from 'react-icons/fa'
 import { set } from "firebase/database";
 import { useLocation, useNavigate } from "react-router-dom";
 import RecommendedRecipes from "../../components/RecipeCard/RecommendedRecipes";
+import RecommendedRecipesList from "../RecipeCard/RecommendedRecipesList";
 
 
 function Search() {
-
     const [input, setInput] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -19,7 +19,6 @@ function Search() {
     useEffect(() => {
         setSearchTerm(location.state?.searchTerm || "");
     }, [location.state]);
-
     const submitHandler = (e) => {
         e.preventDefault();
         if (input.trim() !== "") {
@@ -28,11 +27,8 @@ function Search() {
             setError("Please enter a search term");
         }
     };
-
-
     return (
         <>
-
             <form className="searchForm" onSubmit={submitHandler}>
                 <div className="searchInput">
                     <FaSearch></FaSearch>
@@ -48,18 +44,15 @@ function Search() {
                     {error && <p className="error">{error}</p>}
                 </div>
             </form>
-            <RecommendedRecipes />
+            <RecommendedRecipesList />
             {/*
         <RecommendedRecipesLI />
         <RecommendedRecipesLI />
         <RecommendedRecipesLI />
         <RecommendedRecipesLI />
     */}
-
-
         </>
-
     )
 }
 
-export default Search
+export default Search;
