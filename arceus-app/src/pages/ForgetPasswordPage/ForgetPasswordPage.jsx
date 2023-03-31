@@ -107,7 +107,7 @@ const ForgetPasswordPage = () => {
               type="email"
               id="input-group-1"
               className="bg-white w-full rounded-full py-2 px-12 text-black"
-              placeholder="name@flowbite.com"
+              placeholder="name@email.com"
             />
           </div>
           <button
