@@ -1,15 +1,14 @@
 import axios from "axios";
-import RecipeCard from "./RecipeCard";
 import { useEffect, useState } from "react";
 /*database imports*/
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
 import { ref, child, get, onValue } from "firebase/database";
+import RecipeCardHmepage from "./RecipeCardHmepage";
 
 const RecommendedRecipesList = () => {
   const { userDetails } = useAuth();
-  console.log(userDetails);
-  const apiKey = "0a76b05501d343a3865103c54309f7dd";
+  const apiKey = "cb1c464d94f142c08b156c5beddade8b";
 
   const [id, setID] = useState();
   const [recipeData, setRecipeData] = useState([]);
@@ -26,28 +25,30 @@ const RecommendedRecipesList = () => {
           }&maxFat=${userDetails.fatGoal / 3}&number=5&random=true`
         )
         .then((res) => {
-          {/*response is an array, each recipe is an object inside. so i put inside recipeData which 
-        i initialize as an array*/}
-          console.log(res.data);
+          {
+            /*response is an array, each recipe is an object inside. so i put inside recipeData which 
+        i initialize as an array*/
+          }
+          // console.log(res.data);
           setRecipeData(res.data);
         })
         .catch((error) => console.log(error));
     }
   }, [userDetails]);
-  {/*then in return, i use map to go through every object in the array and get their data*/}
-  return (
-    (recipeData.map((recipe)=>(
-      <RecipeCard
+  {
+    /*then in return, i use map to go through every object in the array and get their data*/
+  }
+  return recipeData.map((recipe) => (
+    <RecipeCardHmepage
       id={recipe.id}
       name={recipe.title}
       carbs={recipe.carbs}
       protein={recipe.protein}
-      fats={recipe.fats}
+      fats={recipe.fat}
       calories={recipe.calories}
       img={recipe.image}
     />
-    )))
-  );
+  ));
 };
 
 export default RecommendedRecipesList;

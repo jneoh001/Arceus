@@ -5,12 +5,13 @@ import { useState, useEffect } from "react";
 
 const ViewReview = (props) => {
   const [reviewsData, setReviewsData] = useState([]);
+  const [isRetrieved, setIsRetrieved] = useState(false);
   useEffect(() => {
     get(child(ref(db), "reviews/" + props.id + "/data"))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setReviewsData(Object.values(snapshot.val()));
-          console.log(reviewsData);
+          setIsRetrieved(true);
         } else {
           console.log("No reviews data");
         }
@@ -22,7 +23,7 @@ const ViewReview = (props) => {
     onValue(child(ref(db), "reviews/" + props.id), (snapshot) => {
       setReviewsData(Object.values(snapshot.val()));
     });
-  }, []);
+  }, [isRetrieved]);
 
   return (
     <div className="main-layout">
@@ -40,9 +41,6 @@ const ViewReview = (props) => {
             <div className="review-box" key={index}>
               <div className="box-top">
                 <div className="" profile="true">
-                  <div className="profile-img">
-                    <img src="c-1.jpg" alt="" />
-                  </div>
                   <div className="name-user">
                     <strong>Anonymous User {index + 1}</strong>
                   </div>

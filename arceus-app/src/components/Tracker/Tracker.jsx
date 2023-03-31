@@ -1,87 +1,34 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import Progress from "./Progress";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
-import { ref, child, get, update } from "firebase/database";
+import { ref, update } from "firebase/database";
 import getDate from "../../helpers/getDate";
 
 const Tracker = () => {
-  const { userIntake, userDetails } = useAuth();
+  const { userIntake, userDetails, currentUser } = useAuth();
+  const navigate = useNavigate();
 
   //Update database once the intake changes
-  // useEffect(() => {
-  //   const [todayID, todayDisplay] = getDate();
-  //   if (userDetails && intake) {
-  //     const updates = {};
-  //     updates["/users-profile/" + currentUser.uid + "/history/" + todayID] = {
-  //       date: todayDisplay,
-  //       carbGoal: userDetails.carbGoal,
-  //       proteinGoal: userDetails.proteinGoal,
-  //       fatGoal: userDetails.fatGoal,
-  //       calorieGoal: userDetails.calorieGoal,
-  //       carbIntake: intake.carb,
-  //       proteinIntake: intake.protein,
-  //       fatIntake: intake.fat,
-  //       calorieIntake: intake.calorie,
-  //     };
-  //     update(ref(db), updates);
-  //   }
-  // }, [intake, userDetails]);
-
-  // Get the user's details when the user first log in
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     const [todayID, todayDisplay] = getDate();
-  //     get(
-  //       child(
-  //         ref(db),
-  //         "users-profile/" + currentUser.uid + "/history/" + todayID
-  //       )
-  //     )
-  //       .then((snapshot) => {
-  //         if (snapshot.exists()) {
-  //           setIntake({
-  //             carb: snapshot.val().carbIntake,
-  //             protein: snapshot.val().proteinIntake,
-  //             fat: snapshot.val().fatIntake,
-  //             calorie: snapshot.val().calorieIntake,
-  //           });
-  //         } else {
-  //           setIntake({
-  //             carb: 0,
-  //             protein: 0,
-  //             fat: 0,
-  //             calorie: 0,
-  //           });
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.code);
-  //       });
-  //   }
-  // }, [currentUser]);
-
-  // const addHandler = () => {
-  //   setIntake((pre) => {
-  //     return {
-  //       carb: pre.carb + 10,
-  //       protein: pre.protein + 10,
-  //       fat: pre.fat + 10,
-  //       calorie: pre.calorie + 10,
-  //     };
-  //   });
-  // };
-
-  // const subtractHandler = () => {
-  //   setIntake((pre) => {
-  //     return {
-  //       carb: pre.carb - 10,
-  //       protein: pre.protein - 10,
-  //       fat: pre.fat - 10,
-  //       calorie: pre.calorie - 10,
-  //     };
-  //   });
-  // };
+  useEffect(() => {
+    const [todayID, todayDisplay] = getDate();
+    if (userDetails && userIntake) {
+      const updates = {};
+      updates["/users-profile/" + currentUser.uid + "/history/" + todayID] = {
+        date: todayDisplay,
+        carbGoal: userDetails.carbGoal,
+        proteinGoal: userDetails.proteinGoal,
+        fatGoal: userDetails.fatGoal,
+        calorieGoal: userDetails.calorieGoal,
+        carbIntake: userIntake.carb,
+        proteinIntake: userIntake.protein,
+        fatIntake: userIntake.fat,
+        calorieIntake: userIntake.calorie,
+      };
+      update(ref(db), updates);
+    }
+  }, [userIntake, userDetails]);
 
   return (
     <div className="py-8 px-16 w-2/5 border-r-2 border-black ">
@@ -92,10 +39,10 @@ const Tracker = () => {
           userIntake
             ? (userIntake.carb / userDetails.carbGoal) * 100 >= 100
               ? "100%"
-              : (userIntake.carb / userDetails.carbGoal) * 100 + "%"
+              : Math.round((userIntake.carb / userDetails.carbGoal) * 100) + "%"
             : "0%"
         }
-        className="bg-green-600 dark:bg-green-500"
+        className="from-emerald-500 to-lime-600"
       />
       <Progress
         title="Protein"
@@ -103,10 +50,12 @@ const Tracker = () => {
           userIntake
             ? (userIntake.protein / userDetails.proteinGoal) * 100 >= 100
               ? "100%"
-              : (userIntake.protein / userDetails.proteinGoal) * 100 + "%"
+              : Math.round(
+                  (userIntake.protein / userDetails.proteinGoal) * 100
+                ) + "%"
             : "0%"
         }
-        className="dark:bg-indigo-500 bg-indigo-600"
+        className="from-sky-400 to-blue-500"
       />{" "}
       <Progress
         title="Fats"
@@ -114,10 +63,10 @@ const Tracker = () => {
           userIntake
             ? (userIntake.fat / userDetails.fatGoal) * 100 >= 100
               ? "100%"
-              : (userIntake.fat / userDetails.fatGoal) * 100 + "%"
+              : Math.round((userIntake.fat / userDetails.fatGoal) * 100) + "%"
             : "0%"
         }
-        className="bg-yellow-400 dark:bg-yellow-500"
+        className="from-yellow-200 via-yellow-300 to-yellow-400"
       />
       <Progress
         title="Calories"
@@ -125,33 +74,23 @@ const Tracker = () => {
           userIntake
             ? (userIntake.calorie / userDetails.calorieGoal) * 100 >= 100
               ? "100%"
-              : (userIntake.calorie / userDetails.calorieGoal) * 100 + "%"
+              : Math.round(
+                  (userIntake.calorie / userDetails.calorieGoal) * 100
+                ) + "%"
             : "0%"
         }
-        className="bg-red-600 dark:bg-red-500"
+        className="from-rose-500 via-red-400 to-red-500"
       />
-      <div className="flex flex-col justify-center items-center">
-        {/* <button
-          onClick={addHandler}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-        >
-          +
-        </button>{" "}
-        <button
-          onClick={subtractHandler}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-        >
-          -
-        </button> */}
+      <Link to="/history" className="flex flex-col items-center">
         <button
           onClick={() => {
-            console.log("Hello");
+            navigate("/history");
           }}
-          className="text-center text-white bg-[#24292F] hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center   mr-2 mb-2"
+          className="text-center text-white bg-[#24292F] hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center absolute mt-8"
         >
           View History
         </button>
-      </div>
+      </Link>
     </div>
   );
 };

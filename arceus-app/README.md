@@ -1,6 +1,6 @@
 # Arceus
 
-## Step-by-step Guide
+## Step-by-Step Guide
 
 <br>
 

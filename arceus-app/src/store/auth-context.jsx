@@ -61,7 +61,7 @@ export const AuthContextProvider = (props) => {
         setIsLoggedIn(true);
         setWrongPassword(false);
         setUserNotFound(false);
-        console.log("User logged In", user.uid);
+        // console.log("User logged In", user.uid);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -78,6 +78,7 @@ export const AuthContextProvider = (props) => {
     signOut(auth)
       .then(() => {
         setIsLoggedIn(false);
+
         console.log("Sign-out successful.");
       })
       .catch((error) => {
@@ -172,7 +173,6 @@ export const AuthContextProvider = (props) => {
       )
         .then((snapshot) => {
           if (snapshot.exists()) {
-            console.log(snapshot.val());
             setUserIntake({
               carb: snapshot.val().carbIntake,
               protein: snapshot.val().proteinIntake,
@@ -191,6 +191,22 @@ export const AuthContextProvider = (props) => {
         .catch((error) => {
           console.log(error.code);
         });
+      onValue(
+        child(
+          ref(db),
+          "users-profile/" + currentUser.uid + "/history/" + todayID
+        ),
+        (snapshot) => {
+          if (snapshot.exists()) {
+            setUserIntake({
+              carb: snapshot.val().carbIntake,
+              protein: snapshot.val().proteinIntake,
+              fat: snapshot.val().fatIntake,
+              calorie: snapshot.val().calorieIntake,
+            });
+          }
+        }
+      );
     }
   }, [currentUser]);
 

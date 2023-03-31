@@ -2,10 +2,11 @@
   position: relative;
   z-index: 1;
   max-width: 35vw;
-  min-width: 500px;
-  padding: 4rem 3rem;
+  min-width: 600px;
+  padding: 4rem 4rem;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin: auto;
 }
 .review-input {
   margin: 1.5rem 0;

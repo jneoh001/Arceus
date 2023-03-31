@@ -2,11 +2,13 @@ const Progress = (props) => {
   return (
     <div>
       <div className="mb-1 text-black font-semibold text-lg">{props.title}</div>
-      <div className="w-full rounded-full h-7 mb-4 bg-white outline outline-gray-500">
+      <div className="w-full rounded-full h-7 mb-4 bg-gray-700 ">
         <div
-          className={`h-7 rounded-full ${props.className}`}
+          className={`h-7  text-center font-semibold text-gray-800 rounded-full bg-gradient-to-r ${props.className}`}
           style={{ width: props.percentage }}
-        ></div>
+        >
+          {props.percentage !== "0%" && props.percentage}
+        </div>
       </div>
     </div>
   );

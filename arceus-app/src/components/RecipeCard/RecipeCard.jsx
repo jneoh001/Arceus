@@ -2,16 +2,17 @@ import { db } from "../../firebaseConfig";
 import { get, child, ref } from "firebase/database";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import "./RecipeCard.css";
 
 const RecipeCard = (props) => {
   const [rating, setRating] = useState(0);
   const [ratingDisplay, setRatingDisplay] = useState([]);
-  const rerouteString = "recipes/" + props.id;
+  const rerouteString = "/recipe/" + props.id;
 
   useEffect(() => {
     get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
       .then((snapshot) => {
-        if (snapshot.exists()) {
+        if (snapshot.exists() && snapshot.val.number != 0) {
           setRating(Math.round(snapshot.val().total / snapshot.val().number));
         }
       })
@@ -74,8 +75,10 @@ const RecipeCard = (props) => {
 
   return (
     <NavLink
+      id="recipeCardEffects"
+      exact="true"
       to={rerouteString}
-      className="flex flex-row min-w-[800px]  max-w-[800px] items-center border rounded-lg shadow hover:bg-gray-100 border-gray-700 bg-gray-800 hover:bg-gray-700 mb-12"
+      className="flex flex-row min-w-[800px]  max-w-[800px] max-h-60 items-center border rounded-lg shadow hover:bg-gray-100 hover:-translate-y-2 border-gray-700 bg-gray-800 hover:bg-gray-700 mb-12"
     >
       <img
         className="object-cover max-h-60 max-w-sm rounded-t-lg h-auto w-1/2 md:rounded-none md:rounded-l-lg"
@@ -83,7 +86,7 @@ const RecipeCard = (props) => {
         alt={props.name}
       />
       <div className="flex flex-col justify-around ml-12">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white pr-3">
           {props.name}
         </h5>
 
@@ -103,7 +106,7 @@ const RecipeCard = (props) => {
             Fats: {props.fats}g
           </p>
           <p className="ml-4 mb-2 text-lg text-gray-700 dark:text-gray-400">
-            Calories: {props.calories}g
+            Calories: {props.calories}kcal
           </p>
         </div>
       </div>{" "}

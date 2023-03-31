@@ -62,6 +62,8 @@ function App() {
         <Pages />
       </BrowserRouter>
       {/* <RecommendedRecipesLI /> */}
+
+      {/* <RecipePage recipeid= {2} /> */}
     </div>
   );
 }

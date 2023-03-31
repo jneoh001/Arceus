@@ -1,48 +1,20 @@
-import { ref, child, get, onValue } from "firebase/database";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { db } from "../../firebaseConfig";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/auth-context";
 
 const MyProfile = () => {
-  const [profile, setProfile] = useState({
-    email: "",
-    height: 0,
-    weight: 0,
-    carbGoal: 0,
-    proteinGoal: 0,
-    fatGoal: 0,
-    calorieGoal: 0,
-  });
-  
-  const { currentUser, logout } = useAuth();
-  const dbRef = ref(db);
-  useEffect(() => {
-    if (currentUser) {
-      get(child(dbRef, "users-profile/" + currentUser.uid + "/details"))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            setProfile(snapshot.val());
-            // console.log(snapshot.val());
-          } else {
-            console.log("No data available");
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-
-      onValue(
-        child(ref(db), "users-profile/" + currentUser.uid + "/details"),
-        (snapshot) => {
-          setProfile(snapshot.val());
-        }
-      );
-    }
-  }, [currentUser]);
-
+  const { logout, userDetails } = useAuth();
+  const navigate = useNavigate();
+  function logoutHandler() {
+    logout();
+    navigate("/login", {
+      replace: true,
+      state: {
+        message: "You have Succesfully Logged Out.",
+      },
+    });
+  }
   return (
-    <div className="bg-white flex flex-col w-7/12 justify-center items-center text-lg font-medium border-2 border-black rounded p-4">
+    <div className="bg-white flex flex-col mx-auto mt-4 w-7/12 justify-center items-center text-lg font-medium border-2 border-black rounded p-4">
       <h1 className="font-bold text-3xl">My Profile</h1>
       <hr className="w-full h-1 mt-4 bg-black rounded" />
       <p className="w-9/12 mt-12">
@@ -80,7 +52,7 @@ const MyProfile = () => {
           </button>
         </Link>
         <button
-          onClick={logout}
+          onClick={logoutHandler}
           type="submit"
           className="mt-12 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
         >

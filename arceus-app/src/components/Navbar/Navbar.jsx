@@ -12,6 +12,7 @@ const Navbar = () => {
     navRef.current.classList.toggle("responsive_nav");
     setNavIsClicked((pre) => !pre);
   };
+  // console.log(ctx.currentUser);
 
   return (
     <div className="nav-container">
@@ -36,12 +37,12 @@ const Navbar = () => {
             </NavLink>
           )}
           {ctx.currentUser && (
-            <NavLink to={"/profile"} className="nav-a" onClick={showNavbar}>
+            <NavLink to={"/goals"} className="nav-a" onClick={showNavbar}>
               MY PROFILE
             </NavLink>
           )}
           <NavLink
-            to={"/history"}
+            to={"/profile"}
             className="lg:absolute lg:right-12 text-2xl"
             onClick={showNavbar}
           >

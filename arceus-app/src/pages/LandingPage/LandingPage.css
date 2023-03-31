@@ -1,6 +1,28 @@
 .LandingPage {
   background-color: rgb(255, 251, 235);
+  height: 2fr;
 }
+
+.LandingPageTop{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1fr;
+  background-color: rgb(255, 251, 235);
+}
+
+.LandingPageTop .text{
+  position: relative;
+  font-size: 40px;
+  font-weight: 600;
+  color: rgb(31 41 55);
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.LandingPageTop .text.first-text{
+  color: black;
+}
+
 .recipecards {
   display: flex;
   flex-direction: column;
