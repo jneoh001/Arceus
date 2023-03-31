@@ -1,11 +1,9 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import LeaveReviewCard from "../../components/Review/LeaveReviewCard";
 import Navbar from "../../components/Navbar/Navbar";
-
+import { useParams } from "react-router-dom";
 function AddReviewPage() {
   let params = useParams();
-  console.log(params);
   return (
     <div>
       <Navbar />

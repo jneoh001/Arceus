@@ -11,7 +11,6 @@ import IndividualRecipePage from "./IndividualRecipePage/IndividualRecipePage";
 import AddReviewPage from "./AddReviewPage/AddReviewPage";
 import ViewReviewPage from "./ViewReviewPage/ViewReviewPage";
 import RecipeSearchPage from "./RecipeSearchPage/RecipeSearchPage";
-import RecommendedRecipePage from "./RecommendedRecipePage/RecommendedRecipePage";
 import EditProfilePage from "./EditProfilePage/EditProfilePage";
 import Searched from "./RecipeSearchPage/Searched";
 import HomePage from "./HomePage/HomePage";
