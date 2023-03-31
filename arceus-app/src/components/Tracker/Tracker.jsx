@@ -33,54 +33,57 @@ const Tracker = () => {
   return (
     <div className="py-8 px-16 w-2/5 border-r-2 border-black ">
       <h1 className="font-bold text-4xl mb-8">Daily Goal</h1>
-      <Progress
-        title="Carbohydrates"
-        percentage={
-          userIntake
-            ? (userIntake.carb / userDetails.carbGoal) * 100 >= 100
-              ? "100%"
-              : Math.round((userIntake.carb / userDetails.carbGoal) * 100) + "%"
-            : "0%"
-        }
-        className="from-emerald-500 to-lime-600"
-      />
-      <Progress
-        title="Protein"
-        percentage={
-          userIntake
-            ? (userIntake.protein / userDetails.proteinGoal) * 100 >= 100
-              ? "100%"
-              : Math.round(
-                  (userIntake.protein / userDetails.proteinGoal) * 100
-                ) + "%"
-            : "0%"
-        }
-        className="from-sky-400 to-blue-500"
-      />{" "}
-      <Progress
-        title="Fats"
-        percentage={
-          userIntake
-            ? (userIntake.fat / userDetails.fatGoal) * 100 >= 100
-              ? "100%"
-              : Math.round((userIntake.fat / userDetails.fatGoal) * 100) + "%"
-            : "0%"
-        }
-        className="from-yellow-200 via-yellow-300 to-yellow-400"
-      />
-      <Progress
-        title="Calories"
-        percentage={
-          userIntake
-            ? (userIntake.calorie / userDetails.calorieGoal) * 100 >= 100
-              ? "100%"
-              : Math.round(
-                  (userIntake.calorie / userDetails.calorieGoal) * 100
-                ) + "%"
-            : "0%"
-        }
-        className="from-rose-500 via-red-400 to-red-500"
-      />
+      <div className="flex flex-col gap-4">
+        <Progress
+          title="Carbohydrates"
+          percentage={
+            userIntake
+              ? (userIntake.carb / userDetails.carbGoal) * 100 >= 100
+                ? "100%"
+                : Math.round((userIntake.carb / userDetails.carbGoal) * 100) +
+                  "%"
+              : "0%"
+          }
+          className="from-emerald-500 to-lime-600"
+        />
+        <Progress
+          title="Protein"
+          percentage={
+            userIntake
+              ? (userIntake.protein / userDetails.proteinGoal) * 100 >= 100
+                ? "100%"
+                : Math.round(
+                    (userIntake.protein / userDetails.proteinGoal) * 100
+                  ) + "%"
+              : "0%"
+          }
+          className="from-sky-400 to-blue-500"
+        />{" "}
+        <Progress
+          title="Fats"
+          percentage={
+            userIntake
+              ? (userIntake.fat / userDetails.fatGoal) * 100 >= 100
+                ? "100%"
+                : Math.round((userIntake.fat / userDetails.fatGoal) * 100) + "%"
+              : "0%"
+          }
+          className="from-yellow-200 via-yellow-300 to-yellow-400"
+        />
+        <Progress
+          title="Calories"
+          percentage={
+            userIntake
+              ? (userIntake.calorie / userDetails.calorieGoal) * 100 >= 100
+                ? "100%"
+                : Math.round(
+                    (userIntake.calorie / userDetails.calorieGoal) * 100
+                  ) + "%"
+              : "0%"
+          }
+          className="from-rose-500 via-red-400 to-red-500"
+        />{" "}
+      </div>
       <Link to="/history" className="flex flex-col items-center">
         <button
           onClick={() => {
