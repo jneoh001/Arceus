@@ -14,7 +14,7 @@ function RecipeSearchPage() {
       <div className="recipecards">
         {/* <Searched/> */}
         <Search/>
-        <RecommendedRecipesList />
+        {/* <RecommendedRecipesList /> */}
         {/* <RecommendedRecipes />
         <RecommendedRecipes />
         <RecommendedRecipes />
