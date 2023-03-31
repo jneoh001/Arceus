@@ -31,7 +31,7 @@ function Searched() {
 
 
     let params = useParams();
-    const apiKey = '4cf4419d29214ccd8eeac75198bf0065';
+    const apiKey = '932d3ebd474e47bdb60c260d7b5a2b1e';
 
     const getSearched = async (name) => {
         const data = await fetch(

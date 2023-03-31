@@ -5,6 +5,7 @@ import RecipePage from '../../components/RecipePage/RecipePage'
 import RecommendedRecipes from "../../components/RecipeCard/RecommendedRecipes";
 import Search from '../../components/Search/Search';
 import Searched from './Searched';
+import RecommendedRecipesList from '../../components/RecipeCard/RecommendedRecipesList';
 
 function RecipeSearchPage() {
   return (
@@ -13,6 +14,7 @@ function RecipeSearchPage() {
       <div className="recipecards">
         {/* <Searched/> */}
         <Search/>
+        <RecommendedRecipesList />
         {/* <RecommendedRecipes />
         <RecommendedRecipes />
         <RecommendedRecipes />
