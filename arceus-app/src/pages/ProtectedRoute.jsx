@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     if (!currentUser) {
-      console.log("No user, redirecting to login");
+      // console.log("No user, redirecting to login");
       navigate("/login", {
         replace: true,
         state: {
