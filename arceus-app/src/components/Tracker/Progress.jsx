@@ -7,7 +7,7 @@ const Progress = (props) => {
           className={`h-7  text-center font-semibold text-gray-800 rounded-full bg-gradient-to-r ${props.className}`}
           style={{ width: props.percentage }}
         >
-          {props.percentage}
+          {props.percentage !== "0%" && props.percentage}
         </div>
       </div>
     </div>
