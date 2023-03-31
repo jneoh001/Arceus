@@ -61,7 +61,7 @@ export const AuthContextProvider = (props) => {
         setIsLoggedIn(true);
         setWrongPassword(false);
         setUserNotFound(false);
-        console.log("User logged In", user.uid);
+        // console.log("User logged In", user.uid);
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -16,7 +16,7 @@ const LoginCard = () => {
   };
 
   const passwordResetHandler = (e) => {
-    resetPassword(emailRef.current.value);
+    navigate("/password-reset")
     e.preventDefault();
   };
   return (

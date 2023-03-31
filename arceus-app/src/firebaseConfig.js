@@ -38,7 +38,7 @@ export const auth = getAuth(firebaseApp);
 
 setPersistence(auth, browserSessionPersistence)
   .then(() => {
-    console.log("Session enabled");
+    // console.log("Session enabled");
   })
   .catch((error) => {
     console.log(error.code);
