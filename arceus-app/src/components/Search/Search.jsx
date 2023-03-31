@@ -44,7 +44,7 @@ function Search() {
                     {error && <p className="error">{error}</p>}
                 </div>
             </form>
-            <RecommendedRecipesList />
+            {/* <RecommendedRecipesList /> */}
             {/*
         <RecommendedRecipesLI />
         <RecommendedRecipesLI />
