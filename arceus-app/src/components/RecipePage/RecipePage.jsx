@@ -11,13 +11,14 @@ import { Link, NavLink } from "react-router-dom";
 
 export default function RecipePage(props) {
   const { currentUser, userDetails } = useAuth();
-  const apiKey = "1bf290a35f8c49c8a844be86f6575f28";
+  const apiKey = "0a76b05501d343a3865103c54309f7dd";
   const [recipeData, setRecipeData] = useState({});
   const [ingredientWidget, setIngredientWidget] = useState();
   const [intake, setIntake] = useState();
   const [rating, setRating] = useState({ total: 0, number: 0 });
   const [ratingDisplay, setRatingDisplay] = useState([]);
   const [isAdded, setIsAdded] = useState(false);
+  const [isRetrieved, setIsRetrieved] = useState(false);
 
   //Update database once the intake changes
   useEffect(() => {
@@ -102,12 +103,16 @@ export default function RecipePage(props) {
 
       // })
       .then((response) => {
-        // console.log(response.data.instructions);
+        // console.log(response.data.analyzedInstructions[0].steps);
         setRecipeData((pre) => {
           return {
             ...pre,
             img: response.data.image,
-            instructions: response.data.instructions,
+            source: response.data.sourceUrl,
+            instructions:
+              response.data.analyzedInstructions.length == 0
+                ? []
+                : response.data.analyzedInstructions[0].steps,
             title: response.data.title,
             recipeCarbs: response.data.nutrition.nutrients[3].amount,
             recipeProtein: response.data.nutrition.nutrients[9].amount,
@@ -115,6 +120,7 @@ export default function RecipePage(props) {
             recipeCalorie: response.data.nutrition.nutrients[0].amount,
           };
         });
+        setIsRetrieved(true);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -269,10 +275,32 @@ export default function RecipePage(props) {
           Preparation
         </h2>
         <hr />
-
-        <p className="text-center mt-3 px-8 text-lg overflow-y-auto">
-          {recipeData.instructions}
-        </p>
+        <div className="text-left mt-3 px-8 text-lg overflow-y-auto">
+          {isRetrieved && recipeData.instructions.length != 0 && (
+            <ol>
+              {recipeData.instructions.map((step) => {
+                return (
+                  <li key={step.number}>
+                    {step.number}. {step.step}
+                  </li>
+                );
+              })}
+            </ol>
+          )}
+          {isRetrieved && recipeData.instructions.length == 0 && (
+            <p className="text-center">
+              Visit{" "}
+              <a
+                target="_blank"
+                href={recipeData.source}
+                className="text-decoration-underline"
+              >
+                "Detailed Instructions"
+              </a>{" "}
+              for detailed instructions{" "}
+            </p>
+          )}
+        </div>
       </div>
 
       {/*Ingredients Portion */}
