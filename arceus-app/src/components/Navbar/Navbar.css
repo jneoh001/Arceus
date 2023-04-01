@@ -41,6 +41,14 @@
   visibility: hidden;
   cursor: pointer;
 }
+.active {
+  color: rgb(244, 227, 159);
+  padding-bottom: 4px;
+  border-bottom: 2px solid rgb(244, 227, 159);
+}
+.icon:hover {
+  color: cornsilk;
+}
 
 @media only screen and (max-width: 1110px) {
   .nav-header {

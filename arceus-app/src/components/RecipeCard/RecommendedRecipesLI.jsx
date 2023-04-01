@@ -27,7 +27,7 @@ const RecommendedRecipesLI = () => {
         )
         .then((res) => {
           const curID = res.data[0].id;
-          console.log(curID);
+          // console.log(curID);
           setID(curID);
           return axios.get(
             "https://api.spoonacular.com/recipes/" +

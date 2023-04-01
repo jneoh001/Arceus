@@ -8,15 +8,20 @@ const LoginCard = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  const { login, resetPassword, wrongPassword, userNotFound } = useAuth();
+  const { login, wrongPassword, userNotFound } = useAuth();
   const submitHandler = (e) => {
-    login(emailRef.current.value, passwordRef.current.value);
+    login(emailRef.current.value, passwordRef.current.value)
+      .then(() => {
+        navigate("/");
+      })
+      .catch(() => {
+        navigate("/login");
+      });
     e.preventDefault();
-    navigate("/");
   };
 
   const passwordResetHandler = (e) => {
-    resetPassword(emailRef.current.value);
+    navigate("/password-reset");
     e.preventDefault();
   };
   return (
