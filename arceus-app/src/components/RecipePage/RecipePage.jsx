@@ -117,7 +117,7 @@ export default function RecipePage(props) {
         });
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [props.id]);
 
   useEffect(() => {
     axios
