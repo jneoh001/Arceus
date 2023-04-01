@@ -12,7 +12,7 @@ const LoginCard = () => {
   const submitHandler = (e) => {
     login(emailRef.current.value, passwordRef.current.value)
       .then(() => {
-        navigate("/profile");
+        navigate("/");
       })
       .catch(() => {
         navigate("/login");
