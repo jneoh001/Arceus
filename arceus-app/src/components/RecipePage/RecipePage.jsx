@@ -90,12 +90,7 @@ export default function RecipePage(props) {
 
   useEffect(() => {
     axios
-      .get(
-        "https://api.spoonacular.com/recipes/" +
-          props.id +
-          "/information?includeNutrition=true&apiKey=" +
-          apiKey
-      )
+      .request(options)
       // .then(response => {
       //     //console.log(response)
       //     setRecipeData({img: response.data.img})
@@ -127,16 +122,10 @@ export default function RecipePage(props) {
 
   useEffect(() => {
     axios
-      .get(
-        "https://api.spoonacular.com/recipes/" +
-          props.id +
-          "/ingredientWidget.png?apiKey=" +
-          apiKey
-      )
+      .request(ingredientOptions)
       .then((response) => {
         setIngredientWidget(response.config.url);
       })
-
       .catch((error) => console.log(error));
   }, []);
 

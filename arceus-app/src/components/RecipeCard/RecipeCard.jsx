@@ -7,7 +7,7 @@ import "./RecipeCard.css";
 const RecipeCard = (props) => {
   const [rating, setRating] = useState(0);
   const [ratingDisplay, setRatingDisplay] = useState([]);
-  const rerouteString = "/recipe/" + props.id;
+  const rerouteString = "/recipes/" + props.id;
 
   useEffect(() => {
     get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
