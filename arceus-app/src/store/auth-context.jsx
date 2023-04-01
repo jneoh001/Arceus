@@ -55,23 +55,27 @@ export const AuthContextProvider = (props) => {
   };
 
   const login = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        setIsLoggedIn(true);
-        setWrongPassword(false);
-        setUserNotFound(false);
-        console.log("User logged In", user.uid);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("Not logged In");
-        console.log(errorCode);
-        if (error.code == "auth/wrong-password") {
-          setWrongPassword(true);
-        }
-      });
+    return new Promise((resolve, reject) => {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          setIsLoggedIn(true);
+          setWrongPassword(false);
+          setUserNotFound(false);
+          // console.log("User logged In", user.uid);
+          resolve("LoggedIn");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // console.log("Not logged In");
+          // console.log(errorCode);
+          if (error.code == "auth/wrong-password") {
+            setWrongPassword(true);
+          }
+          reject("WrongPassword");
+        });
+    });
   };
 
   const logout = () => {

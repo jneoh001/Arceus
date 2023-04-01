@@ -2,7 +2,7 @@ import { db } from "../../firebaseConfig";
 import { get, child, ref } from "firebase/database";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import './RecipeCard.css'
+import "./RecipeCard.css";
 
 const RecipeCardHmepage = (props) => {
   const [rating, setRating] = useState(0);
@@ -75,8 +75,8 @@ const RecipeCardHmepage = (props) => {
 
   return (
     <NavLink
-      id = "recipeCardEffects"
-      exact to={rerouteString}
+      id="recipeCardEffects"
+      to={rerouteString}
       className="flex flex-row min-w-[800px]  max-w-[800px] max-h-60 items-center border rounded-lg shadow hover:bg-gray-100 hover:-translate-y-2 border-gray-700 bg-gray-800 hover:bg-gray-700 mb-12"
     >
       <img

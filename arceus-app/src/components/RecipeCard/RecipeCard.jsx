@@ -2,17 +2,17 @@ import { db } from "../../firebaseConfig";
 import { get, child, ref } from "firebase/database";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import './RecipeCard.css'
+import "./RecipeCard.css";
 
 const RecipeCard = (props) => {
   const [rating, setRating] = useState(0);
   const [ratingDisplay, setRatingDisplay] = useState([]);
-  const rerouteString = "/recipes/" + props.id;
+  const rerouteString = "/recipe/" + props.id;
 
   useEffect(() => {
     get(child(ref(db), "reviews/" + props.id + "/ratingDetails"))
       .then((snapshot) => {
-        if (snapshot.exists()) {
+        if (snapshot.exists() && snapshot.val.number != 0) {
           setRating(Math.round(snapshot.val().total / snapshot.val().number));
         }
       })
@@ -75,8 +75,9 @@ const RecipeCard = (props) => {
 
   return (
     <NavLink
-      id = "recipeCardEffects"
-      exact to={rerouteString}
+      id="recipeCardEffects"
+      exact="true"
+      to={rerouteString}
       className="flex flex-row min-w-[800px]  max-w-[800px] max-h-60 items-center border rounded-lg shadow hover:bg-gray-100 hover:-translate-y-2 border-gray-700 bg-gray-800 hover:bg-gray-700 mb-12"
     >
       <img
