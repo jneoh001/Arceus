@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "vite": "^4.2.1"
+  },
+  "dependencies": {
+    "@react-spring/parallax": "^9.7.1"
   }
 }
