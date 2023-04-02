@@ -11,9 +11,11 @@ const RecommendedRecipesList = () => {
   const apiKey = "1bf290a35f8c49c8a844be86f6575f28";
 
   const [id, setID] = useState();
-  const [recipeData, setRecipeData] = useState([]);
-  const prevRecipeDataRef = useRef();
-
+  const [recipeData, setRecipeData] = useState(
+    localStorage.getItem("recipeData")
+      ? JSON.parse(localStorage.getItem("recipeData"))
+      : []
+  );
   useEffect(() => {
     const fetchRecipeData = async () => {
       try {
@@ -73,10 +75,14 @@ const RecommendedRecipesList = () => {
         .then((res) => {
           // console.log(res.data);
           setRecipeData(res.data);
+          localStorage.setItem("recipeData", JSON.stringify(res.data));
         })
         .catch((error) => console.log(error));
     }
-  }, [userDetails]);*/}
+    else if (userDetails && recipeData){
+      setRecipeData(JSON.parse(localStorage.getItem("recipeData")));
+    }
+  }, [userDetails]);
   {
     /*then in return, i use map to go through every object in the array and get their data*/
   }

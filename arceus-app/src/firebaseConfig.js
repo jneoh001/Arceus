@@ -4,7 +4,6 @@ import {
   browserSessionPersistence,
   getAuth,
   setPersistence,
-  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";

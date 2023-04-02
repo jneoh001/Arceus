@@ -16,6 +16,7 @@ import Searched from "./RecipeSearchPage/Searched";
 import HomePage from "./HomePage/HomePage";
 import { useAuth } from "../store/auth-context";
 import ForgetPasswordPage from "./ForgetPasswordPage/ForgetPasswordPage";
+import ReviewConfirmPage from "./AddReviewPage/ReviewConfirmPage";
 
 function Pages(){
   const {currentUser} = useAuth();
@@ -33,6 +34,7 @@ function Pages(){
             <Route path="/searched/:search" element={<ProtectedRoute><Searched/></ProtectedRoute>}/>
             <Route path="/recipes/:id" element={<ProtectedRoute><IndividualRecipePage /></ProtectedRoute>}/>
             <Route path="/add-reviews/:id" element={<ProtectedRoute><AddReviewPage/></ProtectedRoute>}/>
+            <Route path="/add-reviews/:id/confirm" element={<ProtectedRoute><ReviewConfirmPage /></ProtectedRoute>}/>
             <Route path="/view-reviews/:id" element={<ProtectedRoute><ViewReviewPage/></ProtectedRoute>}/>
         </Routes>
     );
