@@ -4,14 +4,14 @@ import axios from "axios";
 import RecipeFavourite from "./RecipeFavourite";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
-import { ref, child, get, update } from "firebase/database";
+import { ref, child, get, update, onValue } from "firebase/database";
 import getDate from "../../helpers/getDate";
 import "./RecipePage.css";
 import { Link, NavLink } from "react-router-dom";
 
 export default function RecipePage(props) {
   const { currentUser, userDetails } = useAuth();
-  const apiKey = "0a76b05501d343a3865103c54309f7dd";
+  const apiKey = "35ef18ee864f4118b9f1e2f9955ecbfe";
   const [recipeData, setRecipeData] = useState({});
   const [ingredientWidget, setIngredientWidget] = useState();
   const [intake, setIntake] = useState();
@@ -90,7 +90,12 @@ export default function RecipePage(props) {
 
   useEffect(() => {
     axios
-      .request(options)
+      .get(
+        "https://api.spoonacular.com/recipes/" +
+          props.id +
+          "/information?includeNutrition=true&apiKey=" +
+          apiKey
+      )
       // .then(response => {
       //     //console.log(response)
       //     setRecipeData({img: response.data.img})
@@ -122,10 +127,16 @@ export default function RecipePage(props) {
 
   useEffect(() => {
     axios
-      .request(ingredientOptions)
+      .get(
+        "https://api.spoonacular.com/recipes/" +
+          props.id +
+          "/ingredientWidget.png?apiKey=" +
+          apiKey
+      )
       .then((response) => {
         setIngredientWidget(response.config.url);
       })
+
       .catch((error) => console.log(error));
   }, []);
 
@@ -134,11 +145,20 @@ export default function RecipePage(props) {
       .then((snapshot) => {
         if (snapshot.exists()) {
           setRating(snapshot.val());
+        } else {
+          setRating({ number: 0, total: 0 });
         }
       })
       .catch((error) => {
         console.log(error.code);
       });
+
+    onValue(
+      child(ref(db), "reviews/" + props.id + "/ratingDetails"),
+      (snapshot) => {
+        setRating(snapshot.val());
+      }
+    );
   }, []);
 
   useEffect(() => {
