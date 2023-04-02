@@ -4,14 +4,14 @@ import axios from "axios";
 import RecipeFavourite from "./RecipeFavourite";
 import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
-import { ref, child, get, update } from "firebase/database";
+import { ref, child, get, update, onValue } from "firebase/database";
 import getDate from "../../helpers/getDate";
 import "./RecipePage.css";
 import { Link, NavLink } from "react-router-dom";
 
 export default function RecipePage(props) {
   const { currentUser, userDetails } = useAuth();
-  const apiKey = "0a76b05501d343a3865103c54309f7dd";
+  const apiKey = "35ef18ee864f4118b9f1e2f9955ecbfe";
   const [recipeData, setRecipeData] = useState({});
   const [ingredientWidget, setIngredientWidget] = useState();
   const [intake, setIntake] = useState();
@@ -150,6 +150,13 @@ export default function RecipePage(props) {
       .catch((error) => {
         console.log(error.code);
       });
+
+    onValue(
+      child(ref(db), "reviews/" + props.id + "/ratingDetails"),
+      (snapshot) => {
+        setRating(snapshot.val());
+      }
+    );
   }, []);
 
   useEffect(() => {
