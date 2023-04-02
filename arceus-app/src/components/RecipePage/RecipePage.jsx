@@ -145,6 +145,8 @@ export default function RecipePage(props) {
       .then((snapshot) => {
         if (snapshot.exists()) {
           setRating(snapshot.val());
+        } else {
+          setRating({ number: 0, total: 0 });
         }
       })
       .catch((error) => {
