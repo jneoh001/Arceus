@@ -6,7 +6,6 @@ from selenium.webdriver.support.select import Select
 
 s = Service('testing scripts/geckodriver')
 driver = webdriver.Firefox(service=s)
-
 def test_nutrition_tracker():
     driver.get("http://localhost:5173/login")
     time.sleep(1)
@@ -36,12 +35,26 @@ def test_nutrition_tracker():
     recipe_card = driver.find_element(By.XPATH,'//*[@id="recipeCardEffects"]')
     recipe_card.click()
     time.sleep(5)
-
-    # protein_bar = driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[1]/div[2]/div[2]/div")
-    # protein_bar_before = protein_bar.size['width']
-    # print(calories_bar_before,carbohydrate_bar_before,protein_bar_before,fats_bar_before)
-      
-
-
-
-test_nutrition_tracker()
+    tracker_button = driver.find_element(By.XPATH,"/html/body/div/div/div/div[3]/div[1]/div[2]/button")
+    tracker_button.click()
+    time.sleep(5)
+    after_recipe_profile_link = driver.find_element(By.XPATH,"/html/body/div/div/div/div[1]/header/nav/a[3]")
+    after_recipe_profile_link.click()
+    carbohydrate_bar = driver.find_element(By.XPATH,"/html/body/div/div/div/div[2]/div[1]/div/div[1]/div[2]/div")
+    carbohydrate_bar_after = int(carbohydrate_bar.get_attribute('style').split('width: ')[1].split(';')[0].replace('%', ''))
+    protein_bar = driver.find_element(By.XPATH,"/html/body/div/div/div/div[2]/div[1]/div/div[2]/div[2]/div")
+    protein_bar_after = int(protein_bar.get_attribute('style').split('width: ')[1].split(';')[0].replace('%', ''))
+    fats_bar = driver.find_element(By.XPATH,"/html/body/div/div/div/div[2]/div[1]/div/div[3]/div[2]/div")
+    fats_bar_after = int(fats_bar.get_attribute('style').split('width: ')[1].split(';')[0].replace('%', ''))
+    calories_bar = driver.find_element(By.XPATH,"/html/body/div/div/div/div[2]/div[1]/div/div[4]/div[2]/div")
+    calories_bar_after = int(calories_bar.get_attribute('style').split('width: ')[1].split(';')[0].replace('%', ''))
+    print(carbohydrate_bar_after,protein_bar_after,fats_bar_after,calories_bar_after)
+    assert(
+        carbohydrate_bar_after >= carbohydrate_bar_before
+        and
+        protein_bar_after >= protein_bar_before
+        and 
+        fats_bar_after >= fats_bar_before
+        and 
+        calories_bar_after >= calories_bar_before
+    )

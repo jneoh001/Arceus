@@ -31,7 +31,7 @@ function Pages(){
             <Route path="/editprofile" element={<ProtectedRoute><EditProfilePage/></ProtectedRoute>}/>
             <Route path="/search" element={<ProtectedRoute><RecipeSearchPage/></ProtectedRoute>}/>
             <Route path="/searched/:search" element={<ProtectedRoute><Searched/></ProtectedRoute>}/>
-            <Route path="/recipe/:id" element={<ProtectedRoute><IndividualRecipePage /></ProtectedRoute>}/>
+            <Route path="/recipes/:id" element={<ProtectedRoute><IndividualRecipePage /></ProtectedRoute>}/>
             <Route path="/add-reviews/:id" element={<ProtectedRoute><AddReviewPage/></ProtectedRoute>}/>
             <Route path="/view-reviews/:id" element={<ProtectedRoute><ViewReviewPage/></ProtectedRoute>}/>
         </Routes>
