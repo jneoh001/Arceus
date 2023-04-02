@@ -92,6 +92,7 @@ const LeaveReviewCard = (props) => {
           }
         }
       });
+      navigate("/add-reviews/" + props.id + "/confirm");
     } else {
       setIsRetrieved(true);
     }
@@ -130,11 +131,6 @@ const LeaveReviewCard = (props) => {
       const updates = {};
       updates["/reviews/" + props.id + "/data/" + newPostKey] = newEntry;
       update(ref(db), updates);
-
-      setTimeout(() => {
-        setIsAdded(false);
-        navigate("/recipe/" + props.id);
-      }, 2000);
       e.preventDefault();
     }
   };
