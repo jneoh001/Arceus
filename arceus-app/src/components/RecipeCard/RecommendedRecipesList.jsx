@@ -11,10 +11,13 @@ const RecommendedRecipesList = () => {
   const apiKey = "cb1c464d94f142c08b156c5beddade8b";
 
   const [id, setID] = useState();
-  const [recipeData, setRecipeData] = useState([]);
-
+  const [recipeData, setRecipeData] = useState(
+    localStorage.getItem("recipeData")
+      ? JSON.parse(localStorage.getItem("recipeData"))
+      : []
+  );
   useEffect(() => {
-    if (userDetails) {
+    if (userDetails & recipeData == null) {
       axios
         .get(
           `https://api.spoonacular.com/recipes/findByNutrients?apiKey=${apiKey}&minCarbs=${
@@ -31,8 +34,12 @@ const RecommendedRecipesList = () => {
           }
           // console.log(res.data);
           setRecipeData(res.data);
+          localStorage.setItem("recipeData", JSON.stringify(res.data));
         })
         .catch((error) => console.log(error));
+    }
+    else if (userDetails && recipeData){
+      setRecipeData(JSON.parse(localStorage.getItem("recipeData")));
     }
   }, [userDetails]);
   {
