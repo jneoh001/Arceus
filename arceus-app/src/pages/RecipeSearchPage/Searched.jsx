@@ -15,6 +15,8 @@ function Searched() {
   const location = useLocation();
   const searchTerm = location.state?.searchTerm || "";
   const [input, setInput] = useState(searchTerm);
+  const [error, setError] = useState("");
+
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -64,8 +66,13 @@ function Searched() {
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    getFiltered(params.search, caloriesMin, caloriesMax);
-    setShowForm(false);
+    if (caloriesMax > caloriesMin) {
+      getFiltered(params.search, caloriesMin, caloriesMax);
+      setShowForm(false);
+      setError("");
+    } else {
+      setError("Max calories cannot be less than min calories.");
+    }
   };
 
   const sortRecipes = (recipes, sortBy) => {
@@ -176,6 +183,7 @@ function Searched() {
             </form>
           )}
         </div>
+        {error && <p>{error}</p>}
         <div className="dropdown">
           {/* Add dropdown menu to select sorting option */}
           <select onChange={(e) => setSortBy(e.target.value)}>
