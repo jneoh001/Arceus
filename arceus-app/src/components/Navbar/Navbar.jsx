@@ -27,7 +27,7 @@ const Navbar = () => {
         <nav ref={navRef} className="responsive_nav">
           <NavLink
             to={"/"}
-            activeClassName="active"
+            activeclassname="active"
             className="nav-a"
             onClick={showNavbar}
           >
@@ -35,7 +35,7 @@ const Navbar = () => {
           </NavLink>
           <NavLink
             to={"/search"}
-            activeClassName="active"
+            activeclassname="active"
             className="nav-a"
             onClick={showNavbar}
           >
@@ -44,7 +44,7 @@ const Navbar = () => {
           {!ctx.currentUser && (
             <NavLink
               to={"/login"}
-              activeClassName="active"
+              activeclassname="active"
               className="nav-a"
               onClick={showNavbar}
             >
@@ -54,7 +54,7 @@ const Navbar = () => {
           {ctx.currentUser && (
             <NavLink
               to={"/goals"}
-              activeClassName="active"
+              activeclassname="active"
               className="nav-a"
               onClick={showNavbar}
             >
@@ -63,7 +63,7 @@ const Navbar = () => {
           )}
           <NavLink
             to={"/profile"}
-            activeClassName="border-0"
+            activeclassname="border-0"
             className="lg:absolute lg:right-12 scale-150 icon"
             onClick={showNavbar}
           >

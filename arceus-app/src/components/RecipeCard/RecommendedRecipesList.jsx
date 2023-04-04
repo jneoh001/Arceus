@@ -9,7 +9,6 @@ import RecipeCardHmepage from "./RecipeCardHmepage";
 const RecommendedRecipesList = () => {
   const { userDetails } = useAuth();
   const apiKey = "1bf290a35f8c49c8a844be86f6575f28";
-
   const [id, setID] = useState();
   const [recipeData, setRecipeData] = useState(
     localStorage.getItem("recipeData")
@@ -29,8 +28,8 @@ const RecommendedRecipesList = () => {
             }&maxFat=${userDetails.fatGoal / 3}&number=5&random=true`
           );
           setRecipeData(response.data);
-          console.log(response.data)
-          console.log(userDetails)
+          console.log(response.data);
+          console.log(userDetails);
         }
       } catch (error) {
         console.log(error);
