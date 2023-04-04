@@ -17,10 +17,12 @@ import HomePage from "./HomePage/HomePage";
 import { useAuth } from "../store/auth-context";
 import ForgetPasswordPage from "./ForgetPasswordPage/ForgetPasswordPage";
 import ReviewConfirmPage from "./AddReviewPage/ReviewConfirmPage";
+import Fade from "../components/Fade/Fade"
 
 function Pages(){
   const {currentUser} = useAuth();
     return(
+        <Fade location = {location}>
         <Routes>
             <Route path="/" element={currentUser?<ProtectedRoute><HomePage/></ProtectedRoute>:<LandingPage />} />
             <Route path="/login" element={<LoginPage/>} />
@@ -32,11 +34,12 @@ function Pages(){
             <Route path="/editprofile" element={<ProtectedRoute><EditProfilePage/></ProtectedRoute>}/>
             <Route path="/search" element={<ProtectedRoute><RecipeSearchPage/></ProtectedRoute>}/>
             <Route path="/searched/:search" element={<ProtectedRoute><Searched/></ProtectedRoute>}/>
-            <Route path="/recipes/:id" element={<ProtectedRoute><IndividualRecipePage /></ProtectedRoute>}/>
+            <Route path="/recipe/:id" element={<ProtectedRoute><IndividualRecipePage /></ProtectedRoute>}/>
             <Route path="/add-reviews/:id" element={<ProtectedRoute><AddReviewPage/></ProtectedRoute>}/>
             <Route path="/add-reviews/:id/confirm" element={<ProtectedRoute><ReviewConfirmPage /></ProtectedRoute>}/>
             <Route path="/view-reviews/:id" element={<ProtectedRoute><ViewReviewPage/></ProtectedRoute>}/>
         </Routes>
+        </Fade>
     );
 };
 export default Pages;
