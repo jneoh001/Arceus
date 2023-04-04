@@ -3,6 +3,9 @@ import time
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+import firebase_admin
+
+
 
 s = Service('testing scripts/geckodriver')
 driver = webdriver.Firefox(service=s)
