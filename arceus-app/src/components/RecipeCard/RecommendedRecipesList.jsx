@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-/*database imports*/
 import { useAuth } from "../../store/auth-context";
 import RecipeCardHmepage from "./RecipeCardHmepage";
 
