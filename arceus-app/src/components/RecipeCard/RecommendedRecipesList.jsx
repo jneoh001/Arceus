@@ -7,6 +7,7 @@ const RecommendedRecipesList = () => {
   const { userDetails } = useAuth();
   const apiKey = "0a76b05501d343a3865103c54309f7dd";
   const [recipeData, setRecipeData] = useState();
+
   useEffect(() => {
     if (userDetails) {
       axios
@@ -26,6 +27,7 @@ const RecommendedRecipesList = () => {
           console.log(error.message);
         });
     }
+
   }, [userDetails]);
 
   {
