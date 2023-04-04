@@ -1,46 +1,37 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-/*database imports*/
-import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
-import { ref, child, get, onValue } from "firebase/database";
 import RecipeCardHmepage from "./RecipeCardHmepage";
 
 const RecommendedRecipesList = () => {
   const { userDetails } = useAuth();
-  const apiKey = "1bf290a35f8c49c8a844be86f6575f28";
-  const [id, setID] = useState();
-  const [recipeData, setRecipeData] = useState(
-    localStorage.getItem("recipeData")
-      ? JSON.parse(localStorage.getItem("recipeData"))
-      : []
-  );
+  const apiKey = "0a76b05501d343a3865103c54309f7dd";
+  const [recipeData, setRecipeData] = useState();
+
   useEffect(() => {
-    const fetchRecipeData = async () => {
-      try {
-        if (userDetails) {
-          const response = await axios.get(
-            `https://api.spoonacular.com/recipes/findByNutrients?apiKey=${apiKey}&minCarbs=${
-              userDetails.carbGoal / 3
-            }
-        &minCalories=${userDetails.calorieGoal / 3}&minProtein=${
-              userDetails.proteinGoal / 3
-            }&maxFat=${userDetails.fatGoal / 3}&number=5&random=true`
-          );
+    if (userDetails) {
+      axios
+        .get(
+          `https://api.spoonacular.com/recipes/findByNutrients?minCarbs=${
+            userDetails.carbGoal / 3
+          }&minCalories=${userDetails.calorieGoal / 3}&minProtein=${
+            userDetails.proteinGoal / 3
+          }&maxFat=${
+            userDetails.fatGoal / 3
+          }&number=5&random=true&apiKey=${apiKey}`
+        )
+        .then((response) => {
           setRecipeData(response.data);
-          console.log(response.data);
-          console.log(userDetails);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
-    fetchRecipeData();
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+
   }, [userDetails]);
 
-  
-  {/*(useEffect(() => {
+  {
+    /*(useEffect(() => {
     if (prevRecipeDataRef.current && prevRecipeDataRef.current.length === recipeData.length) {
       let same = true;
       for (let i = 0; i < recipeData.length; i++) {
@@ -57,10 +48,11 @@ const RecommendedRecipesList = () => {
     }
 
     prevRecipeDataRef.current = recipeData;
-  }, [recipeData]);*/}
+  }, [recipeData]);*/
+  }
 
-
-  {/*useEffect(() => {
+  {
+    /*useEffect(() => {
     if (userDetails) {
       axios
         .get(
@@ -85,18 +77,23 @@ const RecommendedRecipesList = () => {
   {
     /*then in return, i use map to go through every object in the array and get their data*/
   }
-  return recipeData.map((recipe) => (
-    <RecipeCardHmepage
-      key = {recipe.id}
-      id={recipe.id}
-      name={recipe.title}
-      carbs={recipe.carbs}
-      protein={recipe.protein}
-      fats={recipe.fat}
-      calories={recipe.calories}
-      img={recipe.image}
-    />
-  ));
+  return (
+    <div>
+      {recipeData &&
+        recipeData.map((recipe) => (
+          <RecipeCardHmepage
+            key={recipe.id}
+            id={recipe.id}
+            name={recipe.title}
+            carbs={recipe.carbs}
+            protein={recipe.protein}
+            fats={recipe.fat}
+            calories={recipe.calories}
+            img={recipe.image}
+          />
+        ))}
+    </div>
+  );
 };
 
 export default RecommendedRecipesList;

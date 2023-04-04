@@ -9,23 +9,10 @@ import RecommendedRecipesList from '../../components/RecipeCard/RecommendedRecip
 
 function RecipeSearchPage() {
   return (
-    <div className='LandingPage h-full'>
+    <div className='LandingPage'>
       <Navbar/>
-      <div className="recipecards">
-        {/* <Searched/> */}
+      <div className="recipecards px-16">
         <Search/>
-        {/* <RecommendedRecipesList /> */}
-        {/* <RecommendedRecipes />
-        <RecommendedRecipes />
-        <RecommendedRecipes />
-        <RecommendedRecipes /> */}
-
-        
-        {/*}
-        <SearchPageByID id={716420} />
-        <SearchPageByID id={642605} />
-        <SearchPageByID id={716356} />
-  <SearchPageByID id={641904} />*/}
       </div>
     </div>
   )
