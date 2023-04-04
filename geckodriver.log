@@ -572,3 +572,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 DevTools listening on ws://127.0.0.1:49823/devtools/browser/cc32083d-5146-4636-a842-67e7d2137519
 console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:5173."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:5173."
+1680411087340	Marionette	INFO	Stopped listening on port 49588
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1680411090820	Marionette	INFO	Stopped listening on port 49830
+1680411092557	Marionette	INFO	Stopped listening on port 49407
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'

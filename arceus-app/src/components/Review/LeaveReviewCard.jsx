@@ -133,6 +133,7 @@ const LeaveReviewCard = (props) => {
       update(ref(db), updates);
       e.preventDefault();
     }
+
   };
 
   const ratingChangeHandler = (e) => {
