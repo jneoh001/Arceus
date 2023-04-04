@@ -17,6 +17,7 @@ function RerouteHandler() {
 
   useEffect(() => {
     const error = location.state?.message;
+    console.log(error);
     // console.log(error == "You must be logged in to access this page.");
     if (error) {
       setErrorMessage(error);
