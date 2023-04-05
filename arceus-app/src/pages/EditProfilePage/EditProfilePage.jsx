@@ -10,7 +10,7 @@ function EditProfilePage() {
     initial={{opacity:0}}
     animate={{opacity:1}}
     exit={{opacity:0}}
-    className = "bg-cover h-full" style = {{backgroundImage: `url(${editprofilebg})` }}>
+    className = "bg-cover h-screen lg:h-screen sm:h-screen" style = {{backgroundImage: `url(${editprofilebg})` }}>
       <Navbar />
       <div className="p-16">
         <EditProfile />
