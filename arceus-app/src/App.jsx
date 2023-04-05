@@ -1,19 +1,19 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import Pages from "./pages/Pages";
-import HistoryCard from "./components/HistoryCard/HistoryCard";
-import LoginCard from "./components/LoginCard/LoginCard";
-import Navbar from "./components/Navbar/Navbar";
-import LeaveReviewCard from "./components/Review/LeaveReviewCard";
-import RecipeByID from "./components/RecipeCard/RecipeByID";
-import RecommendedRecipes from "./components/RecipeCard/RecommendedRecipes";
-import RegistrationPage from "./components/RegistrationCard/RegistrationCard";
-import EditProfile from "./components/EditProfile/EditProfile";
-import MyProfile from "./components/MyProfile/MyProfile";
-import ViewReview from "./components/Review/ViewReview";
-import Tracker from "./components/Tracker/Tracker";
-import RecommendedRecipesLI from "./components/RecipeCard/RecommendedRecipesLI";
+// import HistoryCard from "./components/HistoryCard/HistoryCard";
+// import LoginCard from "./components/LoginCard/LoginCard";
+// import Navbar from "./components/Navbar/Navbar";
+// import LeaveReviewCard from "./components/Review/LeaveReviewCard";
+// import RecipeByID from "./components/RecipeCard/RecipeByID";
+// import RecommendedRecipes from "./components/RecipeCard/RecommendedRecipes";
+// import RegistrationPage from "./components/RegistrationCard/RegistrationCard";
+// import EditProfile from "./components/EditProfile/EditProfile";
+// import MyProfile from "./components/MyProfile/MyProfile";
+// import ViewReview from "./components/Review/ViewReview";
+// import Tracker from "./components/Tracker/Tracker";
+// import RecommendedRecipesLI from "./components/RecipeCard/RecommendedRecipesLI";
+import AnimatedRoutes from "./components/AnimatedRoutes/AnimatedRoutes";
 
 function App() {
   return (
@@ -55,7 +55,7 @@ function App() {
       {/* <MyProfile /> */}
       {/* New Code with Routing */}
       <BrowserRouter>
-        <Pages />
+        <AnimatedRoutes />
       </BrowserRouter>
       {/* <RecommendedRecipesLI /> */}
 
