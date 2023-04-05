@@ -2,17 +2,21 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import RecommendedRecipesList from "../../components/RecipeCard/RecommendedRecipesList"; 
 import "./HomePage.css";
-import RecommendedRecipes from "../../components/RecipeCard/RecommendedRecipes";
+import {motion} from 'framer-motion'
 
 const HomePage = () => {
   return (
-    <div className="HomePage">
+    <motion.div className="HomePage"
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+    >
       <Navbar />
       <h1 className="homepageheader">Recommended Recipes</h1>
       <div className="recipecards">
                 <RecommendedRecipesList />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

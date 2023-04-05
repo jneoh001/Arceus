@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { useLocation } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { useState, useEffect } from "react";
+import {motion} from 'framer-motion'
 
 function RerouteHandler() {
   const location = useLocation();
@@ -55,13 +56,17 @@ function RerouteHandler() {
 
 const LoginPage = () => {
   return (
-    <div className="h-screen">
+    <motion.div className="h-screen"
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    exit={{opacity:0}}
+    >
       <Navbar />
       <div className="flex flex-col justify-center items-center mt-20">
         <RerouteHandler />
         <LoginCard />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

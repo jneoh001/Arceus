@@ -9,6 +9,7 @@ import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import { useLocation } from "react-router-dom";
 import "./Searched.css";
 import RecipeCardHmepage from "../../components/RecipeCard/RecipeCardHmepage";
+import {motion} from 'framer-motion'
 
 function Searched() {
   const navigate = useNavigate();
@@ -120,7 +121,11 @@ function Searched() {
     getFiltered(params.search, caloriesMin, caloriesMax);
   }, [params.search]);
   return (
-    <div>
+    <motion.div
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    exit={{opacity:0}}
+    >
       <Navbar />
       <FormStyle onSubmit={submitHandler}>
         <div>
@@ -205,7 +210,7 @@ function Searched() {
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

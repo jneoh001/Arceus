@@ -1,14 +1,19 @@
 import Navbar from "../../components/Navbar/Navbar";
 import HistoryCard from "../../components/HistoryCard/HistoryCard";
+import {motion} from 'framer-motion'
 
 const HistoryPage = () => {
   return (
-    <div className="w-screen">
+    <motion.div className="w-screen"
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    exit={{opacity:0}}
+    >
       <Navbar />
       <div className="flex items-center justify-center mt-20">
         <HistoryCard />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -2,6 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { useRef, useState } from "react";
 import { useAuth } from "../../store/auth-context";
 import { useNavigate } from "react-router-dom";
+import {motion} from 'framer-motion';
 
 const ForgetPasswordPage = () => {
   const emailRef = useRef();
@@ -27,7 +28,11 @@ const ForgetPasswordPage = () => {
     e.preventDefault();
   };
   return (
-    <div>
+    <motion.div
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    exit={{opacity:0}}
+    >
       <Navbar />
       <div className="flex flex-col items-center justify-center mt-12 text-white">
         {isSent && (
@@ -119,7 +124,7 @@ const ForgetPasswordPage = () => {
           </button>
         </div>
       </div>{" "}
-    </div>
+    </motion.div>
   );
 };
 
