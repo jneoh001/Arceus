@@ -1,10 +1,15 @@
 import RegistrationCard from "../../components/RegistrationCard/RegistrationCard";
 import Navbar from "../../components/Navbar/Navbar";
 import './RegistrationPage.css'
+import {motion} from 'framer-motion'
 
 const RegistrationPage = () => {
   return (
-    <div className="h-screen">
+    <motion.div className="h-screen"
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    exit={{opacity:0}}
+    >
       <Navbar />
       <main 
       id = "grid"
@@ -22,7 +27,7 @@ const RegistrationPage = () => {
         <RegistrationCard className="h-screen w-2/3 min-w-2/3"/>
 
       </main>
-    </div>
+    </motion.div>
   );
 };
 

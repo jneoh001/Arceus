@@ -1,18 +1,19 @@
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import RecipeCard from "../../components/RecipeCard/RecipeCard";
-import RecipeByID from "../../components/RecipeCard/RecipeByID";
 import "./LandingPage.css";
 import RecommendedRecipes from "../../components/RecipeCard/RecommendedRecipes";
 import Typewriter from "../../components/TypeWriter/Typewriter";
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
+import {motion} from "framer-motion"
 
 const LandingPage = () => {
 
- 
-
   return (
-  <div className="grid grid-rows-2 grid-cols-1 ">
+  <motion.div className="grid grid-rows-2 grid-cols-1 "
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+  >
    
 
     <Parallax pages={2} >
@@ -56,7 +57,7 @@ const LandingPage = () => {
     </ParallaxLayer>
 
     </Parallax >
-  </div>
+  </motion.div>
   );
 };
 
