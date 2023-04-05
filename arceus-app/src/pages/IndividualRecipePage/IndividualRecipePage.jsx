@@ -4,6 +4,7 @@ import RecipePage from "../../components/RecipePage/RecipePage";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
+import {motion} from 'framer-motion';
 
 function RerouteHandler() {
   const location = useLocation();
@@ -45,11 +46,15 @@ function RerouteHandler() {
 const IndividualRecipePage = () => {
   const params = useParams();
   return (
-    <div>
+    <motion.div
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    exit={{opacity:0}}
+    >
       <Navbar />
       <RerouteHandler/>
       <RecipePage id={params.id} />
-    </div>
+    </motion.div>
   );
 };
 
