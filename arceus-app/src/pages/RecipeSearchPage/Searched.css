@@ -1,5 +1,4 @@
 .searchForm{
-    margin: 0rem 20rem;
     position: relative;
     width: 100%;
 }
@@ -9,8 +8,7 @@
     background: linear-gradient(35deg, #494949, #313131);
     font-size: 1.5rem;
     color: white;
-    padding: 1rem 3rem;
-    border: none;
+    padding: 0.5rem 3rem;
     border-radius: 1rem;
     outline: none;
     width: 100%;
