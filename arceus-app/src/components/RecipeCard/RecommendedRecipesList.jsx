@@ -25,9 +25,11 @@ const RecommendedRecipesList = () => {
         })
         .catch((error) => {
           console.log(error.message);
+          setRecipeData([]);
+          console.log(recipeData);
         });
+        console.log(recipeData);
     }
-
   }, [userDetails]);
 
   {
@@ -79,19 +81,28 @@ const RecommendedRecipesList = () => {
   }
   return (
     <div>
-      {recipeData &&
-        recipeData.map((recipe) => (
-          <RecipeCardHmepage
-            key={recipe.id}
-            id={recipe.id}
-            name={recipe.title}
-            carbs={recipe.carbs}
-            protein={recipe.protein}
-            fats={recipe.fat}
-            calories={recipe.calories}
-            img={recipe.image}
-          />
-        ))}
+      {recipeData ? (
+        recipeData.length > 0 ? (
+          <div className="recipecards">
+            {recipeData.map((recipe) => (
+              <RecipeCardHmepage
+                key={recipe.id}
+                id={recipe.id}
+                name={recipe.title}
+                carbs={recipe.carbs}
+                protein={recipe.protein}
+                fats={recipe.fat}
+                calories={recipe.calories}
+                img={recipe.image}
+              />
+            ))}
+          </div>
+        ) : (
+          <div>Unable to find any Recipes for your current Daily Nutrition Goals.</div>
+        )
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 };

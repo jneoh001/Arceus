@@ -9,7 +9,7 @@ import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import { useLocation } from "react-router-dom";
 import "./Searched.css";
 import RecipeCardHmepage from "../../components/RecipeCard/RecipeCardHmepage";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 
 function Searched() {
   const navigate = useNavigate();
@@ -122,9 +122,9 @@ function Searched() {
   }, [params.search]);
   return (
     <motion.div
-    initial={{opacity:0}}
-    animate={{opacity:1}}
-    exit={{opacity:0}}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
     >
       <Navbar />
       <FormStyle onSubmit={submitHandler}>
@@ -194,21 +194,25 @@ function Searched() {
       </div>
 
       <div className="recipecards">
-        {sortedRecipes.map((item) => {
-          const nutrition = recipeNutrition[item.id];
-          return (
-            <RecipeCard
-              key={item.id}
-              id={item.id}
-              name={item.title}
-              carbs={nutrition?.carbs.slice(0, -1)}
-              protein={nutrition?.protein.slice(0, -1)}
-              fats={nutrition?.fat.slice(0, -1)}
-              calories={nutrition?.calories.slice(0, -1)}
-              img={item.image}
-            />
-          );
-        })}
+        {sortedRecipes.length === 0 ? (
+          <p>Requsted Query did not return any recipes.</p>
+        ) : (
+          sortedRecipes.map((item) => {
+            const nutrition = recipeNutrition[item.id];
+            return (
+              <RecipeCard
+                key={item.id}
+                id={item.id}
+                name={item.title}
+                carbs={nutrition?.carbs.slice(0, -1)}
+                protein={nutrition?.protein.slice(0, -1)}
+                fats={nutrition?.fat.slice(0, -1)}
+                calories={nutrition?.calories.slice(0, -1)}
+                img={item.image}
+              />
+            );
+          })
+        )}
       </div>
     </motion.div>
   );
