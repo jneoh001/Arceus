@@ -70,6 +70,12 @@ export const AuthContextProvider = (props) => {
           const errorMessage = error.message;
           // console.log("Not logged In");
           // console.log(errorCode);
+          if ( error.code == "auth/user-not-found"){
+            setUserNotFound(true);
+          }
+          reject("InvalidEmail");
+
+
           if (error.code == "auth/wrong-password") {
             setWrongPassword(true);
           }
