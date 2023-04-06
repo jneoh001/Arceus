@@ -24,6 +24,8 @@ import { AnimatePresence } from "framer-motion";
 function AnimatedRoutes() {
   const location = useLocation();
   const currentUser = useAuth();
+  console.log("Current User is Logged In?");
+  console.log(currentUser.isLoggedIn);
   return (
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>

@@ -6,6 +6,8 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const ctx = useContext(AuthContext);
+  console.log("Current user?");
+  console.log(ctx.currentUser);
   const [navIsClicked, setNavIsClicked] = useState(false);
   const navRef = useRef();
   const showNavbar = () => {
@@ -51,7 +53,7 @@ const Navbar = () => {
               LOG IN
             </NavLink>
           )}
-          {ctx.currentUser && (
+          {ctx.isLoggedIn && (
             <NavLink
               to={"/goals"}
               activeclassname="active"
