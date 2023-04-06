@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import LandingPage from "../../pages/LandingPage/LandingPage";
+import LandingPage from "../../pages/LandingPage/Landingpage";
 import HistoryPage from "../../pages/HistoryPage/HistoryPage";
 import GoalPage from "../../pages/GoalPage/GoalPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
@@ -30,7 +30,13 @@ function AnimatedRoutes() {
         <Route
           path="/"
           element={
-            currentUser.isLoggedIn?<ProtectedRoute><HomePage/></ProtectedRoute>:<LandingPage /> 
+            currentUser.isLoggedIn ? (
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            ) : (
+              <LandingPage />
+            )
           }
         />
         <Route path="/login" element={<LoginPage />} />
