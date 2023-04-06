@@ -67,7 +67,7 @@ const LandingPage = () => {
       <div id="gradient"></div>
     </ParallaxLayer> */}
 
-        <ParallaxLayer offset={1} speed={0.5} factor={1} className="h-screen overflow-y-hidden">
+        <ParallaxLayer offset={1} speed={0.5} factor={1} className="h-screen overflow-y-auto">
           <div className="LandingPage">
             <h1 className="landingpageheader">Top Rated</h1>
             <div className="recipecards">
