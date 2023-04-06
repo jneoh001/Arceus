@@ -36,7 +36,7 @@ const LandingPage = () => {
          https://i.imgur.com/5dmBrx6.jpg
          Arceus 
          https://i.pinimg.com/originals/b9/12/e7/b912e737b9d67659271be6afc4011efc.jpg */}
-              <div class="flex h-screen items-center justify-center bg-black pl-4 pr-6 mr-4">
+              <div class="flex h-screen items-center justify-center bg-black pl-4 pr-6 mr-5">
                 <div class="max-w-sm overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
                   <img
                     src=" https://i.imgur.com/5dmBrx6.jpg"
@@ -44,14 +44,16 @@ const LandingPage = () => {
                     class="w-full overflow-hidden"
                   />
                   <div class="p-5">
-                    <h2 className="font-bold text-gray-700 mb-2">About Us</h2>
-                    <p class="text-medium mb-5 text-gray-700">
+                    <h2 className="font-bold text-gray-700 text-lg mb-2">About Us</h2>
+                    <p class="text-lg mb-4 text-gray-700">
                       We aim to provide you with a one-stop solution for your
                       recipe needs!
                     </p>
-                    <button class="w-full rounded-md bg-gray-100 border border-black py-2 text-black hover:bg-yellow-500 hover:shadow-md duration-75">
-                      Get Started
-                    </button>
+                    <a href="/login">
+                      <button class="w-full rounded-md bg-gray-100 border border-black py-2 text-black hover:bg-yellow-500 hover:shadow-md duration-75">
+                        Get Started
+                      </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -65,7 +67,7 @@ const LandingPage = () => {
       <div id="gradient"></div>
     </ParallaxLayer> */}
 
-        <ParallaxLayer offset={1} speed={0.5} factor={0.8}>
+        <ParallaxLayer offset={1} speed={0.5} factor={1} className="h-screen overflow-y-hidden">
           <div className="LandingPage">
             <h1 className="landingpageheader">Top Rated</h1>
             <div className="recipecards">
