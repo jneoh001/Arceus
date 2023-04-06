@@ -65,7 +65,7 @@ const EditProfile = () => {
           </div>
         </div>
       )}
-      <div className="flex flex-col justify-center mx-auto mb-4 items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
+      <div className="flex flex-col justify-center mx-auto mb-4 w-auto items-center border-grey border-2 rounded-lg w-1/2 font-semibold text-lg bg-white text-black">
         <h1 className="font-bold text-3xl p-12">Edit Profile</h1>
         <Formik
           initialValues={{
@@ -91,7 +91,7 @@ const EditProfile = () => {
           })}
           onSubmit={submitHandler}
         >
-          <Form className="">
+          <Form className="m-5">
             <div className="grid grid-cols-2">
               <div className="">
                 <MyNumberInput
