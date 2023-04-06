@@ -5,6 +5,7 @@ import Typewriter from "../../components/TypeWriter/Typewriter";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { motion } from "framer-motion";
 import TopRated from "../../components/RecipeCard/TopRated";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -49,11 +50,11 @@ const LandingPage = () => {
                       We aim to provide you with a one-stop solution for your
                       recipe needs!
                     </p>
-                    <a href="/login">
+                    <Link to="/login">
                       <button class="w-full rounded-md bg-gray-100 border border-black py-2 text-black hover:bg-yellow-500 hover:shadow-md duration-75">
                         Get Started
                       </button>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
