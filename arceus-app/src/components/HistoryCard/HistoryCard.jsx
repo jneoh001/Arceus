@@ -5,6 +5,17 @@ import { useAuth } from "../../store/auth-context";
 const HistoryCard = () => {
   const { userHistory } = useAuth();
 
+  const sortedHistory = [...userHistory].sort((a, b) => {
+    console.log(a.date, b.date)
+    const [aDay, aMonth, aYear] = a.date.split('/');
+    const [bDay, bMonth, bYear] = b.date.split('/');
+    const dateA = new Date(`20${aYear}-${aMonth}-${aDay}`);
+    const dateB = new Date(`20${bYear}-${bMonth}-${bDay}`);
+    console.log(dateA,dateB)
+    return dateB - dateA;
+  });
+  console.log(sortedHistory)
+
   return (
     <div className="history-container bg-white">
       {" "}
@@ -23,7 +34,7 @@ const HistoryCard = () => {
           </tr>
         </thead>
         <tbody>
-          {userHistory.map((history) => {
+          {sortedHistory.map((history) => {
             return (
               <tr key={history.date}>
                 <td>{history.date}</td>
