@@ -96,16 +96,14 @@ export const AuthContextProvider = (props) => {
     });
   };
 
-  const logout = () => {
-    signOut(auth)
-      .then(() => {
-        setIsLoggedIn(false);
-
-        console.log("Sign-out successful.");
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      setIsLoggedIn(false);
+      console.log("Sign-out successful.");
+    } catch (error) {
+      console.log(error.message);
+    }; 
   };
 
   const resetPassword = (email) => {

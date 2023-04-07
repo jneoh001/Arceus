@@ -5,16 +5,12 @@ import Progress from "../Tracker/Progress";
 const MyProfile = () => {
   const { logout, userDetails, userIntake } = useAuth();
   const navigate = useNavigate();
-  function logoutHandler() {
-    logout();
+  const logoutHandler = async () => {
+    await logout();
     console.log("redirecting to login");
-    navigate("/login", { replace: true, state: { message: "Logged out successfully" }, absolutePath: true });
-    // navigate("/login", {
-    //   state: {
-    //     message: "You Have Succesfully Logged Out."
-    //   },
-    // })
+    navigate("/login", { replace: true, state: { message: "Logged Out Successfully" }, absolutePath: true });
   };
+  
   return (
     <div className="px-32 text-xl">
       <h1 className="font-bold text-5xl">My Account </h1>

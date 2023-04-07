@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { useState, useEffect } from "react";
 import {motion} from 'framer-motion'
+import { connectStorageEmulator } from "firebase/storage";
 
 function RerouteHandler() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function RerouteHandler() {
       setIsShowing(true);
       setTimeout(() => {
         setIsShowing(false);
+        setErrorMessage(null);
       }, 5000);
       if (error == "You must be logged in to access this page.") {
         setMessageStyle(errorClassName);
