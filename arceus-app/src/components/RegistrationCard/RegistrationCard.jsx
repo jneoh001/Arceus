@@ -82,7 +82,7 @@ const validationSchema = Yup.object({
     .min(1, "*Carbohydrate Goal must be greater than 0g")
     .required("*Required"),
   calorieGoal: Yup.number()
-    .min(1, "*Calorie Goal must be greater than 0g")
+    .min(1, "*Calorie Goal must be greater than 0kcal")
     .required("*Required"),
   fatGoal: Yup.number()
     .min(1, "*Fat Goal must be greater than 0g")
