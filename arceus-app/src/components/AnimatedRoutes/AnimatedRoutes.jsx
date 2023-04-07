@@ -53,7 +53,7 @@ function AnimatedRoutes() {
           }
         />
         <Route
-          path="/goals"
+          path="/account"
           element={
             <ProtectedRoute>
               <GoalPage />
