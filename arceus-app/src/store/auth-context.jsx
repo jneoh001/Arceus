@@ -35,23 +35,27 @@ export const AuthContextProvider = (props) => {
   const [userIntake, setUserIntake] = useState();
 
   const signup = (email, password, profile) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log("Signed Up successfully!", user);
-        setEmailInUse(false);
-        setIsLoggedIn(true);
-        const endpt = "users-profile";
-        const updates = {};
-        updates["/" + endpt + "/" + user.uid + "/details"] = profile;
-        update(ref(db), updates);
-      })
-      .catch((error) => {
-        console.log(error.code);
-        if (error.code == "auth/email-already-in-use") {
-          setEmailInUse(true);
-        }
-      });
+    return new Promise((resolve, reject) => {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("Signed Up successfully!", user);
+          setEmailInUse(false);
+          setIsLoggedIn(true);
+          const endpt = "users-profile";
+          const updates = {};
+          updates["/" + endpt + "/" + user.uid + "/details"] = profile;
+          update(ref(db), updates);
+          resolve("Registration is successful.");
+        })
+        .catch((error) => {
+          console.log(error.code);
+          if (error.code == "auth/email-already-in-use") {
+            setEmailInUse(true);
+            reject("Email is already in use.");
+          }
+        });
+    });
   };
 
   const login = (email, password) => {
@@ -70,6 +74,11 @@ export const AuthContextProvider = (props) => {
           const errorMessage = error.message;
           // console.log("Not logged In");
           // console.log(errorCode);
+          if (error.code == "auth/user-not-found") {
+            setUserNotFound(true);
+          }
+          reject("InvalidEmail");
+
           if (error.code == "auth/wrong-password") {
             setWrongPassword(true);
           }
