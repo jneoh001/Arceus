@@ -7,13 +7,14 @@ const MyProfile = () => {
   const navigate = useNavigate();
   function logoutHandler() {
     logout();
-    navigate("/login", {
-      replace: true,
-      state: {
-        message: "You have Succesfully Logged Out.",
-      },
-    });
-  }
+    console.log("redirecting to login");
+    navigate("/login", { replace: true, state: { message: "Logged out successfully" }, absolutePath: true });
+    // navigate("/login", {
+    //   state: {
+    //     message: "You Have Succesfully Logged Out."
+    //   },
+    // })
+  };
   return (
     <div className="px-32 text-xl">
       <h1 className="font-bold text-5xl">My Account </h1>
@@ -52,7 +53,7 @@ const MyProfile = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
@@ -76,7 +77,7 @@ const MyProfile = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
@@ -99,7 +100,7 @@ const MyProfile = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
@@ -123,7 +124,7 @@ const MyProfile = () => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -155,7 +156,7 @@ const MyProfile = () => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -186,7 +187,7 @@ const MyProfile = () => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -218,7 +219,7 @@ const MyProfile = () => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"

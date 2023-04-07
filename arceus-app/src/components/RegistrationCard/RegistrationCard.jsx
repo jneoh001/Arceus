@@ -112,7 +112,7 @@ const RegistrationCard = () => {
     if(!emailInUse){
       navigate("/login",{
         state:{
-          message: "Registration Succesful! Please Login."
+          message: "Registration Successful! Please Login."
         }
       })
     }
