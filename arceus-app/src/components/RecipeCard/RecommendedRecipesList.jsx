@@ -14,10 +14,10 @@ const RecommendedRecipesList = () => {
         .get(
           `https://api.spoonacular.com/recipes/findByNutrients?minCarbs=${
             userDetails.carbGoal / 3
-          }&minCalories=${userDetails.calorieGoal / 3}&minProtein=${
-            userDetails.proteinGoal / 3
+          }&minCalories=${(userDetails.calorieGoal / 3).toFixed(1)}&minProtein=${
+            (userDetails.proteinGoal / 3).toFixed(1)
           }&maxFat=${
-            userDetails.fatGoal / 3
+            (userDetails.fatGoal / 3).toFixed(1)
           }&number=5&random=true&apiKey=${apiKey}`
         )
         .then((response) => {
