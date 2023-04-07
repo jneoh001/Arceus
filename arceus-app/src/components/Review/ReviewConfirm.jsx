@@ -8,7 +8,7 @@ const ReviewConfirm = (props) => {
   return (
     <div className="flex flex-col justify-center items-center gap-5">
       <div className="bg-white p-16 text-2xl rounded-lg shadow-[5px_5px_0px_0px_gray]">
-        Thank you for submmiting your review.
+        Thank you for submitting your review.
       </div>
       <button
         type="button"
