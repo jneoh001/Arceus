@@ -24,6 +24,8 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
+
+
 export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [wrongPassword, setWrongPassword] = useState(false);
@@ -33,29 +35,36 @@ export const AuthContextProvider = (props) => {
   const [userDetails, setUserDetails] = useState();
   const [userHistory, setUserHistory] = useState();
   const [userIntake, setUserIntake] = useState();
+  useEffect(() => {
+    if (emailInUse) {
+      console.log("Email already in use!");
+    }
+  }, [emailInUse]);
+  
 
-  const signup = (email, password, profile) => {
-    return new Promise((resolve, reject) => {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log("Signed Up successfully!", user);
-          setEmailInUse(false);
-          setIsLoggedIn(true);
-          const endpt = "users-profile";
-          const updates = {};
-          updates["/" + endpt + "/" + user.uid + "/details"] = profile;
-          update(ref(db), updates);
-          resolve("Registration is successful.");
-        })
-        .catch((error) => {
-          console.log(error.code);
-          if (error.code == "auth/email-already-in-use") {
-            setEmailInUse(true);
-            reject("Email is already in use.");
-          }
-        });
-    });
+  const signup = async (email, password, profile) => {
+    
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log("Signed Up successfully!", user);
+      setEmailInUse(false);
+      setIsLoggedIn(true);
+      const endpt = "users-profile";
+      const updates = {};
+      updates["/" + endpt + "/" + user.uid + "/details"] = profile;
+      await update(ref(db), updates);
+    } catch (error) {
+      console.log(error.code);
+      console.log("test the condition");
+      console.log(error.code === "auth/email-already-in-use");
+      if (error.code === "auth/email-already-in-use") {
+        setEmailInUse(true);
+        console.log("updated email in use:");
+        console.log(emailInUse);
+      }
+    } 
   };
 
   const login = (email, password) => {

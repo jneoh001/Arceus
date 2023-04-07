@@ -55,7 +55,7 @@ const Navbar = () => {
           )}
           {ctx.isLoggedIn && (
             <NavLink
-              to={"/goals"}
+              to={"/profile"}
               activeclassname="active"
               className="nav-a"
               onClick={showNavbar}
@@ -64,7 +64,7 @@ const Navbar = () => {
             </NavLink>
           )}
           <NavLink
-            to={"/profile"}
+            to={"/account"}
             activeclassname="border-0"
             className="lg:absolute lg:right-12 scale-150 icon"
             onClick={showNavbar}

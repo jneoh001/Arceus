@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { Form, useField, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/auth-context";
+import { useState, useEffect } from "react";
 
 const MyNumberInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -94,7 +95,6 @@ const validationSchema = Yup.object({
 
 const RegistrationCard = () => {
   const { signup, emailInUse } = useAuth();
-  const navigate = useNavigate();
   const submitHandler = (values) => {
     const profile = {
       email: values.email,
@@ -108,15 +108,14 @@ const RegistrationCard = () => {
       fatGoal: values.fatGoal,
       calorieGoal: values.calorieGoal,
     };
-    signup(values.email, values.password, profile)
-      .then(() => {
-        navigate("/login", {
-          state: {
-            message: "Registration Succesful! Please Login.",
-          },
-        });
+    signup(values.email, values.password, profile);
+    if(!emailInUse){
+      navigate("/login",{
+        state:{
+          message: "Registration Succesful! Please Login."
+        }
       })
-      .catch(navigate("/register"));
+    }
   };
   return (
     <div className="flex flex-col justify-center items-center pl-20 pr-20 font-semibold bg-white text-lg text-black">
