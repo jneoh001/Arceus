@@ -5,6 +5,7 @@ import { db } from "../../firebaseConfig";
 import { useAuth } from "../../store/auth-context";
 import { get, ref, child } from "firebase/database";
 import { useState, useEffect } from "react";
+import {motion} from 'framer-motion';
 
 const GoalPage = () => {
   const { currentUser } = useAuth();
@@ -25,7 +26,11 @@ const GoalPage = () => {
   }, [currentUser]);
 
   return (
-    <div className="h-screen overflow-hidden">
+    <motion.div className="h-screen overflow-hidden"
+    initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+    >
       <Navbar />
       <div className="flex h-[93%]">
         <Tracker />
@@ -40,7 +45,7 @@ const GoalPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

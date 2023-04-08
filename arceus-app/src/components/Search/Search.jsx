@@ -30,7 +30,7 @@ function Search() {
     return (
         <>
             <form className="searchForm" onSubmit={submitHandler}>
-                <div className="searchInput">
+                <div className="searchInput ">
                     <FaSearch></FaSearch>
                     <input
                         onChange={(e) => {

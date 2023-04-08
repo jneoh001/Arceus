@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { Form, useField, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/auth-context";
+import { useState, useEffect } from "react";
 
 const MyNumberInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -82,7 +83,7 @@ const validationSchema = Yup.object({
     .min(1, "*Carbohydrate Goal must be greater than 0g")
     .required("*Required"),
   calorieGoal: Yup.number()
-    .min(1, "*Calorie Goal must be greater than 0g")
+    .min(1, "*Calorie Goal must be greater than 0kcal")
     .required("*Required"),
   fatGoal: Yup.number()
     .min(1, "*Fat Goal must be greater than 0g")
@@ -94,7 +95,6 @@ const validationSchema = Yup.object({
 
 const RegistrationCard = () => {
   const { signup, emailInUse } = useAuth();
-  const navigate = useNavigate();
   const submitHandler = (values) => {
     const profile = {
       email: values.email,
@@ -109,12 +109,13 @@ const RegistrationCard = () => {
       calorieGoal: values.calorieGoal,
     };
     signup(values.email, values.password, profile);
-    
-    navigate("/login",{
-      state:{
-        message: "Registration Succesful! Please Login."
-      }
-    })
+    if(!emailInUse){
+      navigate("/login",{
+        state:{
+          message: "Registration Successful! Please Login."
+        }
+      })
+    }
   };
   return (
     <div className="flex flex-col justify-center items-center pl-20 pr-20 font-semibold bg-white text-lg text-black">
@@ -214,7 +215,7 @@ const RegistrationCard = () => {
             <div className="">
               <MyNumberInput
                 className="border-2 border-black p-2 w-full my-2 font-normal text-black"
-                label="Calorie Goal (g)"
+                label="Calorie Goal (kcal)"
                 name="calorieGoal"
                 type="number"
                 placeholder="Calorie Goal"
@@ -241,11 +242,11 @@ const RegistrationCard = () => {
               />
             </div>
           </div>
-            <button
-              className="my-4 py-2.5 cursor-pointer text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-md text-center w-full"
-              type="submit"
-            >
-              Register
+          <button
+            className="my-4 py-2.5 cursor-pointer text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-md text-center w-full"
+            type="submit"
+          >
+            Register
           </button>
         </Form>
       </Formik>

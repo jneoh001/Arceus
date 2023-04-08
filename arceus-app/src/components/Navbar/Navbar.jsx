@@ -6,6 +6,8 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const ctx = useContext(AuthContext);
+  console.log("Current user?");
+  console.log(ctx.currentUser);
   const [navIsClicked, setNavIsClicked] = useState(false);
   const navRef = useRef();
   const showNavbar = () => {
@@ -27,7 +29,7 @@ const Navbar = () => {
         <nav ref={navRef} className="responsive_nav">
           <NavLink
             to={"/"}
-            activeClassName="active"
+            activeclassname="active"
             className="nav-a"
             onClick={showNavbar}
           >
@@ -35,7 +37,7 @@ const Navbar = () => {
           </NavLink>
           <NavLink
             to={"/search"}
-            activeClassName="active"
+            activeclassname="active"
             className="nav-a"
             onClick={showNavbar}
           >
@@ -44,17 +46,17 @@ const Navbar = () => {
           {!ctx.currentUser && (
             <NavLink
               to={"/login"}
-              activeClassName="active"
+              activeclassname="active"
               className="nav-a"
               onClick={showNavbar}
             >
               LOG IN
             </NavLink>
           )}
-          {ctx.currentUser && (
+          {ctx.isLoggedIn && (
             <NavLink
-              to={"/goals"}
-              activeClassName="active"
+              to={"/profile"}
+              activeclassname="active"
               className="nav-a"
               onClick={showNavbar}
             >
@@ -62,8 +64,8 @@ const Navbar = () => {
             </NavLink>
           )}
           <NavLink
-            to={"/profile"}
-            activeClassName="border-0"
+            to={"/account"}
+            activeclassname="border-0"
             className="lg:absolute lg:right-12 scale-150 icon"
             onClick={showNavbar}
           >

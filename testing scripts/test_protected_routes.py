@@ -36,7 +36,7 @@ def test_profile_protected():
     assert(driver.current_url=="http://localhost:5173/login")
 
 def test_goals_protected():
-    driver.get("http://localhost:5173/goals")
+    driver.get("http://localhost:5173/account")
     time.sleep(5)
     assert(driver.current_url=="http://localhost:5173/login")
 

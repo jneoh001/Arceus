@@ -10,7 +10,7 @@ const MyNumberInput = ({ label, ...props }) => {
       <label htmlFor={props.id || props.name}>{label}</label>
       <input className="number-input" {...field} {...props} />
       {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
+        <div className="error text-red-400">{meta.error}</div>
       ) : null}
     </>
   );
@@ -65,7 +65,7 @@ const EditProfile = () => {
           </div>
         </div>
       )}
-      <div className="flex flex-col justify-center mx-auto mb-4 items-center border-black border-2 w-9/12 font-semibold text-lg bg-gray-800 text-white">
+      <div className="flex flex-col justify-center mx-auto mb-4 w-auto items-center border-grey border-2 rounded-lg w-1/2 font-semibold text-lg bg-white text-black">
         <h1 className="font-bold text-3xl p-12">Edit Profile</h1>
         <Formik
           initialValues={{
@@ -77,21 +77,28 @@ const EditProfile = () => {
             calorieGoal: userDetails.calorieGoal,
           }}
           validationSchema={Yup.object({
-            weight: Yup.number().min(0, "Weight must be greater than 1kg."),
-            height: Yup.number().min(0, "Height must be greater than 0cm"),
-            carbohydrateGoal: Yup.number().min(
-              0,
-              "Carbohydrate Goal must be greater than 0g"
-            ),
-            fatGoal: Yup.number().min(0, "Fat Goal must be greater than 0g"),
-            proteinGoal: Yup.number().min(
-              0,
-              "Protein Goal must be greater than 0g"
-            ),
+            weight: Yup.number()
+              .min(1, "Weight must be greater than 0kg.")
+              .required("*Required"),
+            height: Yup.number()
+              .min(1, "Height must be greater than 0cm")
+              .required("*Required"),
+            carbohydrateGoal: Yup.number()
+              .min(1, "Carbohydrate Goal must be greater than 0g")
+              .required("*Required"),
+            fatGoal: Yup.number()
+              .min(1, "Fat Goal must be greater than 0g")
+              .required("*Required"),
+            proteinGoal: Yup.number()
+              .min(1, "Protein Goal must be greater than 0g")
+              .required("*Required"),
+            calorieGoal: Yup.number()
+              .min(1, "Calories Goal must be greater than 0kcal.")
+              .required("*Required"),
           })}
           onSubmit={submitHandler}
         >
-          <Form className="">
+          <Form className="m-5">
             <div className="grid grid-cols-2">
               <div className="">
                 <MyNumberInput
