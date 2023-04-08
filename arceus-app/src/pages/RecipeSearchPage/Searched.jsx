@@ -190,6 +190,7 @@ function Searched() {
         </div>
         {error && <p>{error}</p>}
         <div className="dropdown">
+          <h1>Sort By:</h1>
           {/* Add dropdown menu to select sorting option */}
           <select onChange={(e) => setSortBy(e.target.value)}>
             <option value="">Default</option>
