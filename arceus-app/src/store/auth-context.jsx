@@ -43,8 +43,6 @@ export const AuthContextProvider = (props) => {
   
 
   const signup = async (email, password, profile) => {
-    
-
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
