@@ -31,7 +31,7 @@ function Searched() {
   const [caloriesMax, setCaloriesMax] = useState(0);
 
   let params = useParams();
-  const apiKey = "2e141398c9fe42e29876fda0a0c27218";
+  const apiKey = "adee7ae6878248ddb9e66de6011b6264";
 
   const getSearched = async (name) => {
     const data = await fetch(
@@ -148,47 +148,40 @@ function Searched() {
       <div className="searchpageheader">
         <h1>Results</h1>
         <div className="filter-form-container">
-          <button className="filter-button" onClick={handleFilterClick}>
-            Filter
-          </button>
+          <div className="buttons-container">
+            <button className="filter-button" onClick={handleFilterClick}>Filter</button>
+            {showForm && (
+              <button onClick={handleFilterSubmit} className="apply-filter-button">Apply Filters</button>
+            )}
+          </div>
           {showForm && (
-            <form onSubmit={handleFilterSubmit}>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="calories-min">Calories (min):</label>
-                  <input
-                    type="number"
-                    id="calories"
-                    name="calories"
-                    value={caloriesMin}
-                    onChange={(event) =>
-                      setCaloriesMin(Math.max(0, event.target.value))
-                    }
-                    placeholder="minimum"
-                    className="form-control"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="calories-max">Calories (max):</label>
-                  <input
-                    type="number"
-                    id="calories"
-                    name="calories"
-                    value={caloriesMax}
-                    onChange={(event) =>
-                      setCaloriesMax(Math.max(0, event.target.value))
-                    }
-                    placeholder="maximum"
-                    className="form-control"
-                  />
-                </div>
+            <form>
+              <div className="form-group">
+                <label htmlFor="calories-min">Calories (min):</label>
+                <input
+                  type="number"
+                  id="calories"
+                  name="calories"
+                  value={caloriesMin}
+                  onChange={(event) => setCaloriesMin(Math.max(0, event.target.value))}
+                  placeholder="minimum"
+                  className="form-control" />
               </div>
-              <br />
-              <button type="submit">Apply Filters</button>
+              <div className="form-group">
+                <label htmlFor="calories-max">Calories (max):</label>
+                <input
+                  type="number"
+                  id="calories"
+                  name="calories"
+                  value={caloriesMax}
+                  onChange={(event) => setCaloriesMax(Math.max(0, event.target.value))}
+                  placeholder="maximum"
+                  className="form-control" />
+              </div>
+              {error && <p className="errorMsg">{error}</p>}
             </form>
           )}
         </div>
-        {error && <p>{error}</p>}
         <div className="dropdown">
           <h1>Sort By:</h1>
           {/* Add dropdown menu to select sorting option */}
