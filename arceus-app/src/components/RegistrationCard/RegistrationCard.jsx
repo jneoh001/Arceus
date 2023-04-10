@@ -94,8 +94,9 @@ const validationSchema = Yup.object({
 });
 
 const RegistrationCard = () => {
-  const { signup, emailInUse } = useAuth();
-  const submitHandler = (values) => {
+  const { signup, isLoggedIn, emailInUse } = useAuth();
+  const navigate = useNavigate();
+  const submitHandler = async (values) => {
     const profile = {
       email: values.email,
       fname: values.firstName,
@@ -108,8 +109,10 @@ const RegistrationCard = () => {
       fatGoal: values.fatGoal,
       calorieGoal: values.calorieGoal,
     };
-    signup(values.email, values.password, profile);
-    if(!emailInUse){
+    await signup(values.email, values.password, profile);
+    console.log("isloggedin");
+    console.log(isLoggedIn);
+    if(isLoggedIn){
       navigate("/login",{
         state:{
           message: "Registration Successful! Please Login."
