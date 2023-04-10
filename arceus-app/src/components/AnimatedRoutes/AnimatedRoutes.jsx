@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import LandingPage from "../../pages/LandingPage/Landingpage";
 import HistoryPage from "../../pages/HistoryPage/HistoryPage";
-import GoalPage from "../../pages/GoalPage/GoalPage";
+import AccountPage from "../../pages/AccountPage/AccountPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import RegistrationPage from "../../pages/RegistrationPage/RegistrationPage";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
@@ -56,7 +56,7 @@ function AnimatedRoutes() {
           path="/account"
           element={
             <ProtectedRoute>
-              <GoalPage />
+              <AccountPage />
             </ProtectedRoute>
           }
         />
