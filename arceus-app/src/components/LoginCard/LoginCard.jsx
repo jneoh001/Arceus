@@ -90,7 +90,7 @@ const LoginCard = () => {
           <button>Don't have an account?</button>
         </NavLink>
         <NavLink to={"/"}>
-          <button onClick={passwordResetHandler}>Forget Password?</button>
+          <button onClick={passwordResetHandler}>Forgot Password?</button>
         </NavLink>
       </div>
     </div>

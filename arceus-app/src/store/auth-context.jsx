@@ -78,7 +78,7 @@ export const AuthContextProvider = (props) => {
       setWrongPassword(false);
       setUserNotFound(false);
       return "LoggedIn";
-    } catch (error) {
+      }catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode,errorMessage);
@@ -87,13 +87,11 @@ export const AuthContextProvider = (props) => {
       } else {
         setUserNotFound(false);
       }
-
       if (error.code == "auth/wrong-password") {
         setWrongPassword(true);
       } else {
         setWrongPassword(false);
       }
-
       throw error;
     }
   };
