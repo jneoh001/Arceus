@@ -32,7 +32,7 @@ function AnimatedRoutes() {
         <Route
           path="/"
           element={
-            currentUser.isLoggedIn ? (
+            currentUser ? (
               <ProtectedRoute>
                 <HomePage />
               </ProtectedRoute>
