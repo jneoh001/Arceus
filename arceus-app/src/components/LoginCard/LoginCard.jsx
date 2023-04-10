@@ -9,15 +9,16 @@ const LoginCard = () => {
   const passwordRef = useRef();
   const navigate = useNavigate();
   const { login, wrongPassword, userNotFound } = useAuth();
-  const submitHandler = (e) => {
-    login(emailRef.current.value, passwordRef.current.value)
-      .then(() => {
-        if(!wrongPassword){navigate("/")};
-      })
-      .catch(() => {
-        navigate("/login");
-      });
+  const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      await login(emailRef.current.value, passwordRef.current.value);
+      if (!wrongPassword) {
+        navigate("/");
+      }
+    } catch (error) {
+      navigate("/login");
+    };
   };
 
   const passwordResetHandler = (e) => {
@@ -26,7 +27,7 @@ const LoginCard = () => {
   };
   return (
     <div className="login-container bg-gray-800">
-      <Form onSubmit={submitHandler}>
+      <Form onSubmit={submitHandler} noValidate>
         <Form.Group className="login-input" controlId="formBasicEmail">
           <Form.Control
             className="login-input"
@@ -34,22 +35,47 @@ const LoginCard = () => {
             type="email"
             placeholder="Email Address"
             ref={emailRef}
+            required
+            onInvalid={() =>
+              emailRef.current.setCustomValidity(
+                "*Required"
+              )
+            }
+            onChange={() => emailRef.current.setCustomValidity("")}
+            isInvalid={emailRef.current && !emailRef.current.validity.valid}
           />
+          <Form.Control.Feedback type="invalid" className="fs-5 mt-2">
+            *Required
+          </Form.Control.Feedback>
+          {userNotFound && (
+            <p className="text-red-500 mt-2 fs-5">*Email is not Registered</p>
+          )}
         </Form.Group>
-        {userNotFound && (
-          <p className="text-red-500 mt-2">*Email is not registered</p>
-        )}
         <Form.Group className="login-input" controlId="formBasicPassword">
           <Form.Control
             size="lg"
             type="password"
             placeholder="Password"
             ref={passwordRef}
+            required
+            onInvalid={() =>
+              passwordRef.current.setCustomValidity(
+                "*Required"
+              )
+            }
+            onChange={() => passwordRef.current.setCustomValidity("")}
+            isInvalid={
+              passwordRef.current && !passwordRef.current.validity.valid
+            }
           />
+          <Form.Control.Feedback type="invalid" className="fs-5 mt-2">
+            *Required
+          </Form.Control.Feedback>
+          {wrongPassword && (
+            <p className="text-red-500 mt-2 fs-5">*Incorrect Password</p>
+          )}
         </Form.Group>
-        {wrongPassword && (
-          <p className="text-red-500 mt-2">*Incorrect Password</p>
-        )}
+
         <div className="d-grid">
           <button
             type="submit"
