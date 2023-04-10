@@ -24,8 +24,6 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-
-
 export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [wrongPassword, setWrongPassword] = useState(false);
@@ -40,11 +38,14 @@ export const AuthContextProvider = (props) => {
       console.log("Email already in use!");
     }
   }, [emailInUse]);
-  
 
   const signup = async (email, password, profile) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
       console.log("Signed Up successfully!", user);
       setEmailInUse(false);
@@ -62,37 +63,69 @@ export const AuthContextProvider = (props) => {
         console.log("updated email in use:");
         console.log(emailInUse);
       }
-    } 
+    }
   };
 
-  const login = (email, password) => {
-    return new Promise((resolve, reject) => {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          setIsLoggedIn(true);
-          setWrongPassword(false);
-          setUserNotFound(false);
-          // console.log("User logged In", user.uid);
-          resolve("LoggedIn");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // console.log("Not logged In");
-          // console.log(errorCode);
-          if (error.code == "auth/user-not-found") {
-            setUserNotFound(true);
-          }
-          reject("InvalidEmail");
+  const login = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      setIsLoggedIn(true);
+      setWrongPassword(false);
+      setUserNotFound(false);
+      return "LoggedIn";
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode,errorMessage);
+      if (errorCode == "auth/user-not-found") {
+        setUserNotFound(true);
+      } else {
+        setUserNotFound(false);
+      }
 
-          if (error.code == "auth/wrong-password") {
-            setWrongPassword(true);
-          }
-          reject("WrongPassword");
-        });
-    });
+      if (error.code == "auth/wrong-password") {
+        setWrongPassword(true);
+      } else {
+        setWrongPassword(false);
+      }
+
+      throw error;
+    }
   };
+
+  // const login = async (email, password) => {
+  //   return new Promise((resolve, reject) => {
+  //     signInWithEmailAndPassword(auth, email, password)
+  //       .then((userCredential) => {
+  //         const user = userCredential.user;
+  //         setIsLoggedIn(true);
+  //         setWrongPassword(false);
+  //         setUserNotFound(false);
+  //         // console.log("User logged In", user.uid);
+  //         resolve("LoggedIn");
+  //       })
+  //       .catch((error) => {
+  //         const errorCode = error.code;
+  //         const errorMessage = error.message;
+  //         // console.log("Not logged In");
+  //         // console.log(errorCode);
+  //         if (error.code == "auth/user-not-found") {
+  //           setUserNotFound(true);
+  //         }
+  //         reject("InvalidEmail");
+
+  //         if (error.code == "auth/wrong-password") {
+  //           setWrongPassword(true);
+  //         }
+  //         reject("WrongPassword");
+  //       });
+  //   });
+  // };
 
   const logout = async () => {
     try {
@@ -101,7 +134,7 @@ export const AuthContextProvider = (props) => {
       console.log("Sign-out successful.");
     } catch (error) {
       console.log(error.message);
-    }; 
+    }
   };
 
   const resetPassword = (email) => {
