@@ -29,7 +29,7 @@ function Searched() {
   const [caloriesMax, setCaloriesMax] = useState(0);
 
   let params = useParams();
-  const apiKey = "2e141398c9fe42e29876fda0a0c27218";
+  const apiKey = "35ef18ee864f4118b9f1e2f9955ecbfe";
 
   const getSearched = async (name) => {
     const data = await fetch(
@@ -207,7 +207,7 @@ function Searched() {
                 carbs={nutrition?.carbs.slice(0, -1)}
                 protein={nutrition?.protein.slice(0, -1)}
                 fats={nutrition?.fat.slice(0, -1)}
-                calories={nutrition?.calories.slice(0, -1)}
+                calories={nutrition?.calories}
                 img={item.image}
               />
             );

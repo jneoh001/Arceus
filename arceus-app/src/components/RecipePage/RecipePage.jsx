@@ -11,7 +11,7 @@ import { Link, NavLink } from "react-router-dom";
 
 export default function RecipePage(props) {
   const { currentUser, userDetails } = useAuth();
-  const apiKey = "35ef18ee864f4118b9f1e2f9955ecbfe";
+  const apiKey = "aa617ea637c4453798f93b5ee55f817d";
   const [recipeData, setRecipeData] = useState({});
   const [ingredientWidget, setIngredientWidget] = useState();
   const [intake, setIntake] = useState();
