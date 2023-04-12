@@ -16,6 +16,8 @@ function Searched() {
   const location = useLocation();
   const searchTerm = location.state?.searchTerm || "";
   const [input, setInput] = useState(searchTerm);
+  const [error, setError] = useState("");
+
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ function Searched() {
   const [caloriesMax, setCaloriesMax] = useState(0);
 
   let params = useParams();
-  const apiKey = "2e141398c9fe42e29876fda0a0c27218";
+  const apiKey = "9fee088ff5c543c889c3fe8d409a3ca8";
 
   const getSearched = async (name) => {
     const data = await fetch(
@@ -65,8 +67,13 @@ function Searched() {
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    getFiltered(params.search, caloriesMin, caloriesMax);
-    setShowForm(false);
+    if (caloriesMax > caloriesMin) {
+      getFiltered(params.search, caloriesMin, caloriesMax);
+      setShowForm(false);
+      setError("");
+    } else {
+      setError("Max calories cannot be less than min calories.");
+    }
   };
 
   const sortRecipes = (recipes, sortBy) => {
@@ -141,47 +148,42 @@ function Searched() {
       <div className="searchpageheader">
         <h1>Results</h1>
         <div className="filter-form-container">
-          <button className="filter-button" onClick={handleFilterClick}>
-            Filter
-          </button>
+          <div className="buttons-container">
+            <button className="filter-button" onClick={handleFilterClick}>Filter</button>
+            {showForm && (
+              <button onClick={handleFilterSubmit} className="apply-filter-button">Apply Filters</button>
+            )}
+          </div>
           {showForm && (
-            <form onSubmit={handleFilterSubmit}>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="calories-min">Calories (min):</label>
-                  <input
-                    type="number"
-                    id="calories"
-                    name="calories"
-                    value={caloriesMin}
-                    onChange={(event) =>
-                      setCaloriesMin(Math.max(0, event.target.value))
-                    }
-                    placeholder="minimum"
-                    className="form-control"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="calories-max">Calories (max):</label>
-                  <input
-                    type="number"
-                    id="calories"
-                    name="calories"
-                    value={caloriesMax}
-                    onChange={(event) =>
-                      setCaloriesMax(Math.max(0, event.target.value))
-                    }
-                    placeholder="maximum"
-                    className="form-control"
-                  />
-                </div>
+            <form>
+              <div className="form-group">
+                <label htmlFor="calories-min">Calories (min):</label>
+                <input
+                  type="number"
+                  id="calories"
+                  name="calories"
+                  value={caloriesMin}
+                  onChange={(event) => setCaloriesMin(Math.max(0, event.target.value))}
+                  placeholder="minimum"
+                  className="form-control" />
               </div>
-              <br />
-              <button type="submit">Apply Filters</button>
+              <div className="form-group">
+                <label htmlFor="calories-max">Calories (max):</label>
+                <input
+                  type="number"
+                  id="calories"
+                  name="calories"
+                  value={caloriesMax}
+                  onChange={(event) => setCaloriesMax(Math.max(0, event.target.value))}
+                  placeholder="maximum"
+                  className="form-control" />
+              </div>
+              {error && <p className="errorMsg">{error}</p>}
             </form>
           )}
         </div>
         <div className="dropdown">
+          <h1>Sort By:</h1>
           {/* Add dropdown menu to select sorting option */}
           <select onChange={(e) => setSortBy(e.target.value)}>
             <option value="">Default</option>
@@ -207,7 +209,7 @@ function Searched() {
                 carbs={nutrition?.carbs.slice(0, -1)}
                 protein={nutrition?.protein.slice(0, -1)}
                 fats={nutrition?.fat.slice(0, -1)}
-                calories={nutrition?.calories.slice(0, -1)}
+                calories={nutrition?.calories}
                 img={item.image}
               />
             );
