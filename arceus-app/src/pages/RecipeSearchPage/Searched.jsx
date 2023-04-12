@@ -18,7 +18,6 @@ function Searched() {
   const [input, setInput] = useState(searchTerm);
   const [error, setError] = useState("");
 
-
   const submitHandler = (e) => {
     e.preventDefault();
     navigate("/searched/" + input);
@@ -31,7 +30,7 @@ function Searched() {
   const [caloriesMax, setCaloriesMax] = useState(0);
 
   let params = useParams();
-  const apiKey = "9fee088ff5c543c889c3fe8d409a3ca8";
+  const apiKey = "35ef18ee864f4118b9f1e2f9955ecbfe";
 
   const getSearched = async (name) => {
     const data = await fetch(
@@ -149,9 +148,16 @@ function Searched() {
         <h1>Results</h1>
         <div className="filter-form-container">
           <div className="buttons-container">
-            <button className="filter-button" onClick={handleFilterClick}>Filter</button>
+            <button className="filter-button" onClick={handleFilterClick}>
+              Filter
+            </button>
             {showForm && (
-              <button onClick={handleFilterSubmit} className="apply-filter-button">Apply Filters</button>
+              <button
+                onClick={handleFilterSubmit}
+                className="apply-filter-button"
+              >
+                Apply Filters
+              </button>
             )}
           </div>
           {showForm && (
@@ -163,9 +169,12 @@ function Searched() {
                   id="calories"
                   name="calories"
                   value={caloriesMin}
-                  onChange={(event) => setCaloriesMin(Math.max(0, event.target.value))}
+                  onChange={(event) =>
+                    setCaloriesMin(Math.max(0, event.target.value))
+                  }
                   placeholder="minimum"
-                  className="form-control" />
+                  className="form-control"
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="calories-max">Calories (max):</label>
@@ -174,9 +183,12 @@ function Searched() {
                   id="calories"
                   name="calories"
                   value={caloriesMax}
-                  onChange={(event) => setCaloriesMax(Math.max(0, event.target.value))}
+                  onChange={(event) =>
+                    setCaloriesMax(Math.max(0, event.target.value))
+                  }
                   placeholder="maximum"
-                  className="form-control" />
+                  className="form-control"
+                />
               </div>
               {error && <p className="errorMsg">{error}</p>}
             </form>
