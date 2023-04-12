@@ -5,7 +5,7 @@ import RecipeCardHmepage from "./RecipeCardHmepage";
 
 const RecommendedRecipesList = () => {
   const { userDetails } = useAuth();
-  const apiKey = "0a76b05501d343a3865103c54309f7dd";
+  const apiKey = "7680a54dea464e5b90ddebf086a2b41d";
   const [recipeData, setRecipeData] = useState();
 
   useEffect(() => {
@@ -14,11 +14,11 @@ const RecommendedRecipesList = () => {
         .get(
           `https://api.spoonacular.com/recipes/findByNutrients?minCarbs=${
             userDetails.carbGoal / 3
-          }&minCalories=${(userDetails.calorieGoal / 3).toFixed(1)}&minProtein=${
-            (userDetails.proteinGoal / 3).toFixed(1)
-          }&maxFat=${
-            (userDetails.fatGoal / 3).toFixed(1)
-          }&number=5&random=true&apiKey=${apiKey}`
+          }&minCalories=${(userDetails.calorieGoal / 3).toFixed(
+            1
+          )}&minProtein=${(userDetails.proteinGoal / 3).toFixed(1)}&maxFat=${(
+            userDetails.fatGoal / 3
+          ).toFixed(1)}&number=5&random=true&apiKey=${apiKey}`
         )
         .then((response) => {
           setRecipeData(response.data);
@@ -28,7 +28,7 @@ const RecommendedRecipesList = () => {
           setRecipeData([]);
           console.log(recipeData);
         });
-        console.log(recipeData);
+      console.log(recipeData);
     }
   }, [userDetails]);
 
@@ -98,7 +98,9 @@ const RecommendedRecipesList = () => {
             ))}
           </div>
         ) : (
-          <div>Unable to find any Recipes for your current Daily Nutrition Goals.</div>
+          <div>
+            Unable to find any Recipes for your current Daily Nutrition Goals.
+          </div>
         )
       ) : (
         <div>Loading...</div>

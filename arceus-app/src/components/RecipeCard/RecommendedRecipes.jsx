@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const RecommendedRecipes = () => {
   const [id, setID] = useState();
   const [recipeData, setRecipeData] = useState({});
-  const apiKey = "cb1c464d94f142c08b156c5beddade8b";
+  const apiKey = "4cf4419d29214ccd8eeac75198bf0065";
 
   useEffect(() => {
     axios
