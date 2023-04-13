@@ -1,9 +1,9 @@
-.searchForm{
+.searchForm {
     position: relative;
     width: 100%;
 }
 
-.searchForm input{
+.searchForm input {
     border: none;
     background: linear-gradient(35deg, #494949, #313131);
     font-size: 1.5rem;
@@ -14,12 +14,12 @@
     width: 100%;
 }
 
-.searchInput{
+.searchInput {
     width: 100%;
     position: relative;
 }
 
-.searchForm svg{
+.searchForm svg {
     position: absolute;
     top: 50%;
     left: 0%;
@@ -30,7 +30,7 @@
 .searchpageheader {
     display: flex;
     justify-content: space-between;
-    width: 60%;
+    width: 70%;
     margin: 0px auto 0.3%;
     padding-top: 3%;
     font-size: 1.8em;
@@ -94,21 +94,50 @@
 
 .filter-form-container {
     position: relative;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
-    display: inline-block;
-    vertical-align: middle;
+    flex-direction: column;
+    height: 100%;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
 }
 
 .filter-form-container form {
-    display: inline-block;
+    flex: 1; /* Added */
+    display: flex; /* Added */
+    flex-wrap: wrap; /* Added */
+    justify-content: center; /* Added */
+    position: relative;
 }
+
+
+
+.filter-form-container form .form-group {
+    flex: 1;
+    margin-right: 1rem;
+    /* Added margin between textboxes */
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
 
 .filter-button {
     font-size: 1rem;
     padding: 0.5rem;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
+    width: 100px;
+    min-height: 40px;
+}
+
+.apply-filter-button {
+    width: 100px;
+    min-height: 40px;
+    padding: 0.5rem;
+    margin-left: 1rem;
 }
 
 .filter-form-container button {
@@ -122,6 +151,7 @@
     vertical-align: middle;
     cursor: pointer;
     width: 100px;
+    margin-top: 1rem;
 }
 
 .filter-form-container button:hover {
@@ -150,35 +180,42 @@
 .filter-form li:hover {
     background-color: #f5f5f5;
     text-decoration: none;
-  }
-  
-  .sort-dropdown-container {
+}
+
+.sort-dropdown-container {
     margin-left: 1rem;
-  }
-  
-  .sort-dropdown-container select {
+}
+
+.sort-dropdown-container select {
     font-size: 1rem;
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 0.5rem 2.5rem 0.5rem 1rem;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 8 5'%3E%3Cpath fill='%23aaa' d='M0 0h8L4 5z'/%3E%3C/svg%3E")
-      no-repeat right center/8px 10px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 8 5'%3E%3Cpath fill='%23aaa' d='M0 0h8L4 5z'/%3E%3C/svg%3E") no-repeat right center/8px 10px;
     appearance: none;
     outline: none;
     cursor: pointer;
-  }
-  
-  .sort-dropdown-container select:hover {
+}
+
+.sort-dropdown-container select:hover {
     border-color: #aaa;
-  }
-  
-  .sort-dropdown-container select:focus {
+}
+
+.sort-dropdown-container select:focus {
     border-color: #4285f4;
-  }
-  
-  .sort-dropdown-container option {
+}
+
+.sort-dropdown-container option {
     background-color: #fff;
     color: #555;
     font-weight: normal;
-  }
-  
+}
+
+.errorMsg {
+    color: red;
+    margin-top: 6rem;
+    font-size: 1.5rem;
+    align-self: flex-start;
+    position: absolute;
+    bottom: -30px;
+}
